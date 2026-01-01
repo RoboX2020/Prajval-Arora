@@ -415,9 +415,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
                      <span>SYSTEM_MONITOR</span>
                  </div>
                  <p className="text-gray-400 text-xs font-mono leading-relaxed">
-                     > CPU: ONLINE <br/>
-                     > MEMORY: 100% CREATIVITY <br/>
-                     > ZOOM_LEVEL: {Math.round(zoom * 100)}%
+                     &gt; CPU: ONLINE <br/>
+                     &gt; MEMORY: 100% CREATIVITY <br/>
+                     &gt; ZOOM_LEVEL: {Math.round(zoom * 100)}%
                  </p>
              </div>
           </div>
