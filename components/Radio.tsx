@@ -7,7 +7,7 @@ interface RadioProps {
 
 export const Radio: React.FC<RadioProps> = ({ message }) => {
   return (
-    <div className="fixed top-8 right-8 w-80 ui-panel p-4 flex flex-col gap-2 z-50 transition-all duration-500 hover:scale-105">
+    <div className="fixed top-20 right-4 w-64 md:top-8 md:right-8 md:w-80 ui-panel p-4 flex flex-col gap-2 z-50 transition-all duration-500 hover:scale-105 shadow-xl">
       <div className="flex justify-between items-center border-b border-gray-200 pb-2">
         <div className="flex items-center gap-2 text-gray-600">
           <RadioIcon size={20} className="animate-pulse text-blue-400" />
@@ -15,7 +15,7 @@ export const Radio: React.FC<RadioProps> = ({ message }) => {
         </div>
         <Music size={16} className="text-gray-400" />
       </div>
-      
+
       <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
         <p className="text-gray-700 text-sm italic leading-relaxed">
           "{message}"
