@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { PROJECTS, HISTORY, Project, HistoryMarker } from '../constants';
 import { Power, ZoomIn, ZoomOut, Cpu, X, ExternalLink, Trophy, Zap, Radio, Coffee, ArrowUpRight, PlayCircle, ArrowLeft, ArrowRight, StopCircle, ShoppingBag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import InteractiveDots from './InteractiveDots';
 
 interface HomePageProps {
     onStart: () => void;
@@ -66,7 +67,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
         const allItems = [...PROJECTS, ...HISTORY];
 
         let angle = 0;
-        let radius = 550; // Increased starting radius to clear the big CPU
+        let radius = 470; // Starting radius to clear the big CPU
 
         allItems.forEach((item, index) => {
             const x = Math.cos(angle) * radius;
@@ -115,8 +116,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
                 pinStart: { x: pinX, y: pinY, side }
             });
 
-            angle += 0.6; // Wider spiral spacing
-            radius += 40 + (index * 2);
+            angle += 0.6; // Spiral spacing
+            radius += 22 + (index * 1.4); // Tighter rings = denser layout, cards closer together
         });
         setNodes(generatedNodes);
 
@@ -196,10 +197,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
     };
 
     // --- Controls ---
+    // Zoom toward a specific screen point (cursor or screen center) so content stays under the pointer
+    const applyZoom = (targetZoom: number, centerX: number, centerY: number) => {
+        const newZoom = Math.min(Math.max(targetZoom, 0.15), 4);
+        const worldX = (centerX - offset.x) / zoom;
+        const worldY = (centerY - offset.y) / zoom;
+        setOffset({ x: centerX - worldX * newZoom, y: centerY - worldY * newZoom });
+        setZoom(newZoom);
+    };
+
     const handleWheel = (e: React.WheelEvent) => {
         if (walkthroughMode || isBooting) return;
-        const scaleAmount = -e.deltaY * 0.001;
-        setZoom(z => Math.min(Math.max(z + scaleAmount, 0.3), 2.5));
+        // Exponential factor keeps zoom speed consistent at every scale; anchors to cursor
+        const factor = Math.exp(-e.deltaY * 0.0015);
+        applyZoom(zoom * factor, e.clientX, e.clientY);
     };
 
     const handleMouseDown = (e: React.MouseEvent) => {
@@ -247,6 +258,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
             <div
                 className={`fixed inset-0 bg-white pointer-events-none z-[100] transition-opacity duration-1000 ease-in ${isBooting ? 'opacity-100' : 'opacity-0'}`}
             ></div>
+
+            {/* Interactive Dots Background */}
+            <InteractiveDots backgroundColor="#101214" dotColor="#444444" />
 
             {/* 1. PCB Base Texture */}
             <div
@@ -385,7 +399,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
                                     <div className="absolute inset-0 bg-amber-500/10 translate-y-full group-hover:translate-y-0 transition-transform"></div>
                                     <div className="relative flex items-center justify-center gap-2">
                                         <Power size={18} />
-                                        <span>BOOT_SEQUENCE</span>
+                                        <span>MY JOURNEY</span>
                                     </div>
                                 </button>
 
@@ -395,7 +409,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
                                         className="group relative w-full px-4 py-2 bg-gray-200 text-gray-800 font-bold font-mono rounded overflow-hidden shadow transition-all hover:bg-white hover:scale-105 active:scale-95 text-xs flex items-center justify-center gap-2"
                                     >
                                         <PlayCircle size={16} className="text-blue-600" />
-                                        <span>AUTO_PILOT</span>
+                                        <span>TAKE A LOOK</span>
                                     </button>
 
                                     <button
@@ -403,7 +417,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
                                         className="mt-3 group relative w-full px-4 py-2 bg-[#1a1a1a] text-amber-500 font-bold font-mono rounded overflow-hidden shadow transition-all hover:bg-[#222] hover:scale-105 active:scale-95 text-xs flex items-center justify-center gap-2 border border-amber-900/40"
                                     >
                                         <ShoppingBag size={16} className="text-amber-500" />
-                                        <span>VISIT_SHOP</span>
+                                        <span>MY PROJECTS</span>
                                     </button>
                                 </div>
                             </div>
@@ -490,9 +504,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
 
             {!walkthroughMode && (
                 <div className="fixed bottom-8 right-8 z-50 flex gap-2 pointer-events-auto">
-                    <button onClick={() => setZoom(z => Math.max(z - 0.2, 0.3))} className="p-3 bg-gray-900 text-gray-300 hover:text-white rounded-lg border border-gray-700 shadow-lg"><ZoomOut size={20} /></button>
+                    <button onClick={() => applyZoom(zoom * 0.8, window.innerWidth / 2, window.innerHeight / 2)} className="p-3 bg-gray-900 text-gray-300 hover:text-white rounded-lg border border-gray-700 shadow-lg"><ZoomOut size={20} /></button>
                     <button onClick={() => { setOffset({ x: window.innerWidth / 2, y: window.innerHeight / 2 }); setZoom(0.8); }} className="px-4 bg-amber-900/20 text-amber-500 border border-amber-900/50 hover:bg-amber-900/40 rounded-lg font-mono text-xs font-bold tracking-wider">RESET</button>
-                    <button onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))} className="p-3 bg-gray-900 text-gray-300 hover:text-white rounded-lg border border-gray-700 shadow-lg"><ZoomIn size={20} /></button>
+                    <button onClick={() => applyZoom(zoom * 1.25, window.innerWidth / 2, window.innerHeight / 2)} className="p-3 bg-gray-900 text-gray-300 hover:text-white rounded-lg border border-gray-700 shadow-lg"><ZoomIn size={20} /></button>
                 </div>
             )}
 
