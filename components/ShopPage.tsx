@@ -2,10 +2,12 @@ import React from 'react';
 import { ArrowLeft, ShoppingBag, ExternalLink, Star, Briefcase, Mail, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SHOP_ITEMS } from '../constants_shop';
+import InteractiveDots from './InteractiveDots';
 
 export const ShopPage: React.FC = () => {
     return (
         <div className="h-screen w-full bg-[#050505] text-white font-nunito selection:bg-amber-500/30 overflow-y-auto relative">
+            <InteractiveDots backgroundColor="#050505" dotColor="#444444" />
             {/* Background Texture */}
             <div
                 className="fixed inset-0 pointer-events-none opacity-10"

@@ -9,6 +9,7 @@ interface GameCanvasProps {
   onFinish: () => void;
   gameActive: boolean;
   isPaused: boolean;
+  onProgress?: (info: { x: number; velocity: number }) => void;
 }
 
 interface Particle {
@@ -29,9 +30,16 @@ interface Cloud {
   opacity: number;
 }
 
-export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProximity, onFinish, gameActive, isPaused }) => {
+export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProximity, onFinish, gameActive, isPaused, onProgress }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const finishedRef = useRef(false);
+
+  // Keep latest props/callbacks in refs so the render loop NEVER needs to restart
+  // (re-running the effect would reset visuals; refs let HUD updates flow freely).
+  const isPausedRef = useRef(isPaused);
+  const callbacksRef = useRef({ onMessage, onProjectProximity, onFinish, onProgress });
+  useEffect(() => { isPausedRef.current = isPaused; }, [isPaused]);
+  useEffect(() => { callbacksRef.current = { onMessage, onProjectProximity, onFinish, onProgress }; });
   
   // Game State
   const carState = useRef({
@@ -118,12 +126,13 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProx
 
     let animationId: number;
     let time = 0;
+    let progressTick = 0;
 
     const render = () => {
       time += 0.05;
       const state = carState.current;
       
-      if (!isPaused) {
+      if (!isPausedRef.current) {
           // --- PHYSICS ---
           const ACCEL = 0.5; 
           const MAX_SPEED = 35; 
@@ -150,7 +159,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProx
           // Finish Logic
           if (state.x > WORLD_WIDTH - 200 && !finishedRef.current) {
              finishedRef.current = true;
-             onFinish();
+             callbacksRef.current.onFinish();
           }
           if (state.x > WORLD_WIDTH) { state.x = WORLD_WIDTH; state.velocity = 0; }
 
@@ -220,7 +229,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProx
         if (dist < 800 && lastProjectAnnounced.current !== p.id) {
           lastProjectAnnounced.current = p.id;
           generateRadioIntro(p.title, p.description).then(intro => {
-             onMessage(intro);
+             callbacksRef.current.onMessage(intro);
           });
         }
       });
@@ -233,7 +242,13 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProx
               break;
           }
       }
-      onProjectProximity(foundProject);
+      callbacksRef.current.onProjectProximity(foundProject);
+
+      // Report progress + speed to the HUD (throttled, ~12x/sec)
+      progressTick++;
+      if (progressTick % 5 === 0) {
+        callbacksRef.current.onProgress?.({ x: state.x, velocity: state.velocity });
+      }
 
       // --- CAMERA ---
       const targetCamX = state.x - canvas.width * 0.4;
@@ -468,7 +483,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({ onMessage, onProjectProx
 
     render();
     return () => cancelAnimationFrame(animationId);
-  }, [gameActive, isPaused, onFinish]);
+  }, [gameActive]);
 
   return <canvas ref={canvasRef} className="block w-full h-full" />;
 };
