@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
+import { OriginPage } from './components/OriginPage';
 import { HomePage } from './components/HomePage';
 import { GameLayer } from './components/GameLayer';
 import { ShopPage } from './components/ShopPage';
+import { ArchiveChrome } from './components/ArchiveChrome';
 import { audioService } from './services/audioService';
 
-const HomeWrapper: React.FC = () => {
+const CircuitArchive: React.FC = () => {
   const [view, setView] = React.useState<'home' | 'game'>('home');
 
-  // We can use a simple state switch for the internal Home/Game view
-  // while keeping the main routing for major pages like Shop.
   return (
     <>
+      <ArchiveChrome label={view === 'home' ? 'Circuit atlas' : 'Driving home'} />
       {view === 'home' ? (
         <HomePage onStart={() => setView('game')} />
       ) : (
@@ -20,6 +21,23 @@ const HomeWrapper: React.FC = () => {
     </>
   );
 };
+
+const JourneyArchive: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <ArchiveChrome label="Driving home" />
+      <GameLayer onBackToHome={() => navigate('/v1')} />
+    </>
+  );
+};
+
+const GarageArchive: React.FC = () => (
+  <>
+    <ArchiveChrome label="Internet garage" />
+    <ShopPage />
+  </>
+);
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -34,14 +52,14 @@ const App: React.FC = () => {
     const handleGlobalMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const interactive = target.closest('button, a, [role="button"]');
-      
+
       if (interactive && e.relatedTarget) {
         const related = e.relatedTarget as HTMLElement;
         if (!interactive.contains(related)) {
           audioService.playHoverSound();
         }
       } else if (interactive && !e.relatedTarget) {
-         audioService.playHoverSound();
+        audioService.playHoverSound();
       }
     };
 
@@ -56,10 +74,13 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className="w-full h-full">
+      <div className="w-full min-h-full">
         <Routes>
-          <Route path="/" element={<HomeWrapper />} />
-          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/" element={<OriginPage />} />
+          <Route path="/v1" element={<CircuitArchive />} />
+          <Route path="/v1/journey" element={<JourneyArchive />} />
+          <Route path="/v1/garage" element={<GarageArchive />} />
+          <Route path="/shop" element={<Navigate to="/v1/garage" replace />} />
         </Routes>
       </div>
     </BrowserRouter>

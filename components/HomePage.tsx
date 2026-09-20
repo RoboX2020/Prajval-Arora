@@ -413,7 +413,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
                                     </button>
 
                                     <button
-                                        onClick={() => navigate('/shop')}
+                                        onClick={() => navigate('/v1/garage')}
                                         className="mt-3 group relative w-full px-4 py-2 bg-[#1a1a1a] text-amber-500 font-bold font-mono rounded overflow-hidden shadow transition-all hover:bg-[#222] hover:scale-105 active:scale-95 text-xs flex items-center justify-center gap-2 border border-amber-900/40"
                                     >
                                         <ShoppingBag size={16} className="text-amber-500" />
@@ -449,7 +449,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
 
             {/* --- HUD --- */}
             {!walkthroughMode && (
-                <div className="fixed top-6 left-6 z-50 pointer-events-none">
+                <div className="fixed top-16 left-6 z-50 pointer-events-none">
                     <div className="bg-black/90 backdrop-blur border-l-4 border-amber-500 p-4 rounded-r-lg shadow-2xl pointer-events-auto">
                         <div className="flex items-center gap-2 text-amber-500 font-mono text-xs mb-1">
                             <Cpu size={14} />
