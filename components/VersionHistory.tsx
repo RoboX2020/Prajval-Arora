@@ -45,10 +45,11 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
 
       {open && (
         <div
-          className="fixed inset-0 z-[80] flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center"
+          className="fixed inset-0 z-[80] overflow-y-auto bg-black/80 p-4 backdrop-blur-sm"
           onClick={() => setOpen(false)}
           role="presentation"
         >
+          <div className="flex min-h-full items-start justify-center py-20 sm:items-center sm:py-10">
           <div
             role="dialog"
             aria-labelledby="version-title"
@@ -98,6 +99,7 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
                 </li>
               ))}
             </ul>
+          </div>
           </div>
         </div>
       )}
