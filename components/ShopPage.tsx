@@ -6,7 +6,7 @@ import InteractiveDots from './InteractiveDots';
 
 export const ShopPage: React.FC = () => {
     return (
-        <div className="h-screen w-full bg-[#050505] text-white font-nunito selection:bg-amber-500/30 overflow-y-auto relative">
+        <div className="h-screen w-full bg-[#050505] text-white font-nunito selection:bg-amber-500/30 overflow-y-auto relative pt-14">
             <InteractiveDots backgroundColor="#050505" dotColor="#444444" />
             {/* Background Texture */}
             <div
@@ -20,9 +20,9 @@ export const ShopPage: React.FC = () => {
             {/* Header */}
             <header className="sticky top-0 z-50 bg-[#050505]/90 backdrop-blur-md border-b border-gray-800/50">
                 <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                    <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-amber-500 transition-colors group">
+                    <Link to="/v1" className="flex items-center gap-2 text-gray-400 hover:text-amber-500 transition-colors group">
                         <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-mono text-sm uppercase tracking-wider">Back to Base</span>
+                        <span className="font-mono text-sm uppercase tracking-wider">Circuit atlas</span>
                     </Link>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
@@ -71,7 +71,7 @@ export const ShopPage: React.FC = () => {
                             </p>
                             <div className="flex flex-wrap gap-4">
                                 <a
-                                    href="mailto:prajval@example.com" // Replace with actual if known, or generic
+                                    href="mailto:parora24@asu.edu"
                                     className="px-6 py-3 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all flex items-center gap-2 cursor-pointer"
                                 >
                                     <Mail size={18} />

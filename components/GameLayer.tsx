@@ -153,7 +153,7 @@ export const GameLayer: React.FC<GameLayerProps> = ({ onBackToHome }) => {
       </div>
 
       {/* Header UI (Centered Top) */}
-      <div className="fixed top-0 left-0 right-0 z-40 flex justify-center pt-6 pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-40 flex justify-center pt-16 pointer-events-none">
         <div className="bg-white/30 backdrop-blur-md px-8 py-3 rounded-full shadow-lg border border-white/40 flex flex-col items-center">
           <h1 className="font-display text-3xl font-bold text-gray-900 drop-shadow-sm tracking-tight">
             Prajval Arora
@@ -165,7 +165,7 @@ export const GameLayer: React.FC<GameLayerProps> = ({ onBackToHome }) => {
       </div>
 
       {/* Top-left controls: Exit + Mute */}
-      <div className="fixed top-6 left-6 z-50 flex gap-2">
+      <div className="fixed top-16 left-6 z-50 flex gap-2">
         <button
           onClick={onBackToHome}
           title="Back to base"
