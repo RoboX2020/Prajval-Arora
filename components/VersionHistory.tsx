@@ -3,6 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { History, X } from 'lucide-react';
 import { VERSIONS } from '../content';
 
+function isCurrent(href: string, path: string) {
+  if (href === '/') return path === '/';
+  if (href === '/v1') return path === '/v1';
+  return path === href;
+}
+
 interface VersionHistoryProps {
   variant?: 'ink' | 'light';
 }
@@ -53,7 +59,7 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
           <div
             role="dialog"
             aria-labelledby="version-title"
-            className="w-full max-w-2xl border border-white/10 bg-[#11100c] p-6 text-stone-100 shadow-2xl sm:p-8"
+            className="origin-root w-full max-w-2xl border border-white/10 bg-[#11100c] p-6 text-stone-100 shadow-2xl sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-6 flex items-start justify-between gap-4">
@@ -82,14 +88,14 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
                   <Link
                     to={v.href}
                     className={`block border px-4 py-4 transition-colors ${
-                      v.current
+                      isCurrent(v.href, location.pathname)
                         ? 'border-orange-500/50 bg-orange-500/10'
                         : 'border-white/10 hover:border-orange-400/40 hover:bg-white/5'
                     }`}
                   >
                     <div className="flex items-baseline justify-between gap-3">
                       <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-orange-300">{v.version}</span>
-                      {v.current && (
+                      {isCurrent(v.href, location.pathname) && (
                         <span className="font-mono text-[10px] uppercase tracking-widest text-stone-500">you are here</span>
                       )}
                     </div>

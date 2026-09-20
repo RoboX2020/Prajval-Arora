@@ -10,44 +10,32 @@ import {
   MORE_WORK,
   SKILL_FIELDS,
   RECOGNITION,
+  PHOTOS,
 } from '../content';
-import { InterferenceField } from './InterferenceField';
+import { SiteHeader } from './SiteHeader';
+import { JointLattice } from './JointLattice';
+import { PixelSprites } from './PixelSprites';
+import { PhotoWall } from './PhotoWall';
+import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
 
 const nav = [
   { href: '#guide', label: 'Guide' },
+  { href: '#room', label: 'Room' },
   { href: '#now', label: 'Now' },
   { href: '#collisions', label: 'Work' },
-  { href: '#practice', label: 'Practice' },
+  { href: '#signals', label: 'Traces' },
   { href: '#connect', label: 'Connect' },
 ];
 
 export const OriginPage: React.FC = () => {
   return (
     <div className="origin-root relative min-h-screen text-[#f3ece3]">
-      <InterferenceField />
-      <div className="pointer-events-none fixed inset-0 bg-gradient-to-b from-[#0c0b09]/40 via-[#0c0b09]/75 to-[#0c0b09]" />
+      <JointLattice />
+      <PixelSprites />
+      <div className="pointer-events-none fixed inset-0 bg-gradient-to-b from-transparent via-[#0c0b09]/55 to-[#0c0b09]" />
 
-      <header className="sticky top-0 z-40 border-b border-white/5 bg-[#0c0b09]/70 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-          <a href="#top" className="font-display text-lg tracking-tight text-stone-100">
-            {PERSON.first}
-            <span className="text-orange-400">.</span>
-          </a>
-          <nav className="hidden items-center gap-6 md:flex">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="font-mono text-[10px] uppercase tracking-[0.22em] text-stone-400 hover:text-orange-300"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <VersionHistory />
-        </div>
-      </header>
+      <SiteHeader nav={nav} />
 
       <main id="top" className="relative z-10">
         <section className="mx-auto grid max-w-6xl gap-12 px-5 pb-24 pt-16 md:grid-cols-12 md:pt-24">
@@ -88,8 +76,15 @@ export const OriginPage: React.FC = () => {
               </a>
             </div>
           </div>
-          <aside className="md:col-span-4 md:pt-16">
-            <div className="border border-white/10 bg-black/35 p-5 backdrop-blur-sm">
+          <aside className="md:col-span-4 md:pt-8">
+            <figure className="polaroid -rotate-2">
+              <img src={PHOTOS.asu.src} alt={PHOTOS.asu.alt} className="aspect-[3/4] w-full object-cover" />
+              <figcaption>
+                <span className="block font-display text-xl text-stone-800">{PHOTOS.asu.caption}</span>
+                <span className="mt-1 block text-xs text-stone-500">{PHOTOS.asu.note}</span>
+              </figcaption>
+            </figure>
+            <div className="mt-8 border border-white/10 bg-black/35 p-5 backdrop-blur-sm">
               <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-stone-500">Currently</p>
               <p className="mt-3 font-display text-2xl leading-tight text-stone-100">{PERSON.role}</p>
               <p className="mt-3 text-sm leading-relaxed text-stone-400">{PERSON.seeking}</p>
@@ -124,6 +119,8 @@ export const OriginPage: React.FC = () => {
             ))}
           </div>
         </section>
+
+        <PhotoWall />
 
         <section id="guide" className="mx-auto max-w-6xl px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-orange-400">A guide</p>
@@ -263,6 +260,8 @@ export const OriginPage: React.FC = () => {
             ))}
           </ul>
         </section>
+
+        <SignalBoard />
 
         <section id="connect" className="border-t border-white/10 bg-gradient-to-b from-orange-950/30 to-transparent py-24">
           <div className="mx-auto max-w-6xl px-5">

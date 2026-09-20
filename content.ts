@@ -12,6 +12,12 @@ export const PERSON = {
   calendly: 'https://calendly.com/prajval-2029/30min',
   resume: '/Prajval_Arora_Resume.pdf',
   tapri: 'https://gotapri.com',
+  huggingface: 'https://huggingface.co/iamprajval',
+  instagram: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  instagramAir: 'https://www.instagram.com/reel/DSyhRm6CeOL/',
+  instagramBot: 'https://www.instagram.com/p/DAojHutz0g4/',
+  productHunt: 'https://vibeverseai.com',
+  githubStats: 'https://github.com/RoboX2020',
   education: {
     school: 'Arizona State University',
     degree: 'B.S.E. Robotics and Autonomous Systems Engineering',
@@ -251,33 +257,122 @@ export const RECOGNITION = [
   { title: 'Harvard', detail: 'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast' },
 ];
 
+export const PHOTOS = {
+  asu: {
+    src: '/portraits/asu-mentor.jpg',
+    alt: 'Prajval Arora, ASU Fulton Schools peer mentor',
+    caption: 'Century Hall, Polytechnic',
+    note: 'Peer mentor office hours — the face students already walk up to.',
+  },
+  asuPixel: {
+    src: '/portraits/asu-pixel.png',
+    alt: 'Pixelated scan of Prajval from the mentor photograph',
+    caption: 'Machine-vision of the same frame',
+    note: 'Nearest-neighbor, 32-pixel scan — how a cell would see me.',
+  },
+  github: {
+    src: '/portraits/github.jpg',
+    alt: 'Prajval Arora GitHub portrait',
+    caption: 'RoboX2020',
+    note: 'The face that ships with the repos.',
+  },
+  githubPixel: {
+    src: '/portraits/github-pixel.png',
+    alt: 'Pixelated GitHub portrait of Prajval',
+    caption: 'Public scan',
+    note: 'Same portrait, quantized — identity as a sprite.',
+  },
+};
+
+export const EMBEDS = [
+  {
+    id: 'github',
+    kind: 'GitHub',
+    title: 'RoboX2020',
+    body: 'Source, PRs, and the air-guitar that still gets cloned. A contribution graph is a handwriting sample.',
+    href: 'https://github.com/RoboX2020',
+  },
+  {
+    id: 'linkedin',
+    kind: 'LinkedIn',
+    title: 'prajvaldesignsmachines',
+    body: 'The professional trail: cells, grants, and the long sentences that happen after a build.',
+    href: 'https://www.linkedin.com/in/prajvaldesignsmachines',
+  },
+  {
+    id: 'instagram',
+    kind: 'Instagram',
+    title: 'Machines in the air',
+    body: 'Reels of the air mouse, the buddy robot, the things that only make sense moving. Best embedding for proof of life.',
+    href: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  },
+  {
+    id: 'calendly',
+    kind: 'Calendar',
+    title: 'Thirty minutes',
+    body: 'Not a funnel. A slot. Friends and employers use the same door.',
+    href: 'https://calendly.com/prajval-2029/30min',
+  },
+  {
+    id: 'tapri',
+    kind: 'Community',
+    title: 'gotapri.com',
+    body: 'The tea stall as a network. 2,200+ builders, 40+ ventures.',
+    href: 'https://gotapri.com',
+  },
+  {
+    id: 'hf',
+    kind: 'Hugging Face',
+    title: 'iamprajval',
+    body: 'Spaces and experiments — the public notebook of models, not just repos.',
+    href: 'https://huggingface.co/iamprajval',
+  },
+  {
+    id: 'pr',
+    kind: 'Open source',
+    title: 'ESP-Claw PR',
+    body: 'A pull request as an embedding: talk to Arduino hardware Espressif could not reach.',
+    href: 'https://github.com/espressif/esp-claw/pull/11',
+  },
+  {
+    id: 'air',
+    kind: 'Build',
+    title: 'Air Guitar',
+    body: 'The repo that went viral without a campaign. DSP on a wrist.',
+    href: 'https://github.com/RoboX2020/Air-Guitar',
+  },
+  {
+    id: 'vibe',
+    kind: 'Product',
+    title: 'VibeVerse',
+    body: 'A marketplace launched on Product Hunt — builders sharing AI-born projects.',
+    href: 'https://vibeverseai.com',
+  },
+];
+
 export const VERSIONS = [
   {
     version: 'v2',
     title: 'This page',
     blurb: 'The current field: interdisciplinary collisions, a guide for people who want to know me, and a door to work together.',
     href: '/',
-    current: true,
   },
   {
     version: 'v1.1',
     title: 'Circuit atlas',
     blurb: 'A PCB of every project, wired to a central processor. Pan, zoom, or take the guided walkthrough.',
     href: '/v1',
-    current: false,
   },
   {
     version: 'v1.0',
     title: 'Driving home',
     blurb: 'The original road: a long horizontal journey past tea stalls, posters, and machines.',
     href: '/v1/journey',
-    current: false,
   },
   {
     version: 'v1.garage',
     title: 'Internet garage',
     blurb: 'The workshop listing — every prototype, paper, and community artifact as a stall.',
     href: '/v1/garage',
-    current: false,
   },
 ];
