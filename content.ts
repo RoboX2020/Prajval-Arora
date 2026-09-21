@@ -57,7 +57,6 @@ export const FRAMES = {
     alt: 'Prajval arms wide in front of a wall of live news screens',
     latin: 'Totus mundus agit histrionem.',
     note: 'All the world’s a stage. I love Bollywood. I act because it is fun.',
-    wide: true,
   },
   quest: {
     src: '/portraits/5764.jpg',
@@ -91,6 +90,7 @@ export const FRAMES = {
     note: 'Moving walk, no dialogue, still the main character.',
   },
   blimp: {
+    // Drop the WhatsApp / IMG_6706 clip here, named exactly blimp.mp4
     src: '/portraits/blimp.mp4',
     alt: 'Blimp and balloon experiments from AMASS research',
     latin: 'Nuper cum globis ludo.',
@@ -110,7 +110,7 @@ export const FRAMES = {
     alt: 'Prajval in a blazer taking a mirror selfie',
     latin: 'Ad limen paratus.',
     note: 'Ready at the door. Write if you want the mind in the room.',
-    wide: true,
+    square: true,
   },
 };
 
@@ -203,6 +203,7 @@ export type Collision = {
     latin: string;
     note: string;
     wide?: boolean;
+    square?: boolean;
     video?: boolean;
     fallbackHref?: string;
   };
@@ -212,6 +213,7 @@ export type Collision = {
     latin: string;
     note: string;
     wide?: boolean;
+    square?: boolean;
     video?: boolean;
     fallbackHref?: string;
   }[];
@@ -264,7 +266,16 @@ export const COLLISIONS: Collision[] = [
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: '$7,500 across two years',
     photo: FRAMES.team,
-    gallery: [FRAMES.hack],
+  },
+  {
+    id: 'hack-play',
+    fields: ['Play', 'Pressure'],
+    title: 'Hackathons as the serious kind of play',
+    result: 'Ludus est labor — the lecture hall at 2 a.m. still counts as a lab.',
+    body: 'Honeywell was not a lone sprint. The same season of play produced the team that won and the face that still peace-signs in a hall. Fun is how the thermodynamics got finished.',
+    link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
+    stat: 'Two years, two rooms',
+    photo: FRAMES.hack,
   },
   {
     id: 'riverside',

@@ -74,11 +74,13 @@ export const OriginPage: React.FC = () => {
             </div>
           </div>
           <aside className="md:col-span-5">
-            <Frame media={HERO_PHOTO} />
-            <div className="mt-8 border border-[#3d3228] bg-[#241c16] p-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
-              <p className="mt-3 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
-              <p className="mt-3 text-sm leading-relaxed text-[#b8a894]">{PERSON.seeking}</p>
+            <div className="overflow-hidden border border-[#3d3228]">
+              <Frame media={HERO_PHOTO} />
+              <div className="border-t border-[#3d3228] bg-[#241c16] p-5">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
+                <p className="mt-3 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
+                <p className="mt-3 text-sm leading-relaxed text-[#b8a894]">{PERSON.seeking}</p>
+              </div>
             </div>
           </aside>
         </section>
@@ -97,7 +99,7 @@ export const OriginPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 py-24">
+        <section className="mx-auto max-w-6xl space-y-10 px-5 py-24">
           <Spread media={FRAMES.sky} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">A reading</p>
             <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
@@ -135,26 +137,25 @@ export const OriginPage: React.FC = () => {
               Simulation, technician training, and a Stellantis cell in the same season — side quests that refused to stay side quests.
             </p>
           </Spread>
-          <div className="mt-12 grid items-start gap-8 md:grid-cols-12">
-            <div className="md:col-span-4">
-              <Frame media={FRAMES.mentor} />
-            </div>
-            <div className="grid gap-4 md:col-span-8">
-              {NOW.map((job) => (
-                <article key={job.title} className="border border-[#3d3228] bg-[#241c16] p-6">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">{job.when}</p>
-                  <h3 className="mt-2 font-display text-2xl text-[#f0e6d4]">{job.title}</h3>
-                  <p className="mt-1 text-sm text-[#8a7a68]">{job.place}</p>
-                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[#d8cbb6]">
-                    {job.points.map((p) => (
-                      <li key={p} className="border-l border-[#c4a35a]/50 pl-4">
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
+          <div className="mt-10 space-y-10">
+            <Spread media={FRAMES.mentor}>
+              <div className="space-y-4">
+                {NOW.map((job) => (
+                  <article key={job.title}>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">{job.when}</p>
+                    <h3 className="mt-1 font-display text-2xl text-[#f0e6d4]">{job.title}</h3>
+                    <p className="text-sm text-[#8a7a68]">{job.place}</p>
+                    <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#d8cbb6]">
+                      {job.points.map((p) => (
+                        <li key={p} className="border-l border-[#c4a35a]/50 pl-4">
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </Spread>
           </div>
         </section>
 
@@ -165,9 +166,9 @@ export const OriginPage: React.FC = () => {
               Work that only exists because two fields were forced to share a room.
             </h2>
 
-            <div className="mt-16 space-y-24">
+            <div className="mt-16 space-y-10">
               {featured.map((c, i) => (
-                <Spread key={c.id} media={c.photo!} extras={c.gallery} reverse={i % 2 === 1}>
+                <Spread key={c.id} media={c.photo!} reverse={i % 2 === 1}>
                   <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#d4b87a]">
                     {c.fields[0]} × {c.fields[1]}
                     {c.stat ? ` · ${c.stat}` : ''}
@@ -293,45 +294,50 @@ export const OriginPage: React.FC = () => {
         <SignalBoard />
 
         <section id="connect" className="border-t border-[#3d3228] py-24">
-          <div className="mx-auto max-w-6xl px-5">
-            <div className="grid items-start gap-10 md:grid-cols-12">
-              <div className="md:col-span-7">
-                <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Connect</p>
-                <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-6xl">
-                  Write if you want a mind in the room — not a creative you can procure.
-                </h2>
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-[#b8a894]">
-                  Summer 2027 internships, research, industrial cells, education, and strange prototypes. Friends can skip the formality.
-                </p>
-                <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                  <a href={`mailto:${PERSON.email}`} className="border border-[#3d3228] bg-[#241c16] p-5 hover:border-[#c4a35a]/60">
-                    <Mail size={18} className="text-[#d4b87a]" />
-                    <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Email</span>
-                    <span>{PERSON.email}</span>
-                  </a>
-                  <a href={PERSON.phoneHref} className="border border-[#3d3228] bg-[#241c16] p-5 hover:border-[#c4a35a]/60">
-                    <Phone size={18} className="text-[#d4b87a]" />
-                    <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Phone</span>
-                    <span>{PERSON.phone}</span>
-                  </a>
-                  <a href={PERSON.linkedin} target="_blank" rel="noreferrer" className="border border-[#3d3228] bg-[#241c16] p-5 hover:border-[#c4a35a]/60">
-                    <ArrowUpRight size={18} className="text-[#d4b87a]" />
-                    <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">LinkedIn</span>
-                    <span>prajvaldesignsmachines</span>
-                  </a>
-                  <a href={PERSON.github} target="_blank" rel="noreferrer" className="border border-[#3d3228] bg-[#241c16] p-5 hover:border-[#c4a35a]/60">
-                    <ArrowUpRight size={18} className="text-[#d4b87a]" />
-                    <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">GitHub</span>
-                    <span>RoboX2020</span>
-                  </a>
-                </div>
+          <div className="mx-auto max-w-6xl space-y-10 px-5">
+            <Spread media={FRAMES.blazer}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Connect</p>
+              <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
+                Write if you want a mind in the room — not a creative you can procure.
+              </h2>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#b8a894]">
+                Summer 2027 internships, research, industrial cells, education, and strange prototypes. Friends can skip the formality.
+              </p>
+            </Spread>
+
+            <Spread media={FRAMES.airport} reverse>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">While the plot is in the air</p>
+              <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">Direct line</h3>
+              <div className="mt-6 grid gap-4">
+                <a href={`mailto:${PERSON.email}`} className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
+                  <Mail size={18} className="text-[#d4b87a]" />
+                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Email</span>
+                  <span>{PERSON.email}</span>
+                </a>
+                <a href={PERSON.phoneHref} className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
+                  <Phone size={18} className="text-[#d4b87a]" />
+                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Phone</span>
+                  <span>{PERSON.phone}</span>
+                </a>
               </div>
-              <div className="grid gap-8 md:col-span-5">
-                <Frame media={FRAMES.blazer} />
-                <Frame media={FRAMES.airport} />
-                <Frame media={FRAMES.walkway} />
+            </Spread>
+
+            <Spread media={FRAMES.walkway}>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">In transit, still the main character</p>
+              <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">The public trail</h3>
+              <div className="mt-6 grid gap-4">
+                <a href={PERSON.linkedin} target="_blank" rel="noreferrer" className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
+                  <ArrowUpRight size={18} className="text-[#d4b87a]" />
+                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">LinkedIn</span>
+                  <span>prajvaldesignsmachines</span>
+                </a>
+                <a href={PERSON.github} target="_blank" rel="noreferrer" className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
+                  <ArrowUpRight size={18} className="text-[#d4b87a]" />
+                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">GitHub</span>
+                  <span>RoboX2020</span>
+                </a>
               </div>
-            </div>
+            </Spread>
           </div>
         </section>
       </main>

@@ -6,16 +6,38 @@ export type FrameMedia = {
   latin: string;
   note: string;
   wide?: boolean;
+  square?: boolean;
   video?: boolean;
   fallbackHref?: string;
 };
 
-export const Frame: React.FC<{ media: FrameMedia; className?: string }> = ({ media, className = '' }) => {
+function ratioClass(media: FrameMedia) {
+  if (media.square) return 'aspect-square';
+  if (media.wide) return 'aspect-[4/3]';
+  return 'aspect-[3/4]';
+}
+
+export const Frame: React.FC<{ media: FrameMedia; className?: string; fill?: boolean }> = ({
+  media,
+  className = '',
+  fill = false,
+}) => {
   const [videoFailed, setVideoFailed] = useState(false);
-  const ratio = media.wide ? 'aspect-[5/4]' : 'aspect-[4/5]';
+  const mediaClass = fill
+    ? 'absolute inset-0 h-full w-full object-cover object-center'
+    : `block w-full ${ratioClass(media)} object-cover object-center`;
+
+  const overlay = (
+    <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] bg-gradient-to-t from-[#1c1814] via-[#1c1814]/80 to-transparent px-4 pb-4 pt-20">
+      <span className="block font-display text-xl italic text-[#d4b87a]">{media.latin}</span>
+      <span className="mt-1 block text-xs leading-relaxed text-[#e6d9c4]/90">{media.note}</span>
+    </figcaption>
+  );
 
   return (
-    <figure className={`frame ${className}`}>
+    <figure
+      className={`frame relative overflow-hidden bg-[#241c16] ${fill ? 'h-full min-h-[22rem]' : ''} ${className}`}
+    >
       {media.video && !videoFailed ? (
         <video
           src={media.src}
@@ -25,49 +47,48 @@ export const Frame: React.FC<{ media: FrameMedia; className?: string }> = ({ med
           loop
           playsInline
           controls
-          className={`block w-full ${ratio} bg-[#2a2219] object-cover`}
+          className={`${mediaClass} bg-[#2a2219]`}
           onError={() => setVideoFailed(true)}
         />
-      ) : media.video && videoFailed && media.fallbackHref ? (
+      ) : media.video && videoFailed ? (
         <a
-          href={media.fallbackHref}
+          href={media.fallbackHref || media.src}
           target="_blank"
           rel="noreferrer"
-          className={`${ratio} flex flex-col justify-end border border-[#5a4a32] bg-[#2a2219] p-5`}
+          className="absolute inset-0 flex min-h-[22rem] flex-col justify-end p-6"
         >
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#d4b87a]">Play the air experiment</span>
-          <span className="mt-2 text-sm text-[#d8cbb6]">{media.alt}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#d4b87a]">Blimp clip</span>
+          <span className="mt-3 font-display text-3xl italic text-[#f0e6d4]">{media.latin}</span>
+          <span className="mt-2 max-w-sm text-sm leading-relaxed text-[#d8cbb6]">{media.note}</span>
+          <span className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[#c4a35a]">
+            Save the WhatsApp video as public/portraits/blimp.mp4
+          </span>
         </a>
       ) : (
-        <img
-          src={media.src}
-          alt={media.alt}
-          className={`block w-full ${ratio} object-cover object-center`}
-        />
+        <img src={media.src} alt={media.alt} className={mediaClass} />
       )}
-      <figcaption className="px-1 pt-3">
-        <span className="block font-display text-xl italic text-[#d4b87a]">{media.latin}</span>
-        <span className="mt-1 block text-xs leading-relaxed text-[#c4b49a]">{media.note}</span>
-      </figcaption>
+      {!(media.video && videoFailed) && overlay}
     </figure>
   );
 };
 
 export const Spread: React.FC<{
   media: FrameMedia;
-  extras?: FrameMedia[];
   reverse?: boolean;
   children: React.ReactNode;
-}> = ({ media, extras, reverse, children }) => {
+}> = ({ media, reverse, children }) => {
   return (
-    <div className="grid items-start gap-8 md:grid-cols-12 md:gap-12">
-      <div className={`space-y-8 md:col-span-5 ${reverse ? 'md:order-2' : ''}`}>
-        <Frame media={media} />
-        {extras?.map((extra) => (
-          <Frame key={extra.src} media={extra} />
-        ))}
+    <div className="grid overflow-hidden border border-[#3d3228] md:grid-cols-12 md:items-stretch">
+      <div className={`md:col-span-5 ${reverse ? 'md:order-2' : ''}`}>
+        <Frame media={media} fill />
       </div>
-      <div className={`md:col-span-7 ${reverse ? 'md:order-1' : ''} md:pt-4`}>{children}</div>
+      <div
+        className={`flex flex-col justify-center bg-[#241c16] px-6 py-8 md:col-span-7 md:px-10 md:py-12 ${
+          reverse ? 'md:order-1' : ''
+        }`}
+      >
+        {children}
+      </div>
     </div>
   );
 };
