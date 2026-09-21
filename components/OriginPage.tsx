@@ -238,8 +238,6 @@ export const OriginPage: React.FC = () => {
             <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">{PRACTICE[0].title}</h3>
             <p className="text-sm text-[#d4b87a]">{PRACTICE[0].place}</p>
             <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6]">{PRACTICE[0].body}</p>
-            <p className="mt-4 font-display text-xl italic text-[#d4b87a]">{PRACTICE[0].latin}</p>
-            <p className="mt-1 text-sm text-[#b8a894]">{PRACTICE[0].note}</p>
           </Spread>
 
           {PRACTICE.slice(1).map((job) => (
