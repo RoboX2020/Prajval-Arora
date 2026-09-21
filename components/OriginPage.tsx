@@ -16,7 +16,7 @@ import {
 import { SiteHeader } from './SiteHeader';
 import { JointLattice } from './JointLattice';
 import { PixelSprites } from './PixelSprites';
-import { Frame, Spread } from './Frame';
+import { Spread } from './Frame';
 import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
 
@@ -41,12 +41,12 @@ export const OriginPage: React.FC = () => {
       <SiteHeader nav={nav} />
 
       <main id="top" className="relative z-10" style={{ zIndex: 10 }}>
-        <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-14 md:grid-cols-12 md:pt-20">
-          <div className="md:col-span-7">
+        <section className="mx-auto max-w-6xl px-5 pb-8 pt-14 md:pt-20">
+          <Spread media={HERO_PHOTO} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">
               Independent thought · interdisciplinary build
             </p>
-            <h1 className="mt-5 font-display text-[clamp(3.2rem,8vw,7.2rem)] leading-[0.88] tracking-tight text-[#f0e6d4]">
+            <h1 className="mt-5 font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.88] tracking-tight text-[#f0e6d4]">
               Prajval
               <br />
               Arora
@@ -58,7 +58,10 @@ export const OriginPage: React.FC = () => {
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894]">
               Robotics and Autonomous Systems at Arizona State University. A mind that treats a factory cell, a clinic, a classroom, and a guitar as the same kind of problem: invent the missing joint.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
+            <p className="mt-2 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
+            <p className="mt-2 text-sm leading-relaxed text-[#b8a894]">{PERSON.seeking}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#connect"
                 className="inline-flex items-center gap-2 bg-[#c4a35a] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#1c1814] hover:bg-[#d4b87a]"
@@ -72,17 +75,7 @@ export const OriginPage: React.FC = () => {
                 <FileText size={14} /> Resume
               </a>
             </div>
-          </div>
-          <aside className="md:col-span-5">
-            <div className="overflow-hidden border border-[#3d3228]">
-              <Frame media={HERO_PHOTO} />
-              <div className="border-t border-[#3d3228] bg-[#241c16] p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
-                <p className="mt-3 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
-                <p className="mt-3 text-sm leading-relaxed text-[#b8a894]">{PERSON.seeking}</p>
-              </div>
-            </div>
-          </aside>
+          </Spread>
         </section>
 
         <section className="border-y border-[#3d3228] bg-[#241c16]/80">
