@@ -36,7 +36,7 @@ const PixelArm: React.FC<{ className?: string; delay?: string }> = ({ className,
 
 export const PixelSprites: React.FC = () => {
   return (
-    <div className="pointer-events-none fixed inset-0 z-[5] overflow-hidden" aria-hidden>
+    <div className="pointer-events-none fixed inset-0 z-[1] overflow-hidden opacity-35" style={{ zIndex: 1 }} aria-hidden>
       <PixelBot className="pixel-walk absolute bottom-[18%] opacity-80" delay="0s" />
       <PixelCup className="pixel-walk-rev absolute bottom-[32%] opacity-70" delay="-8s" />
       <PixelArm className="pixel-walk absolute top-[22%] opacity-75" delay="-4s" />

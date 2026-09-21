@@ -134,7 +134,8 @@ export const JointLattice: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 h-full w-full"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full"
+      style={{ zIndex: 0 }}
       aria-hidden
     />
   );

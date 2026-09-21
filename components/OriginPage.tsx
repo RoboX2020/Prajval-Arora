@@ -34,13 +34,13 @@ export const OriginPage: React.FC = () => {
   const rest = COLLISIONS.filter((c) => !c.photo && !c.gallery);
 
   return (
-    <div className="origin-root relative min-h-screen text-[#e6d9c4]">
+    <div className="origin-root relative min-h-screen bg-[#1c1814] text-[#e6d9c4]">
       <JointLattice />
       <PixelSprites />
 
       <SiteHeader nav={nav} />
 
-      <main id="top" className="relative z-10">
+      <main id="top" className="relative z-10" style={{ zIndex: 10 }}>
         <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-14 md:grid-cols-12 md:pt-20">
           <div className="md:col-span-7">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">
