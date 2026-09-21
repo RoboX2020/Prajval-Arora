@@ -243,7 +243,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
 
     return (
         <div
-            className="w-full h-screen bg-[#101214] relative overflow-hidden text-white font-nunito selection:bg-amber-500/30"
+            className="w-full flex-1 min-h-0 bg-[#101214] relative overflow-hidden text-white font-nunito selection:bg-amber-500/30"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={() => setIsDragging(false)}
@@ -449,7 +449,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
 
             {/* --- HUD --- */}
             {!walkthroughMode && (
-                <div className="fixed top-16 left-6 z-50 pointer-events-none">
+                <div className="fixed top-20 left-6 z-50 pointer-events-none">
                     <div className="bg-black/90 backdrop-blur border-l-4 border-amber-500 p-4 rounded-r-lg shadow-2xl pointer-events-auto">
                         <div className="flex items-center gap-2 text-amber-500 font-mono text-xs mb-1">
                             <Cpu size={14} />

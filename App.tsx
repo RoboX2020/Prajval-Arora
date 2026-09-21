@@ -4,39 +4,39 @@ import { OriginPage } from './components/OriginPage';
 import { HomePage } from './components/HomePage';
 import { GameLayer } from './components/GameLayer';
 import { ShopPage } from './components/ShopPage';
-import { ArchiveChrome } from './components/ArchiveChrome';
+import { SiteHeader } from './components/SiteHeader';
 import { audioService } from './services/audioService';
 
 const CircuitArchive: React.FC = () => {
   const [view, setView] = React.useState<'home' | 'game'>('home');
 
   return (
-    <>
-      <ArchiveChrome label={view === 'home' ? 'Circuit atlas' : 'Driving home'} />
+    <div className="flex h-full min-h-screen flex-col">
+      <SiteHeader archiveLabel={view === 'home' ? 'Circuit atlas' : 'Driving home'} />
       {view === 'home' ? (
         <HomePage onStart={() => setView('game')} />
       ) : (
         <GameLayer onBackToHome={() => setView('home')} />
       )}
-    </>
+    </div>
   );
 };
 
 const JourneyArchive: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <>
-      <ArchiveChrome label="Driving home" />
+    <div className="flex h-full min-h-screen flex-col">
+      <SiteHeader archiveLabel="Driving home" />
       <GameLayer onBackToHome={() => navigate('/v1')} />
-    </>
+    </div>
   );
 };
 
 const GarageArchive: React.FC = () => (
-  <>
-    <ArchiveChrome label="Internet garage" />
+  <div className="flex h-full min-h-screen flex-col">
+    <SiteHeader archiveLabel="Internet garage" />
     <ShopPage />
-  </>
+  </div>
 );
 
 const App: React.FC = () => {

@@ -18,6 +18,24 @@ New home at `/`. Previous versions live under **Version history**:
 2. Optional: set `GEMINI_API_KEY` in `.env.local` (used by the archived radio/journey)
 3. `npm run dev`
 
+## Add the blimp video
+
+The AMASS spread plays `public/portraits/blimp.mp4`. The WhatsApp clip is not in git until you put it there.
+
+From your machine (in this repo):
+
+```bash
+cp "/Users/dr.arora/Downloads/WhatsApp Video 2026-09-20 at 23.04.29.mp4" public/portraits/blimp.mp4
+```
+
+Or in Cursor: drag that file onto the `public/portraits` folder and rename it to **`blimp.mp4`** (exact name). Then commit.
+
+If it is still a `.mov`, convert first:
+
+```bash
+ffmpeg -i "/Users/dr.arora/Downloads/WhatsApp Video 2026-09-20 at 23.04.29.mp4" -c:v libx264 -pix_fmt yuv420p -movflags +faststart public/portraits/blimp.mp4
+```
+
 
 This contains everything you need to run your app locally.
 

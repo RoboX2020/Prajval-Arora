@@ -6,7 +6,7 @@ import InteractiveDots from './InteractiveDots';
 
 export const ShopPage: React.FC = () => {
     return (
-        <div className="h-screen w-full bg-[#050505] text-white font-nunito selection:bg-amber-500/30 overflow-y-auto relative pt-14">
+        <div className="flex-1 min-h-0 w-full bg-[#050505] text-white font-nunito selection:bg-amber-500/30 overflow-y-auto relative">
             <InteractiveDots backgroundColor="#050505" dotColor="#444444" />
             {/* Background Texture */}
             <div

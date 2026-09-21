@@ -12,11 +12,105 @@ export const PERSON = {
   calendly: 'https://calendly.com/prajval-2029/30min',
   resume: '/Prajval_Arora_Resume.pdf',
   tapri: 'https://gotapri.com',
+  huggingface: 'https://huggingface.co/iamprajval',
+  instagram: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  instagramAir: 'https://www.instagram.com/reel/DSyhRm6CeOL/',
+  instagramBot: 'https://www.instagram.com/p/DAojHutz0g4/',
+  productHunt: 'https://vibeverseai.com',
+  githubStats: 'https://github.com/RoboX2020',
   education: {
     school: 'Arizona State University',
     degree: 'B.S.E. Robotics and Autonomous Systems Engineering',
     when: 'Expected 2029',
     extra: 'Harvard Certificate of Internship and Entrepreneurship, Summer 2025',
+  },
+};
+
+export const HERO_PHOTO = {
+  src: '/portraits/6616.jpg',
+  alt: 'Prajval Arora on an Arizona street, white shirt, backpack',
+  latin: 'Ecce persona.',
+  note: 'The working title of a person — beside the name, not instead of it.',
+};
+
+export const FRAMES = {
+  walk: {
+    src: '/portraits/179.jpg',
+    alt: 'Prajval walking a sunlit path with a backpack and a grocery bag',
+    latin: 'Iter facio.',
+    note: 'Bag, path, grin. Just me, arriving as a friend would.',
+  },
+  sky: {
+    src: '/portraits/198.jpg',
+    alt: 'Prajval in sunglasses looking up under a blue sky',
+    latin: 'Ad caelum specto.',
+    note: 'Looking where the work is going — not at the job description.',
+  },
+  stage: {
+    src: '/portraits/1111.jpg',
+    alt: 'Prajval speaking at the Walter Cronkite School of Journalism and Mass Communication',
+    latin: 'Scaenam honoro; verbis impero.',
+    note: 'I honor the stage. I command with speech. The paper, delivered.',
+  },
+  cinema: {
+    src: '/portraits/1125.jpg',
+    alt: 'Prajval arms wide in front of a wall of live news screens',
+    latin: 'Totus mundus agit histrionem.',
+    note: 'All the world’s a stage. I love Bollywood. I act because it is fun.',
+  },
+  quest: {
+    src: '/portraits/5764.jpg',
+    alt: 'Prajval at night above a city of lights',
+    latin: 'Quaestio lateralis semper aperta.',
+    note: 'Always up for a side quest. The city as the map.',
+  },
+  hack: {
+    src: '/portraits/6955.jpg',
+    alt: 'Prajval peace-signing in a lecture hall',
+    latin: 'Ludus est labor.',
+    note: 'Hackathons are fun — the serious kind of play.',
+  },
+  team: {
+    src: '/portraits/7157.jpg',
+    alt: 'Prajval with the Honeywell hackathon team at the Innovation Hub',
+    latin: 'Victoria non mea — nostra.',
+    note: 'Goated team. Winning team.',
+    wide: true,
+  },
+  airport: {
+    src: '/portraits/7931.jpg',
+    alt: 'Prajval at an airport window with headphones around his neck',
+    latin: 'Os apertum, mundus apertus.',
+    note: 'Wheels-up face. Write me while the plot is in the air.',
+  },
+  walkway: {
+    src: '/portraits/9698.jpg',
+    alt: 'Prajval on a moving walkway with headphones, deadpan',
+    latin: 'In transitu, tamen ego.',
+    note: 'Moving walk, no dialogue, still the main character.',
+  },
+  blimp: {
+    // Drop the WhatsApp / IMG_6706 clip here, named exactly blimp.mp4
+    src: '/portraits/blimp.mp4',
+    alt: 'Blimp and balloon experiments from AMASS research',
+    latin: 'Nuper cum globis ludo.',
+    note: 'Lately I’ve been playing with balloons — the blimp, in the air.',
+    video: true,
+    wide: true,
+    fallbackHref: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  },
+  mentor: {
+    src: '/portraits/asu-mentor.jpg',
+    alt: 'Prajval as an ASU peer mentor in a black polo against ivy',
+    latin: 'Discere et ducere.',
+    note: 'Peer mentor kit: same campus, same season as the live experiments.',
+  },
+  blazer: {
+    src: '/portraits/github.jpg',
+    alt: 'Prajval in a blazer taking a mirror selfie',
+    latin: 'Ad limen paratus.',
+    note: 'Ready at the door. Write if you want the mind in the room.',
+    square: true,
   },
 };
 
@@ -78,6 +172,8 @@ export const PRACTICE = [
     place: 'AMASS Lab, Arizona State University',
     when: 'Aug 2025 – Mar 2026',
     body: 'Led ROS 2, embedded electronics, computer vision, and perception for an autonomous blimp with live airborne object detection. Integrated sensors, Jetson compute, electrical hardware, and control software.',
+    latin: 'Nuper cum globis ludo.',
+    note: 'Lately I’ve been playing with balloons — the blimp, in the air.',
   },
   {
     title: 'AR Assistant Developer',
@@ -101,6 +197,31 @@ export type Collision = {
   body: string;
   link?: string;
   stat?: string;
+  photo?: {
+    src: string;
+    alt: string;
+    latin: string;
+    note: string;
+    wide?: boolean;
+    square?: boolean;
+    video?: boolean;
+    fallbackHref?: string;
+  };
+  gallery?: {
+    src: string;
+    alt: string;
+    latin: string;
+    note: string;
+    wide?: boolean;
+    square?: boolean;
+    video?: boolean;
+    fallbackHref?: string;
+  }[];
+  video?: {
+    src: string;
+    latin: string;
+    note: string;
+  };
 };
 
 export const COLLISIONS: Collision[] = [
@@ -144,15 +265,27 @@ export const COLLISIONS: Collision[] = [
     body: '2025: 2nd place, $5,000 — cooling jet engines with bleed-air exhaust. 2026: 3rd place, $2,500 — automated manufacturing for engine heat-exchange systems. Thermodynamics one year, production the next.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: '$7,500 across two years',
+    photo: FRAMES.team,
+  },
+  {
+    id: 'hack-play',
+    fields: ['Play', 'Pressure'],
+    title: 'Hackathons as the serious kind of play',
+    result: 'Ludus est labor — the lecture hall at 2 a.m. still counts as a lab.',
+    body: 'Honeywell was not a lone sprint. The same season of play produced the team that won and the face that still peace-signs in a hall. Fun is how the thermodynamics got finished.',
+    link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
+    stat: 'Two years, two rooms',
+    photo: FRAMES.hack,
   },
   {
     id: 'riverside',
     fields: ['Climate', 'Compute'],
     title: 'Riverside data centers',
     result: 'Put the heat where a river already knows how to carry it.',
-    body: 'Solo research on dam-based cooling for sustainable data centers. $2,500 Microsoft Research grant through TKS, plus published papers on the same problem.',
+    body: 'Solo research on dam-based cooling for sustainable data centers. $2,500 Microsoft Research grant through TKS, plus published papers on the same problem. Spoken at Cronkite — the page becoming a voice.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_microsoft-researchpaper-culture-activity-7340222850680688640-kP--',
     stat: '$2,500 Microsoft grant',
+    photo: FRAMES.stage,
   },
   {
     id: 'air-guitar',
@@ -251,33 +384,99 @@ export const RECOGNITION = [
   { title: 'Harvard', detail: 'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast' },
 ];
 
+export const PHOTOS = {
+  hero: HERO_PHOTO,
+};
+
+export const EMBEDS = [
+  {
+    id: 'github',
+    kind: 'GitHub',
+    title: 'RoboX2020',
+    body: 'Source, PRs, and the air-guitar that still gets cloned. A contribution graph is a handwriting sample.',
+    href: 'https://github.com/RoboX2020',
+  },
+  {
+    id: 'linkedin',
+    kind: 'LinkedIn',
+    title: 'prajvaldesignsmachines',
+    body: 'The professional trail: cells, grants, and the long sentences that happen after a build.',
+    href: 'https://www.linkedin.com/in/prajvaldesignsmachines',
+  },
+  {
+    id: 'instagram',
+    kind: 'Instagram',
+    title: 'Machines in the air',
+    body: 'Reels of the air mouse, the buddy robot, the things that only make sense moving. Best embedding for proof of life.',
+    href: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  },
+  {
+    id: 'calendly',
+    kind: 'Calendar',
+    title: 'Thirty minutes',
+    body: 'Not a funnel. A slot. Friends and employers use the same door.',
+    href: 'https://calendly.com/prajval-2029/30min',
+  },
+  {
+    id: 'tapri',
+    kind: 'Community',
+    title: 'gotapri.com',
+    body: 'The tea stall as a network. 2,200+ builders, 40+ ventures.',
+    href: 'https://gotapri.com',
+  },
+  {
+    id: 'hf',
+    kind: 'Hugging Face',
+    title: 'iamprajval',
+    body: 'Spaces and experiments — the public notebook of models, not just repos.',
+    href: 'https://huggingface.co/iamprajval',
+  },
+  {
+    id: 'pr',
+    kind: 'Open source',
+    title: 'ESP-Claw PR',
+    body: 'A pull request as an embedding: talk to Arduino hardware Espressif could not reach.',
+    href: 'https://github.com/espressif/esp-claw/pull/11',
+  },
+  {
+    id: 'air',
+    kind: 'Build',
+    title: 'Air Guitar',
+    body: 'The repo that went viral without a campaign. DSP on a wrist.',
+    href: 'https://github.com/RoboX2020/Air-Guitar',
+  },
+  {
+    id: 'vibe',
+    kind: 'Product',
+    title: 'VibeVerse',
+    body: 'A marketplace launched on Product Hunt — builders sharing AI-born projects.',
+    href: 'https://vibeverseai.com',
+  },
+];
+
 export const VERSIONS = [
   {
     version: 'v2',
     title: 'This page',
     blurb: 'The current field: interdisciplinary collisions, a guide for people who want to know me, and a door to work together.',
     href: '/',
-    current: true,
   },
   {
     version: 'v1.1',
     title: 'Circuit atlas',
     blurb: 'A PCB of every project, wired to a central processor. Pan, zoom, or take the guided walkthrough.',
     href: '/v1',
-    current: false,
   },
   {
     version: 'v1.0',
     title: 'Driving home',
     blurb: 'The original road: a long horizontal journey past tea stalls, posters, and machines.',
     href: '/v1/journey',
-    current: false,
   },
   {
     version: 'v1.garage',
     title: 'Internet garage',
     blurb: 'The workshop listing — every prototype, paper, and community artifact as a stall.',
     href: '/v1/garage',
-    current: false,
   },
 ];
