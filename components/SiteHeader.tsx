@@ -15,11 +15,11 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
   const home = location.pathname === '/';
 
   return (
-    <header className="origin-root sticky top-0 z-[70] border-b border-white/10 bg-[#0c0b09]/85 text-[#f3ece3] backdrop-blur-md">
+    <header className="origin-root sticky top-0 z-[70] border-b border-[#3d3228] bg-[#241c16] text-[#e6d9c4]">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3">
-        <Link to="/" className="shrink-0 font-display text-lg tracking-tight text-stone-100">
+        <Link to="/" className="shrink-0 font-display text-lg tracking-tight text-[#f0e6d4]">
           {PERSON.first}
-          <span className="text-orange-400">.</span>
+          <span className="text-[#d4b87a]">.</span>
         </Link>
 
         {home && nav ? (
@@ -28,14 +28,14 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
               <a
                 key={item.href}
                 href={item.href}
-                className="font-mono text-[10px] uppercase tracking-[0.22em] text-stone-400 hover:text-orange-300"
+                className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#b8a894] hover:text-[#d4b87a]"
               >
                 {item.label}
               </a>
             ))}
           </nav>
         ) : (
-          <p className="hidden min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.18em] text-orange-400 sm:block">
+          <p className="hidden min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a] sm:block">
             {archiveLabel ? `Archived · ${archiveLabel}` : 'Archive'}
           </p>
         )}
@@ -44,7 +44,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
           {!home && (
             <Link
               to="/"
-              className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-stone-500 hover:text-orange-300 sm:inline"
+              className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-[#8a7a68] hover:text-[#d4b87a] sm:inline"
             >
               Current site
             </Link>

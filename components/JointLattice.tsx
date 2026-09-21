@@ -51,7 +51,7 @@ export const JointLattice: React.FC = () => {
     const draw = (t: number) => {
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
-      ctx.fillStyle = '#0c0b09';
+      ctx.fillStyle = '#1c1814';
       ctx.fillRect(0, 0, w, h);
 
       const cols = Math.ceil(w / CELL);
@@ -98,16 +98,16 @@ export const JointLattice: React.FC = () => {
           const teal = (gx + gy) % 5 === 0;
 
           ctx.fillStyle = isRing
-            ? `rgba(255, 92, 40, ${0.55 + heat * 0.4})`
+            ? `rgba(196, 163, 90, ${0.5 + heat * 0.4})`
             : teal
-              ? `rgba(64, 180, 170, ${0.12 + heat * 0.45})`
-              : `rgba(232, 140, 72, ${0.1 + heat * 0.5})`;
+              ? `rgba(140, 110, 70, ${0.14 + heat * 0.4})`
+              : `rgba(196, 140, 72, ${0.12 + heat * 0.45})`;
           ctx.fillRect(px + (CELL - size) / 2, py + (CELL - size) / 2, size, size);
         }
       }
 
       // Orthogonal traces from cursor — joints, not a photo wall
-      ctx.strokeStyle = 'rgba(255, 92, 40, 0.22)';
+      ctx.strokeStyle = 'rgba(196, 163, 90, 0.28)';
       ctx.lineWidth = 2;
       ctx.beginPath();
       const gx = Math.round(mx / CELL) * CELL;

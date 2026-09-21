@@ -26,6 +26,94 @@ export const PERSON = {
   },
 };
 
+export const HERO_PHOTO = {
+  src: '/portraits/6616.jpg',
+  alt: 'Prajval Arora on an Arizona street, white shirt, backpack',
+  latin: 'Ecce persona.',
+  note: 'The working title of a person — beside the name, not instead of it.',
+};
+
+export const FRAMES = {
+  walk: {
+    src: '/portraits/179.jpg',
+    alt: 'Prajval walking a sunlit path with a backpack and a grocery bag',
+    latin: 'Iter facio.',
+    note: 'Bag, path, grin. Just me, arriving as a friend would.',
+  },
+  sky: {
+    src: '/portraits/198.jpg',
+    alt: 'Prajval in sunglasses looking up under a blue sky',
+    latin: 'Ad caelum specto.',
+    note: 'Looking where the work is going — not at the job description.',
+  },
+  stage: {
+    src: '/portraits/1111.jpg',
+    alt: 'Prajval speaking at the Walter Cronkite School of Journalism and Mass Communication',
+    latin: 'Scaenam honoro; verbis impero.',
+    note: 'I honor the stage. I command with speech. The paper, delivered.',
+  },
+  cinema: {
+    src: '/portraits/1125.jpg',
+    alt: 'Prajval arms wide in front of a wall of live news screens',
+    latin: 'Totus mundus agit histrionem.',
+    note: 'All the world’s a stage. I love Bollywood. I act because it is fun.',
+    wide: true,
+  },
+  quest: {
+    src: '/portraits/5764.jpg',
+    alt: 'Prajval at night above a city of lights',
+    latin: 'Quaestio lateralis semper aperta.',
+    note: 'Always up for a side quest. The city as the map.',
+  },
+  hack: {
+    src: '/portraits/6955.jpg',
+    alt: 'Prajval peace-signing in a lecture hall',
+    latin: 'Ludus est labor.',
+    note: 'Hackathons are fun — the serious kind of play.',
+  },
+  team: {
+    src: '/portraits/7157.jpg',
+    alt: 'Prajval with the Honeywell hackathon team at the Innovation Hub',
+    latin: 'Victoria non mea — nostra.',
+    note: 'Goated team. Winning team.',
+    wide: true,
+  },
+  airport: {
+    src: '/portraits/7931.jpg',
+    alt: 'Prajval at an airport window with headphones around his neck',
+    latin: 'Os apertum, mundus apertus.',
+    note: 'Wheels-up face. Write me while the plot is in the air.',
+  },
+  walkway: {
+    src: '/portraits/9698.jpg',
+    alt: 'Prajval on a moving walkway with headphones, deadpan',
+    latin: 'In transitu, tamen ego.',
+    note: 'Moving walk, no dialogue, still the main character.',
+  },
+  blimp: {
+    src: '/portraits/blimp.mp4',
+    alt: 'Blimp and balloon experiments from AMASS research',
+    latin: 'Nuper cum globis ludo.',
+    note: 'Lately I’ve been playing with balloons — the blimp, in the air.',
+    video: true,
+    wide: true,
+    fallbackHref: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  },
+  mentor: {
+    src: '/portraits/asu-mentor.jpg',
+    alt: 'Prajval as an ASU peer mentor in a black polo against ivy',
+    latin: 'Discere et ducere.',
+    note: 'Peer mentor kit: same campus, same season as the live experiments.',
+  },
+  blazer: {
+    src: '/portraits/github.jpg',
+    alt: 'Prajval in a blazer taking a mirror selfie',
+    latin: 'Ad limen paratus.',
+    note: 'Ready at the door. Write if you want the mind in the room.',
+    wide: true,
+  },
+};
+
 export const LAWS = [
   { law: 'Stay in one major.', break: 'Robotics is the meeting of mechanics, code, people, and plants that should not exist yet.' },
   { law: 'Hire creativity.', break: 'You work with an independent mind. Creativity is the byproduct, not the job title.' },
@@ -115,7 +203,18 @@ export type Collision = {
     latin: string;
     note: string;
     wide?: boolean;
+    video?: boolean;
+    fallbackHref?: string;
   };
+  gallery?: {
+    src: string;
+    alt: string;
+    latin: string;
+    note: string;
+    wide?: boolean;
+    video?: boolean;
+    fallbackHref?: string;
+  }[];
   video?: {
     src: string;
     latin: string;
@@ -164,13 +263,8 @@ export const COLLISIONS: Collision[] = [
     body: '2025: 2nd place, $5,000 — cooling jet engines with bleed-air exhaust. 2026: 3rd place, $2,500 — automated manufacturing for engine heat-exchange systems. Thermodynamics one year, production the next.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: '$7,500 across two years',
-    photo: {
-      src: '/portraits/7157.jpg',
-      alt: 'Prajval with the Honeywell hackathon team at the Innovation Hub',
-      latin: 'Victoria non mea — nostra.',
-      note: 'Goated team. Winning team. The Innovation Hub still has our fingerprints.',
-      wide: true,
-    },
+    photo: FRAMES.team,
+    gallery: [FRAMES.hack],
   },
   {
     id: 'riverside',
@@ -180,12 +274,7 @@ export const COLLISIONS: Collision[] = [
     body: 'Solo research on dam-based cooling for sustainable data centers. $2,500 Microsoft Research grant through TKS, plus published papers on the same problem. Spoken at Cronkite — the page becoming a voice.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_microsoft-researchpaper-culture-activity-7340222850680688640-kP--',
     stat: '$2,500 Microsoft grant',
-    photo: {
-      src: '/portraits/1111.jpg',
-      alt: 'Prajval speaking at the Walter Cronkite School of Journalism and Mass Communication',
-      latin: 'Scaenam honoro; verbis impero.',
-      note: 'I honor the stage. I command with speech. The paper, delivered — not recited.',
-    },
+    photo: FRAMES.stage,
   },
   {
     id: 'air-guitar',
@@ -284,97 +373,8 @@ export const RECOGNITION = [
   { title: 'Harvard', detail: 'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast' },
 ];
 
-export const HERO_PHOTO = {
-  src: '/portraits/6616.jpg',
-  alt: 'Prajval Arora on an Arizona street, white shirt, backpack',
-  latin: 'Ecce persona.',
-  note: 'The working title of a person — beside the name, not instead of it.',
-};
-
-export const WALL_PHOTOS = [
-  {
-    id: '179',
-    src: '/portraits/179.jpg',
-    alt: 'Prajval walking a sunlit path with a backpack and a grocery bag',
-    latin: 'Iter facio.',
-    note: 'Bag, path, grin. Just me.',
-    rotate: '-2deg',
-    span: 'md:col-span-4',
-  },
-  {
-    id: '198',
-    src: '/portraits/198.jpg',
-    alt: 'Prajval in sunglasses looking up under a blue sky',
-    latin: 'Ad caelum specto.',
-    note: 'Same afternoon. Looking where the work is going.',
-    rotate: '2.5deg',
-    span: 'md:col-span-4',
-  },
-  {
-    id: '1125',
-    src: '/portraits/1125.jpg',
-    alt: 'Prajval arms wide in front of a wall of live news screens',
-    latin: 'Totus mundus agit histrionem.',
-    note: 'All the world’s a stage. I love Bollywood. I act because it is fun.',
-    rotate: '-1deg',
-    span: 'md:col-span-4',
-  },
-  {
-    id: '5764',
-    src: '/portraits/5764.jpg',
-    alt: 'Prajval at night above a city of lights',
-    latin: 'Quaestio lateralis semper aperta.',
-    note: 'Always up for a side quest. The city as the map.',
-    rotate: '1.5deg',
-    span: 'md:col-span-5',
-  },
-  {
-    id: '6955',
-    src: '/portraits/6955.jpg',
-    alt: 'Prajval peace-signing in a lecture hall',
-    latin: 'Ludus est labor.',
-    note: 'Hackathons are fun — the serious kind of play.',
-    rotate: '-3deg',
-    span: 'md:col-span-3',
-  },
-  {
-    id: '7931',
-    src: '/portraits/7931.jpg',
-    alt: 'Prajval at an airport window with headphones around his neck',
-    latin: 'Os apertum, mundus apertus.',
-    note: 'Wheels-up face. The plot is already in the air.',
-    rotate: '2deg',
-    span: 'md:col-span-4',
-  },
-  {
-    id: '9698',
-    src: '/portraits/9698.jpg',
-    alt: 'Prajval on a moving walkway with headphones, deadpan',
-    latin: 'In transitu, tamen ego.',
-    note: 'Moving walk, no dialogue, still the main character.',
-    rotate: '-2deg',
-    span: 'md:col-span-4',
-  },
-  {
-    id: '6616-pixel',
-    src: '/portraits/6616-pixel.png',
-    alt: 'Pixel scan of the main portrait',
-    latin: 'Persona, punctatim.',
-    note: 'The same face, quantized. How a cell would greet you.',
-    rotate: '3deg',
-    span: 'md:col-span-4',
-    pixel: true,
-  },
-];
-
 export const PHOTOS = {
   hero: HERO_PHOTO,
-  stagePixel: {
-    src: '/portraits/1111-pixel.png',
-    alt: 'Pixel scan of Prajval at the Cronkite podium',
-    latin: 'Pulpita, pixelata.',
-    note: 'The stage, as a machine would remember it.',
-  },
 };
 
 export const EMBEDS = [
