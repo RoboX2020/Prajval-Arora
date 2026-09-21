@@ -10,7 +10,7 @@ import {
   MORE_WORK,
   SKILL_FIELDS,
   RECOGNITION,
-  PHOTOS,
+  HERO_PHOTO,
 } from '../content';
 import { SiteHeader } from './SiteHeader';
 import { JointLattice } from './JointLattice';
@@ -78,10 +78,10 @@ export const OriginPage: React.FC = () => {
           </div>
           <aside className="md:col-span-4 md:pt-8">
             <figure className="polaroid -rotate-2">
-              <img src={PHOTOS.asu.src} alt={PHOTOS.asu.alt} className="aspect-[3/4] w-full object-cover" />
+              <img src={HERO_PHOTO.src} alt={HERO_PHOTO.alt} className="aspect-[3/4] w-full object-cover object-top" />
               <figcaption>
-                <span className="block font-display text-xl text-stone-800">{PHOTOS.asu.caption}</span>
-                <span className="mt-1 block text-xs text-stone-500">{PHOTOS.asu.note}</span>
+                <span className="block font-display text-xl italic text-stone-800">{HERO_PHOTO.latin}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-stone-500">{HERO_PHOTO.note}</span>
               </figcaption>
             </figure>
             <div className="mt-8 border border-white/10 bg-black/35 p-5 backdrop-blur-sm">
@@ -185,6 +185,15 @@ export const OriginPage: React.FC = () => {
                   <h3 className="mt-4 font-display text-3xl text-stone-50">{c.title}</h3>
                   <p className="mt-2 text-base italic text-stone-400">{c.result}</p>
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-stone-400">{c.body}</p>
+                  {c.photo && (
+                    <figure className="polaroid mt-6 rotate-1">
+                      <img src={c.photo.src} alt={c.photo.alt} className={`${c.photo.wide ? 'aspect-[5/4]' : 'aspect-[3/4]'} w-full object-cover object-top`} />
+                      <figcaption>
+                        <span className="block font-display text-lg italic text-stone-800">{c.photo.latin}</span>
+                        <span className="mt-1 block text-xs leading-relaxed text-stone-500">{c.photo.note}</span>
+                      </figcaption>
+                    </figure>
+                  )}
                   {c.link && (
                     <a
                       href={c.link}
@@ -224,6 +233,14 @@ export const OriginPage: React.FC = () => {
                   <h3 className="font-display text-2xl text-stone-50">{job.title}</h3>
                   <p className="text-sm text-orange-300/80">{job.place}</p>
                   <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone-400">{job.body}</p>
+                  {'latin' in job && job.latin && (
+                    <p className="mt-4 max-w-xl font-display text-xl italic text-orange-300/90">
+                      {job.latin}
+                      {'note' in job && job.note ? (
+                        <span className="mt-1 block font-sans text-sm not-italic text-stone-500">{job.note}</span>
+                      ) : null}
+                    </p>
+                  )}
                 </div>
               </article>
             ))}

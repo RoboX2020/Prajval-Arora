@@ -84,6 +84,8 @@ export const PRACTICE = [
     place: 'AMASS Lab, Arizona State University',
     when: 'Aug 2025 – Mar 2026',
     body: 'Led ROS 2, embedded electronics, computer vision, and perception for an autonomous blimp with live airborne object detection. Integrated sensors, Jetson compute, electrical hardware, and control software.',
+    latin: 'Nuper cum globis ludo.',
+    note: 'Lately I’ve been playing with balloons — the blimp, in the air.',
   },
   {
     title: 'AR Assistant Developer',
@@ -107,6 +109,18 @@ export type Collision = {
   body: string;
   link?: string;
   stat?: string;
+  photo?: {
+    src: string;
+    alt: string;
+    latin: string;
+    note: string;
+    wide?: boolean;
+  };
+  video?: {
+    src: string;
+    latin: string;
+    note: string;
+  };
 };
 
 export const COLLISIONS: Collision[] = [
@@ -150,15 +164,28 @@ export const COLLISIONS: Collision[] = [
     body: '2025: 2nd place, $5,000 — cooling jet engines with bleed-air exhaust. 2026: 3rd place, $2,500 — automated manufacturing for engine heat-exchange systems. Thermodynamics one year, production the next.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: '$7,500 across two years',
+    photo: {
+      src: '/portraits/7157.jpg',
+      alt: 'Prajval with the Honeywell hackathon team at the Innovation Hub',
+      latin: 'Victoria non mea — nostra.',
+      note: 'Goated team. Winning team. The Innovation Hub still has our fingerprints.',
+      wide: true,
+    },
   },
   {
     id: 'riverside',
     fields: ['Climate', 'Compute'],
     title: 'Riverside data centers',
     result: 'Put the heat where a river already knows how to carry it.',
-    body: 'Solo research on dam-based cooling for sustainable data centers. $2,500 Microsoft Research grant through TKS, plus published papers on the same problem.',
+    body: 'Solo research on dam-based cooling for sustainable data centers. $2,500 Microsoft Research grant through TKS, plus published papers on the same problem. Spoken at Cronkite — the page becoming a voice.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_microsoft-researchpaper-culture-activity-7340222850680688640-kP--',
     stat: '$2,500 Microsoft grant',
+    photo: {
+      src: '/portraits/1111.jpg',
+      alt: 'Prajval speaking at the Walter Cronkite School of Journalism and Mass Communication',
+      latin: 'Scaenam honoro; verbis impero.',
+      note: 'I honor the stage. I command with speech. The paper, delivered — not recited.',
+    },
   },
   {
     id: 'air-guitar',
@@ -257,30 +284,96 @@ export const RECOGNITION = [
   { title: 'Harvard', detail: 'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast' },
 ];
 
+export const HERO_PHOTO = {
+  src: '/portraits/6616.jpg',
+  alt: 'Prajval Arora on an Arizona street, white shirt, backpack',
+  latin: 'Ecce persona.',
+  note: 'The working title of a person — beside the name, not instead of it.',
+};
+
+export const WALL_PHOTOS = [
+  {
+    id: '179',
+    src: '/portraits/179.jpg',
+    alt: 'Prajval walking a sunlit path with a backpack and a grocery bag',
+    latin: 'Iter facio.',
+    note: 'Bag, path, grin. Just me.',
+    rotate: '-2deg',
+    span: 'md:col-span-4',
+  },
+  {
+    id: '198',
+    src: '/portraits/198.jpg',
+    alt: 'Prajval in sunglasses looking up under a blue sky',
+    latin: 'Ad caelum specto.',
+    note: 'Same afternoon. Looking where the work is going.',
+    rotate: '2.5deg',
+    span: 'md:col-span-4',
+  },
+  {
+    id: '1125',
+    src: '/portraits/1125.jpg',
+    alt: 'Prajval arms wide in front of a wall of live news screens',
+    latin: 'Totus mundus agit histrionem.',
+    note: 'All the world’s a stage. I love Bollywood. I act because it is fun.',
+    rotate: '-1deg',
+    span: 'md:col-span-4',
+  },
+  {
+    id: '5764',
+    src: '/portraits/5764.jpg',
+    alt: 'Prajval at night above a city of lights',
+    latin: 'Quaestio lateralis semper aperta.',
+    note: 'Always up for a side quest. The city as the map.',
+    rotate: '1.5deg',
+    span: 'md:col-span-5',
+  },
+  {
+    id: '6955',
+    src: '/portraits/6955.jpg',
+    alt: 'Prajval peace-signing in a lecture hall',
+    latin: 'Ludus est labor.',
+    note: 'Hackathons are fun — the serious kind of play.',
+    rotate: '-3deg',
+    span: 'md:col-span-3',
+  },
+  {
+    id: '7931',
+    src: '/portraits/7931.jpg',
+    alt: 'Prajval at an airport window with headphones around his neck',
+    latin: 'Os apertum, mundus apertus.',
+    note: 'Wheels-up face. The plot is already in the air.',
+    rotate: '2deg',
+    span: 'md:col-span-4',
+  },
+  {
+    id: '9698',
+    src: '/portraits/9698.jpg',
+    alt: 'Prajval on a moving walkway with headphones, deadpan',
+    latin: 'In transitu, tamen ego.',
+    note: 'Moving walk, no dialogue, still the main character.',
+    rotate: '-2deg',
+    span: 'md:col-span-4',
+  },
+  {
+    id: '6616-pixel',
+    src: '/portraits/6616-pixel.png',
+    alt: 'Pixel scan of the main portrait',
+    latin: 'Persona, punctatim.',
+    note: 'The same face, quantized. How a cell would greet you.',
+    rotate: '3deg',
+    span: 'md:col-span-4',
+    pixel: true,
+  },
+];
+
 export const PHOTOS = {
-  asu: {
-    src: '/portraits/asu-mentor.jpg',
-    alt: 'Prajval Arora, ASU Fulton Schools peer mentor',
-    caption: 'Century Hall, Polytechnic',
-    note: 'Peer mentor office hours — the face students already walk up to.',
-  },
-  asuPixel: {
-    src: '/portraits/asu-pixel.png',
-    alt: 'Pixelated scan of Prajval from the mentor photograph',
-    caption: 'Machine-vision of the same frame',
-    note: 'Nearest-neighbor, 32-pixel scan — how a cell would see me.',
-  },
-  github: {
-    src: '/portraits/github.jpg',
-    alt: 'Prajval Arora GitHub portrait',
-    caption: 'RoboX2020',
-    note: 'The face that ships with the repos.',
-  },
-  githubPixel: {
-    src: '/portraits/github-pixel.png',
-    alt: 'Pixelated GitHub portrait of Prajval',
-    caption: 'Public scan',
-    note: 'Same portrait, quantized — identity as a sprite.',
+  hero: HERO_PHOTO,
+  stagePixel: {
+    src: '/portraits/1111-pixel.png',
+    alt: 'Pixel scan of Prajval at the Cronkite podium',
+    latin: 'Pulpita, pixelata.',
+    note: 'The stage, as a machine would remember it.',
   },
 };
 
