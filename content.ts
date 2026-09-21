@@ -90,13 +90,11 @@ export const FRAMES = {
     note: 'Moving walk, no dialogue, still the main character.',
   },
   blimp: {
-    // Drop the WhatsApp / IMG_6706 clip here, named exactly blimp.mp4
     src: '/portraits/blimp.mp4',
     alt: 'Blimp and balloon experiments from AMASS research',
     latin: 'Nuper cum globis ludo.',
     note: 'Lately I’ve been playing with balloons — the blimp, in the air.',
     video: true,
-    wide: true,
     fallbackHref: 'https://www.instagram.com/reel/DReO46_EdtP/',
   },
   mentor: {
