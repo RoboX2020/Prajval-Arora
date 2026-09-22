@@ -8,7 +8,7 @@ export const SignalBoard: React.FC = () => {
       <div className="mx-auto max-w-6xl px-5">
         <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Live traces</p>
         <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-          Embeddings. I already exist in these places, so I pull them onto this page.
+          Embeddings. Places I already exist, pulled onto this page.
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#b8a894]">
           GitHub, LinkedIn, and Instagram sit in plain sight. The interesting joints hide in a contribution graph, a reel of a machine in the air, a calendar, a lab that is also a club.

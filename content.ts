@@ -38,25 +38,25 @@ export const FRAMES = {
     src: '/portraits/179.jpg',
     alt: 'Prajval walking a sunlit path with a backpack and a grocery bag',
     latin: 'Iter facio.',
-    note: 'Bag, path, grin. Just me, arriving as a friend would.',
+    note: 'Bag, path, grin. Arriving as a friend would.',
   },
   sky: {
     src: '/portraits/198.jpg',
     alt: 'Prajval in sunglasses looking up under a blue sky',
     latin: 'Ad caelum specto.',
-    note: 'I look where the work goes. I do not stare at the job description.',
+    note: 'Look where the work goes. Not at the job description.',
   },
   stage: {
     src: '/portraits/1111.jpg',
     alt: 'Prajval speaking at the Walter Cronkite School of Journalism and Mass Communication',
     latin: 'Scaenam honoro; verbis impero.',
-    note: 'I honor the stage. I command with speech. I delivered the paper.',
+    note: 'Honor the stage. Command with speech. The paper, delivered.',
   },
   cinema: {
     src: '/portraits/1125.jpg',
     alt: 'Prajval arms wide in front of a wall of live news screens',
     latin: 'Totus mundus agit histrionem.',
-    note: 'All the world’s a stage. I love Bollywood. I act because it is fun.',
+    note: 'All the world’s a stage. Bollywood. Acting because it is fun.',
   },
   quest: {
     src: '/portraits/5764.jpg',
@@ -68,7 +68,7 @@ export const FRAMES = {
     src: '/portraits/6955.jpg',
     alt: 'Prajval peace-signing in a lecture hall',
     latin: 'Ludus est labor.',
-    note: 'Hackathons are fun. I mean the serious kind of play.',
+    note: 'Hackathons are fun. The serious kind of play.',
   },
   team: {
     src: '/portraits/7157.jpg',
@@ -93,7 +93,7 @@ export const FRAMES = {
     src: '/portraits/blimp.mp4',
     alt: 'Blimp and balloon experiments from AMASS research',
     latin: 'Nuper cum globis ludo.',
-    note: 'Lately I play with balloons. The blimp is in the air.',
+    note: 'Lately playing with balloons. The blimp is in the air.',
     video: true,
     fallbackHref: 'https://www.instagram.com/reel/DReO46_EdtP/',
   },
@@ -109,33 +109,33 @@ export const FRAMES = {
 export const LAWS = [
   { law: 'Stay in one major.', break: 'Robotics meets mechanics, code, people, and plants that do not exist yet.' },
   { law: 'Hire creativity.', break: 'You work with an independent mind. Creativity follows. It is not the job title.' },
-  { law: 'Prototype or ship.', break: 'I build the lab, the curriculum, the cell, and the community that makes the next thing possible.' },
-  { law: 'Keep art away from industry.', break: 'I make a guitar with no strings, a robot that draws faces, a line that thinks in vision and air.' },
+  { law: 'Prototype or ship.', break: 'Labs, curriculum, cells, and communities that make the next thing possible.' },
+  { law: 'Keep art away from industry.', break: 'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.' },
 ];
 
 export const READERS = [
   {
     who: 'If you build teams',
-    body: 'I am a RAS sophomore at ASU. I look toward Summer 2027. I already train robots in Isaac Sim, commission industrial cells, teach PLC technicians, and take hardware from CAD onto a live network. Read Currently, Practice, and Collisions. Then write me as a peer, not a vacancy.',
+    body: 'RAS sophomore at ASU, looking toward Summer 2027. Already training robots in Isaac Sim, commissioning industrial cells, teaching PLC technicians, taking hardware from CAD onto a live network. Read Currently, Practice, and Collisions. Then write as a peer, not a vacancy.',
   },
   {
     who: 'If you want to make something',
-    body: 'I connect branches that usually refuse each other: speech therapy and on-device LLMs, bleed-air thermodynamics and manufacturing, DSP and wearables, warehouses and cobots. Start with Collisions. Then book time or write on LinkedIn.',
+    body: 'Branches that usually refuse each other: speech therapy and on-device LLMs, bleed-air thermodynamics and manufacturing, DSP and wearables, warehouses and cobots. Start with Collisions. Then book time or write on LinkedIn.',
   },
   {
     who: 'If you already know me',
-    body: 'This map shows what I have done since the last tea stall conversation. Skip to Now, Tapri, FAITH, and Connect. You will find the older websites under Version history.',
+    body: 'A map of what has happened since the last tea stall conversation. Skip to Now, Tapri, FAITH, and Connect. Older websites live under Version history.',
   },
 ];
 
 export const NOW = [
   {
-    title: 'Research Assistant',
+    title: 'Lab Assistant',
     place: 'Arizona State University',
     when: 'Jul 2026 to Present',
     points: [
-      'I train robots in simulation with PhD researchers using ROS 2, NVIDIA Isaac Sim, Omniverse digital twins, C++, Python, and reinforcement learning.',
-      'I co-author an Isaac Sim lab manual for RAS 545. We cover simulation, robot articulation, perception, and validation.',
+      'Train robots in simulation with PhD researchers using ROS 2, NVIDIA Isaac Sim, Omniverse digital twins, C++, Python, and reinforcement learning.',
+      'Co-authoring an Isaac Sim lab manual for RAS 545: simulation, robot articulation, perception, and validation.',
     ],
   },
   {
@@ -143,8 +143,8 @@ export const NOW = [
     place: 'TSMC Training Program (volunteer)',
     when: 'Jul 2026 to Present',
     points: [
-      'I train technicians on Allen-Bradley PLCs, structured text, sensors, conveyors, pneumatics, and robot-cell safety.',
-      'I demonstrate troubleshooting across Ethernet, USB, EtherCAT, digital I/O, IP communications, and commissioning.',
+      'Train technicians on Allen-Bradley PLCs, structured text, sensors, conveyors, pneumatics, and robot-cell safety.',
+      'Troubleshooting across Ethernet, USB, EtherCAT, digital I/O, IP communications, and commissioning.',
     ],
   },
   {
@@ -152,8 +152,8 @@ export const NOW = [
     place: 'ASU × Wandelbots',
     when: 'Aug 2026 to Present',
     points: [
-      'I build a dual-URSe industrial automation cell for the Stellantis Detroit event.',
-      'I integrate hardware, end-effectors, machine vision, networking, Isaac Sim twins, and commissioning.',
+      'Building a dual-URSe industrial automation cell for the Stellantis Detroit event.',
+      'Hardware, end-effectors, machine vision, networking, Isaac Sim twins, and commissioning in one cell.',
     ],
   },
 ];
@@ -163,21 +163,21 @@ export const PRACTICE = [
     title: 'Robotics Software and Electronics Lead',
     place: 'AMASS Lab, Arizona State University',
     when: 'Aug 2025 to Mar 2026',
-    body: 'I led ROS 2, embedded electronics, computer vision, and perception for an autonomous blimp. It detects objects while it flies. I integrated sensors, Jetson compute, electrical hardware, and control software.',
+    body: 'Led ROS 2, embedded electronics, computer vision, and perception for an autonomous blimp that detects objects in flight. Sensors, Jetson compute, electrical hardware, and control software in one stack.',
     latin: 'Nuper cum globis ludo.',
-    note: 'Lately I play with balloons. The blimp is in the air.',
+    note: 'Lately playing with balloons. The blimp is in the air.',
   },
   {
     title: 'AR Assistant Developer',
     place: 'Barrow Institute, Arizona',
     when: 'Sept 2025 to Mar 2026',
-    body: 'I built an AR speech-therapy device: Jetson Nano local LLM inference, stereo vision, a birdbath AR display, and speech-guidance pipelines. I handled hardware, camera calibration, and C++/Python prototypes. The clinic tests it now.',
+    body: 'AR speech-therapy device: Jetson Nano local LLM inference, stereo vision, a birdbath AR display, and speech-guidance pipelines. Hardware, camera calibration, and C++/Python prototypes. The clinic tests it now.',
   },
   {
     title: 'Head of Research and Development',
     place: 'Tinker India Labs',
     when: 'Sept 2024 to Jan 2025',
-    body: 'I led robotics, IoT, CAD and SolidWorks prototyping, 3D printing, electronics assembly, and student-team mentoring for competitions.',
+    body: 'Robotics, IoT, CAD and SolidWorks prototyping, 3D printing, electronics assembly, and student-team mentoring for competitions.',
   },
 ];
 
@@ -222,15 +222,15 @@ export const COLLISIONS: Collision[] = [
     fields: ['Medicine', 'On-device AI'],
     title: 'AR speech therapy',
     result: 'A wearable that listens, sees, and coaches speech in the clinic.',
-    body: 'At Barrow Institute I run a Jetson Nano with local LLM inference, a stereo camera, and a birdbath AR display. Aphasia patients get pronunciation guidance. Apraxia patients hear a continuous narration of their surroundings. I built it with Dr. Catherine’s research team. The clinic tests it now, and I move it toward an LLC.',
+    body: 'At Barrow Institute: a Jetson Nano with local LLM inference, a stereo camera, and a birdbath AR display. Aphasia patients get pronunciation guidance. Apraxia patients hear a continuous narration of their surroundings. Built with Dr. Catherine’s research team. The clinic tests it now, moving toward an LLC.',
     stat: 'Clinical testing',
   },
   {
     id: 'stellantis',
     fields: ['Automotive', 'Digital twins'],
     title: 'Stellantis dual-URSe cell',
-    result: 'I commission a physical line and its twin for Detroit.',
-    body: 'ASU and Wandelbots asked for a demonstrator. I integrate dual URSe cobots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
+    result: 'A physical line and its twin, commissioned for Detroit.',
+    body: 'ASU and Wandelbots asked for a demonstrator. Dual URSe cobots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
     stat: 'In build',
   },
   {
@@ -238,7 +238,7 @@ export const COLLISIONS: Collision[] = [
     fields: ['Warehouses', 'Industrial robots'],
     title: 'Manufacturing line replica',
     result: 'UR5, UR3, JAKA, Dobot, FANUC thinking, PLCs, conveyors, vision, air.',
-    body: 'I built an Innovation Showcase cell with 6-DOF and 4-DOF coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety. It is a factory in miniature, and it still has to run.',
+    body: 'An Innovation Showcase cell with 6-DOF and 4-DOF coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety. A factory in miniature that still has to run.',
     stat: 'Showcase',
   },
   {
@@ -246,15 +246,15 @@ export const COLLISIONS: Collision[] = [
     fields: ['Physical AI', 'Sim-to-real'],
     title: 'Unitree Go2 in Isaac Sim',
     result: 'Train the dog in a twin, then argue with physics.',
-    body: 'I run ROS 2, Isaac Sim, and Omniverse workflows for Unitree Go2. I train with reinforcement learning and digital twins, then I argue with physics when the animal actually moves.',
+    body: 'ROS 2, Isaac Sim, and Omniverse workflows for Unitree Go2. Reinforcement learning and digital twins first. Physics when the animal actually moves.',
     stat: 'Ongoing research',
   },
   {
     id: 'honeywell',
     fields: ['Aerospace', 'Heat'],
     title: 'Honeywell jet cooling & heat exchangers',
-    result: 'I use bleed air as a coolant. Then I design the factory that would make the exchanger.',
-    body: 'In 2025 I took 2nd place and $5,000 by cooling jet engines with bleed-air exhaust. In 2026 I took 3rd place and $2,500 with automated manufacturing for engine heat-exchange systems. Thermodynamics one year. Production the next.',
+    result: 'Bleed air as a coolant. Then the factory that would make the exchanger.',
+    body: '2025: 2nd place and $5,000, cooling jet engines with bleed-air exhaust. 2026: 3rd place and $2,500, automated manufacturing for engine heat-exchange systems. Thermodynamics one year. Production the next.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: '$7,500 across two years',
     photo: FRAMES.team,
@@ -274,7 +274,7 @@ export const COLLISIONS: Collision[] = [
     fields: ['Climate', 'Compute'],
     title: 'Riverside data centers',
     result: 'Put the heat where a river already knows how to carry it.',
-    body: 'I wrote solo research on dam-based cooling for sustainable data centers. TKS and Microsoft gave me a $2,500 research grant, and I published papers on the same problem. I spoke at Cronkite and turned the page into a voice.',
+    body: 'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Cronkite turned the page into a voice.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_microsoft-researchpaper-culture-activity-7340222850680688640-kP--',
     stat: '$2,500 Microsoft grant',
     photo: FRAMES.stage,
@@ -284,7 +284,7 @@ export const COLLISIONS: Collision[] = [
     fields: ['Music', 'DSP'],
     title: 'Air guitar',
     result: 'No strings. No frets. A wrist, an accelerometer, Karplus-Strong.',
-    body: 'I built a wearable instrument with Arduino, inertial sensing, and a real-time sound engine. It reached 300,000 Instagram views. The open-source repo grew with no campaign.',
+    body: 'A wearable instrument with Arduino, inertial sensing, and a real-time sound engine. 300,000 Instagram views. The open-source repo grew with no campaign.',
     link: 'https://github.com/RoboX2020/Air-Guitar',
     stat: '300k views',
   },
@@ -293,15 +293,15 @@ export const COLLISIONS: Collision[] = [
     fields: ['Education', 'Robotics'],
     title: 'FAITH Labs',
     result: 'The schools had no labs. Then 200 students could build.',
-    body: 'I founded robotics labs in Kanpur schools. I procured kits, designed curriculum, and taught. I coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
+    body: 'Founded robotics labs in Kanpur schools. Kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
     stat: '200+ students',
   },
   {
     id: 'tapri',
     fields: ['Community', 'Ventures'],
     title: 'Tapri Builder Club',
-    result: 'I run a tea stall for people who make things. ASU now charters it.',
-    body: 'I founded Tapri and I preside. We reached 22,000 people, 2,200 members, and 40+ ventures (Ideacode, FlexFund, STEMverse). We hosted external hackathons with 5,000+ combined participants. The platform lives at gotapri.com. I restarted it as a chartered club at ASU with Prof. Aram Chavez.',
+    result: 'A tea stall for people who make things. ASU now charters it.',
+    body: 'Founded Tapri. Preside. 22,000 people, 2,200 members, and 40+ ventures (Ideacode, FlexFund, STEMverse). External hackathons with 5,000+ combined participants. The platform lives at gotapri.com. Restarted as a chartered club at ASU with Prof. Aram Chavez.',
     link: 'https://gotapri.com',
     stat: '40+ ventures',
   },
@@ -310,7 +310,7 @@ export const COLLISIONS: Collision[] = [
     fields: ['Open source', 'Voice'],
     title: 'ESP-Claw contribution',
     result: 'Talk to hardware that Espressif’s agent could not reach.',
-    body: 'I opened a PR to Espressif’s ESP-Claw AI agent framework. I added Arduino support the agent could not reach, plus natural-language control so people program hardware by speaking.',
+    body: 'A PR to Espressif’s ESP-Claw AI agent framework. Arduino support the agent could not reach, plus natural-language control so people program hardware by speaking.',
     link: 'https://github.com/espressif/esp-claw/pull/11',
   },
   {
@@ -318,28 +318,28 @@ export const COLLISIONS: Collision[] = [
     fields: ['Constraint', 'Mechanics'],
     title: 'International Robotics Championship',
     result: 'First nationally, most budget-efficient, tenth in the world.',
-    body: 'I built an omnidirectional robot with a mounted arm and its own local Wi-Fi server. You drive it from any phone. I built it on $100 against four-figure budgets.',
+    body: 'An omnidirectional robot with a mounted arm and its own local Wi-Fi server. Drive it from any phone. Built on $100 against four-figure budgets.',
     stat: '1st national · $100',
   },
   {
     id: 'arms',
     fields: ['Flight', 'Payloads'],
     title: 'A R M S at ASU',
-    result: 'I serve as treasurer, marketing head, and software lead. I also hold a $10k payload conversation.',
-    body: 'I lead software and operations for MSN-affiliated projects. I talk with Phoenix Drone LLC about a payload system under a $10,000 budget. I also lead engineering with Drone Devils on a plane, a boat, and an FPV car.',
+    result: 'Treasurer, marketing head, and software lead. Also a $10k payload conversation.',
+    body: 'Software and operations for MSN-affiliated projects. Phoenix Drone LLC on a payload system under a $10,000 budget. Engineering with Drone Devils on a plane, a boat, and an FPV car.',
     stat: '2026 to Present',
   },
 ];
 
 export const MORE_WORK = [
-  { title: 'Air piano & vision mouse', body: 'I use computer vision and MediaPipe to turn any flat surface into keys or a cursor. No extra hardware.' },
-  { title: 'Caricature & Dobot drawing', body: 'I send pixels to a pencil. Image-to-motor pipelines and OpenCV stroke paths drive robot arms.' },
+  { title: 'Air piano & vision mouse', body: 'Computer vision and MediaPipe. Any flat surface becomes keys or a cursor. No extra hardware.' },
+  { title: 'Caricature & Dobot drawing', body: 'Pixels to a pencil. Image-to-motor pipelines and OpenCV stroke paths drive robot arms.' },
   { title: 'AI tic-tac-toe on paper', body: 'A physical arm sees your mark and draws its reply with inverse kinematics.' },
-  { title: 'LLM-driven spider robot', body: 'I parse natural language into multi-leg motion and wire intelligence straight into hardware.' },
-  { title: 'Gaze glasses', body: 'I built a wearable where the cursor follows your eyes.' },
-  { title: 'CeliaLife & Kalki', body: 'I surface medical-history risk for doctors, and I built a platform so people can raise local problems.' },
-  { title: 'VibeVerse', body: 'I launched a marketplace for AI-generated projects on Product Hunt. It lives at vibeverseai.com.' },
-  { title: 'Euler Ai', body: 'I built an animation agent that turns text into Desmos-quality visualizations for math educators.' },
+  { title: 'LLM-driven spider robot', body: 'Natural language into multi-leg motion. Intelligence wired straight into hardware.' },
+  { title: 'Gaze glasses', body: 'A wearable where the cursor follows your eyes.' },
+  { title: 'CeliaLife & Kalki', body: 'Medical-history risk for doctors, and a platform so people can raise local problems.' },
+  { title: 'VibeVerse', body: 'A marketplace for AI-generated projects on Product Hunt. It lives at vibeverseai.com.' },
+  { title: 'Euler Ai', body: 'An animation agent that turns text into Desmos-quality visualizations for math educators.' },
 ];
 
 export const SKILL_FIELDS = [
@@ -385,7 +385,7 @@ export const EMBEDS = [
     id: 'github',
     kind: 'GitHub',
     title: 'RoboX2020',
-    body: 'I keep source, PRs, and the air-guitar that people still clone. A contribution graph is a handwriting sample.',
+    body: 'Source, PRs, and the air-guitar that people still clone. A contribution graph is a handwriting sample.',
     href: 'https://github.com/RoboX2020',
   },
   {
@@ -441,7 +441,7 @@ export const EMBEDS = [
     id: 'vibe',
     kind: 'Product',
     title: 'VibeVerse',
-    body: 'I launched a marketplace on Product Hunt. Builders share AI-born projects there.',
+    body: 'A marketplace on Product Hunt. Builders share AI-born projects there.',
     href: 'https://vibeverseai.com',
   },
 ];
@@ -456,7 +456,7 @@ export const VERSIONS = [
   {
     version: 'v1.1',
     title: 'Circuit atlas',
-    blurb: 'I wired every project to a central processor on a PCB. Pan, zoom, or take the guided walkthrough.',
+    blurb: 'Every project wired to a central processor on a PCB. Pan, zoom, or take the guided walkthrough.',
     href: '/v1',
   },
   {

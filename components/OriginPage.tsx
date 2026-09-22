@@ -52,10 +52,10 @@ export const OriginPage: React.FC = () => {
               Arora
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#d8cbb6] md:text-xl">
-              I connect branches that never shared a table. Then I make the thing that only lives there. You do not hire creativity. It walks in with independent thought.
+              Connecting branches that never shared a table, then making the thing that only lives there. You do not hire creativity. It arrives with independent thought.
             </p>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894]">
-              I study Robotics and Autonomous Systems at Arizona State University. I treat a factory cell, a clinic, a classroom, and a guitar as one problem: invent the missing joint.
+              Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar count as the same problem: invent the missing joint.
             </p>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
             <p className="mt-2 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
@@ -95,7 +95,7 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.sky} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">A reading</p>
             <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-              How to read me. Hire me, build with me, or drink tea with me.
+              How to read me, whether you hire, collaborate, or already drink tea with me.
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-[#b8a894]">
               The photograph looks up. The work does too. Follow the frame that matches why you came.
@@ -126,7 +126,7 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Now</p>
             <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">The live experiments</h2>
             <p className="mt-4 text-sm text-[#b8a894]">
-              I run simulation, technician training, and a Stellantis cell in the same season. The side quests refused to stay side quests.
+              Simulation, technician training, and a Stellantis cell in the same season. Side quests that refused to stay side quests.
             </p>
           </Spread>
           <div className="mt-10 space-y-10">
@@ -155,7 +155,7 @@ export const OriginPage: React.FC = () => {
           <div className="mx-auto max-w-6xl px-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Collisions</p>
             <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-              I force two fields to share a room. The work only exists after that.
+              Work that only exists when two fields share a room.
             </h2>
 
             <div className="mt-16 space-y-10">
@@ -224,7 +224,7 @@ export const OriginPage: React.FC = () => {
 
         <section id="practice" className="mx-auto max-w-6xl space-y-24 px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Practice</p>
-          <h2 className="font-display text-4xl text-[#f0e6d4]">Where I put my hands</h2>
+          <h2 className="font-display text-4xl text-[#f0e6d4]">Hands on the work</h2>
 
           <Spread media={FRAMES.airport}>
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#d4b87a]">{PRACTICE[0].when}</p>
@@ -250,7 +250,7 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Offstage</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">Play is not a footnote.</h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6]">
-              I love Bollywood. I stand in front of a wall of live news with my arms open. I commission cells and I act, because joy belongs in independent thought.
+              Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.
             </p>
           </Spread>
         </section>
@@ -290,10 +290,10 @@ export const OriginPage: React.FC = () => {
             <Spread media={FRAMES.blazer}>
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Connect</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-                Write if you want a mind in the room. You cannot procure a creative.
+                Write if you want a mind in the room, not a creative you can procure.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#b8a894]">
-                I look toward Summer 2027 internships, research, industrial cells, education, and strange prototypes. Friends, skip the formality.
+                Summer 2027 internships, research, industrial cells, education, and strange prototypes. Friends, skip the formality.
               </p>
             </Spread>
 
