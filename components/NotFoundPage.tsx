@@ -4,9 +4,9 @@ import { SiteHeader } from './SiteHeader';
 
 export const NotFoundPage: React.FC = () => {
   useEffect(() => {
-    document.title = '404 — Prajval Arora';
+    document.title = '404 | Prajval Arora';
     return () => {
-      document.title = 'Prajval Arora — Independent thought, interdisciplinary build';
+      document.title = 'Prajval Arora. Independent thought, interdisciplinary build';
     };
   }, []);
 
@@ -17,7 +17,7 @@ export const NotFoundPage: React.FC = () => {
         <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Error 404</p>
         <h1 className="mt-4 font-display text-5xl leading-tight text-[#f0e6d4] md:text-7xl">This joint does not exist.</h1>
         <p className="mt-6 max-w-lg text-base leading-relaxed text-[#b8a894]">
-          That address is not on this map. The current site, the circuit atlas, and the garage still are.
+          That address is not on this map. You can still open the current site, the circuit atlas, and the garage.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <Link
