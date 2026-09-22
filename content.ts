@@ -97,12 +97,6 @@ export const FRAMES = {
     video: true,
     fallbackHref: 'https://www.instagram.com/reel/DReO46_EdtP/',
   },
-  mentor: {
-    src: '/portraits/asu-mentor.jpg',
-    alt: 'Prajval as an ASU peer mentor in a black polo against ivy',
-    latin: 'Discere et ducere.',
-    note: 'Peer mentor kit: same campus, same season as the live experiments.',
-  },
   blazer: {
     src: '/portraits/github.jpg',
     alt: 'Prajval in a blazer taking a mirror selfie',
@@ -126,7 +120,7 @@ export const READERS = [
   },
   {
     who: 'If you want to make something',
-    body: 'I connect branches that usually refuse each other: speech therapy and on-device LLMs, bleed-air thermodynamics and manufacturing, DSP and wearables, warehouses and cobots. Start with Collisions. Then book time or email.',
+    body: 'I connect branches that usually refuse each other: speech therapy and on-device LLMs, bleed-air thermodynamics and manufacturing, DSP and wearables, warehouses and cobots. Start with Collisions. Then book time or write on LinkedIn.',
   },
   {
     who: 'If you already know me',
