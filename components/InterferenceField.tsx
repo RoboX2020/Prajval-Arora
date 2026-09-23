@@ -66,7 +66,7 @@ export const InterferenceField: React.FC = () => {
         ctx.stroke();
       });
 
-      // Interference seam — the "new thing" that appears where fields overlap
+      // Interference seam. The new thing appears where fields overlap.
       const cx = (0.18 + 0.72 + mx) / 3 * w;
       const cy = (0.28 + 0.48 + my) / 3 * h;
       ctx.beginPath();
