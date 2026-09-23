@@ -4,6 +4,8 @@
   "framework": "vite",
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
+    { "source": "/playbook", "destination": "/playbook/index.html" },
+    { "source": "/playbook/", "destination": "/playbook/index.html" },
     { "source": "/v1", "destination": "/index.html" },
     { "source": "/v1/", "destination": "/index.html" },
     { "source": "/v1/journey", "destination": "/index.html" },

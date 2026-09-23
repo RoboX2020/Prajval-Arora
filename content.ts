@@ -349,6 +349,13 @@ export const PHOTOS = {
 
 export const EMBEDS = [
   {
+    id: 'playbook',
+    kind: 'Lab',
+    title: 'Robotics Playbook',
+    body: 'Interactive chapters on this domain at /playbook. Circuits, sensors, motors.',
+    href: '/playbook',
+  },
+  {
     id: 'github',
     kind: 'GitHub',
     title: 'RoboX2020',

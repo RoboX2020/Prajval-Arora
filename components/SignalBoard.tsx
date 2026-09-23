@@ -11,16 +11,18 @@ export const SignalBoard: React.FC = () => {
           Embeddings.
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#b8a894]">
-          GitHub, LinkedIn, Instagram, calendar, Tapri.
+          GitHub, LinkedIn, Instagram, calendar, Tapri, playbook.
         </p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {EMBEDS.map((e) => (
+          {EMBEDS.map((e) => {
+            const offsite = e.href.startsWith('http');
+            return (
             <a
               key={e.id}
               href={e.href}
-              target="_blank"
-              rel="noreferrer"
+              target={offsite ? '_blank' : undefined}
+              rel={offsite ? 'noreferrer' : undefined}
               className="group flex flex-col border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60"
             >
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#d4b87a]">{e.kind}</span>
@@ -30,7 +32,8 @@ export const SignalBoard: React.FC = () => {
                 Open <ArrowUpRight size={12} />
               </span>
             </a>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">

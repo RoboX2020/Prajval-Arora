@@ -9,6 +9,7 @@ New home at `/`. Previous versions live under **Version history**:
 - `/v1` circuit atlas
 - `/v1/journey` driving journey
 - `/v1/garage` internet garage
+- `/playbook` Robotics Playbook (from [Robotics-Playbook-1](https://github.com/RoboX2020/Robotics-Playbook-1))
 
 ## Run locally
 

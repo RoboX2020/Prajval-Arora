@@ -22,6 +22,7 @@ const nav = [
   { href: '#now', label: 'Now' },
   { href: '#collisions', label: 'Work' },
   { href: '#practice', label: 'Practice' },
+  { href: '/playbook', label: 'Playbook' },
   { href: '#signals', label: 'Traces' },
   { href: '#connect', label: 'Connect' },
 ];
