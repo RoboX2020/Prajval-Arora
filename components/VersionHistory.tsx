@@ -66,10 +66,10 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#d4b87a]">Archive</p>
                 <h2 id="version-title" className="mt-1 font-display text-3xl text-[#f0e6d4]">
-                  Previous selves of this site
+                  Previous versions
                 </h2>
                 <p className="mt-2 max-w-md text-sm leading-relaxed text-[#b8a894]">
-                  The circuit atlas, the road trip, and the garage stay intact. They introduced the work. This page introduces the mind.
+                  Circuit atlas, road trip, and garage.
                 </p>
               </div>
               <button

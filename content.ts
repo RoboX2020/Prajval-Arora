@@ -2,7 +2,6 @@ export const PERSON = {
   name: 'Prajval Arora',
   first: 'Prajval',
   role: 'Robotics and Autonomous Systems, Arizona State University',
-  seeking: 'Summer 2027 internship in robotics, automation, industrial robotics, or electromechanical engineering',
   email: 'parora24@asu.edu',
   phone: '(480) 937-8658',
   phoneHref: 'tel:+14809378658',
@@ -30,7 +29,7 @@ export const HERO_PHOTO = {
   src: '/portraits/6616.jpg',
   alt: 'Prajval Arora on an Arizona street, white shirt, backpack',
   latin: 'Ecce persona.',
-  note: 'The working title of a person. It sits beside the name. It does not replace it.',
+  note: 'Prajval Arora.',
 };
 
 export const FRAMES = {
@@ -38,19 +37,19 @@ export const FRAMES = {
     src: '/portraits/179.jpg',
     alt: 'Prajval walking a sunlit path with a backpack and a grocery bag',
     latin: 'Iter facio.',
-    note: 'Bag, path, grin. Arriving as a friend would.',
+    note: 'Bag, path, grin.',
   },
   sky: {
     src: '/portraits/198.jpg',
     alt: 'Prajval in sunglasses looking up under a blue sky',
     latin: 'Ad caelum specto.',
-    note: 'Look where the work goes. Not at the job description.',
+    note: 'Looking up.',
   },
   stage: {
     src: '/portraits/1111.jpg',
     alt: 'Prajval speaking at the Walter Cronkite School of Journalism and Mass Communication',
     latin: 'Scaenam honoro; verbis impero.',
-    note: 'Honor the stage. Command with speech. The paper, delivered.',
+    note: 'Cronkite. The paper, spoken.',
   },
   cinema: {
     src: '/portraits/1125.jpg',
@@ -62,13 +61,13 @@ export const FRAMES = {
     src: '/portraits/5764.jpg',
     alt: 'Prajval at night above a city of lights',
     latin: 'Quaestio lateralis semper aperta.',
-    note: 'Always up for a side quest. The city as the map.',
+    note: 'Tempe at night.',
   },
   hack: {
     src: '/portraits/6955.jpg',
     alt: 'Prajval peace-signing in a lecture hall',
     latin: 'Ludus est labor.',
-    note: 'Hackathons are fun. The serious kind of play.',
+    note: 'Lecture hall. Honeywell season.',
   },
   team: {
     src: '/portraits/7157.jpg',
@@ -81,13 +80,13 @@ export const FRAMES = {
     src: '/portraits/7931.jpg',
     alt: 'Prajval at an airport window with headphones around his neck',
     latin: 'Os apertum, mundus apertus.',
-    note: 'Wheels-up face. Write me while the plot is in the air.',
+    note: 'In transit.',
   },
   walkway: {
     src: '/portraits/9698.jpg',
     alt: 'Prajval on a moving walkway with headphones, deadpan',
     latin: 'In transitu, tamen ego.',
-    note: 'Moving walk, no dialogue, still the main character.',
+    note: 'Moving walk.',
   },
   blimp: {
     src: '/portraits/blimp.mp4',
@@ -101,32 +100,10 @@ export const FRAMES = {
     src: '/portraits/github.jpg',
     alt: 'Prajval in a blazer taking a mirror selfie',
     latin: 'Ad limen paratus.',
-    note: 'Ready at the door. Write if you want the mind in the room.',
+    note: 'At the door.',
     square: true,
   },
 };
-
-export const LAWS = [
-  { law: 'Stay in one major.', break: 'Robotics meets mechanics, code, people, and plants that do not exist yet.' },
-  { law: 'Hire creativity.', break: 'You work with an independent mind. Creativity follows. It is not the job title.' },
-  { law: 'Prototype or ship.', break: 'Labs, curriculum, cells, and communities that make the next thing possible.' },
-  { law: 'Keep art away from industry.', break: 'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.' },
-];
-
-export const READERS = [
-  {
-    who: 'If you build teams',
-    body: 'RAS sophomore at ASU, looking toward Summer 2027. Already training robots in Isaac Sim, commissioning industrial cells, teaching PLC technicians, taking hardware from CAD onto a live network. Read Currently, Practice, and Collisions. Then write as a peer, not a vacancy.',
-  },
-  {
-    who: 'If you want to make something',
-    body: 'Branches that usually refuse each other: speech therapy and on-device LLMs, bleed-air thermodynamics and manufacturing, DSP and wearables, warehouses and cobots. Start with Collisions. Then book time or write on LinkedIn.',
-  },
-  {
-    who: 'If you already know me',
-    body: 'A map of what has happened since the last tea stall conversation. Skip to Now, Tapri, FAITH, and Connect. Older websites live under Version history.',
-  },
-];
 
 export const NOW = [
   {
@@ -245,7 +222,7 @@ export const COLLISIONS: Collision[] = [
     id: 'go2',
     fields: ['Physical AI', 'Sim-to-real'],
     title: 'Unitree Go2 in Isaac Sim',
-    result: 'Train the dog in a twin, then argue with physics.',
+    result: 'Train the dog in a twin. Then the real animal.',
     body: 'ROS 2, Isaac Sim, and Omniverse workflows for Unitree Go2. Reinforcement learning and digital twins first. Physics when the animal actually moves.',
     stat: 'Ongoing research',
   },
@@ -260,21 +237,11 @@ export const COLLISIONS: Collision[] = [
     photo: FRAMES.team,
   },
   {
-    id: 'hack-play',
-    fields: ['Play', 'Pressure'],
-    title: 'Hackathons as the serious kind of play',
-    result: 'Ludus est labor. The lecture hall at 2 a.m. still counts as a lab.',
-    body: 'Honeywell was not a lone sprint. That season of play produced the winning team and the face that still peace-signs in a hall. Fun finished the thermodynamics.',
-    link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
-    stat: 'Two years, two rooms',
-    photo: FRAMES.hack,
-  },
-  {
     id: 'riverside',
     fields: ['Climate', 'Compute'],
     title: 'Riverside data centers',
     result: 'Put the heat where a river already knows how to carry it.',
-    body: 'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Cronkite turned the page into a voice.',
+    body: 'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Spoken at Cronkite.',
     link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_microsoft-researchpaper-culture-activity-7340222850680688640-kP--',
     stat: '$2,500 Microsoft grant',
     photo: FRAMES.stage,
@@ -385,49 +352,49 @@ export const EMBEDS = [
     id: 'github',
     kind: 'GitHub',
     title: 'RoboX2020',
-    body: 'Source, PRs, and the air-guitar that people still clone. A contribution graph is a handwriting sample.',
+    body: 'Source, PRs, and the air-guitar repo.',
     href: 'https://github.com/RoboX2020',
   },
   {
     id: 'linkedin',
     kind: 'LinkedIn',
     title: 'prajvaldesignsmachines',
-    body: 'The professional trail: cells, grants, and the long sentences that happen after a build.',
+    body: 'Cells, grants, and the posts after a build.',
     href: 'https://www.linkedin.com/in/prajvaldesignsmachines',
   },
   {
     id: 'instagram',
     kind: 'Instagram',
     title: 'Machines in the air',
-    body: 'Reels of the air mouse, the buddy robot, the things that only make sense moving. Best embedding for proof of life.',
+    body: 'Reels of the air mouse, the buddy robot, machines in motion.',
     href: 'https://www.instagram.com/reel/DReO46_EdtP/',
   },
   {
     id: 'calendly',
     kind: 'Calendar',
     title: 'Thirty minutes',
-    body: 'Not a funnel. A slot. Friends and employers use the same door.',
+    body: 'Thirty minutes. Same calendar for friends and work.',
     href: 'https://calendly.com/prajval-2029/30min',
   },
   {
     id: 'tapri',
     kind: 'Community',
     title: 'gotapri.com',
-    body: 'The tea stall as a network. 2,200+ builders, 40+ ventures.',
+    body: '2,200+ builders, 40+ ventures.',
     href: 'https://gotapri.com',
   },
   {
     id: 'hf',
     kind: 'Hugging Face',
     title: 'iamprajval',
-    body: 'Spaces and experiments. This is my public notebook of models, not just repos.',
+    body: 'Models and spaces.',
     href: 'https://huggingface.co/iamprajval',
   },
   {
     id: 'pr',
     kind: 'Open source',
     title: 'ESP-Claw PR',
-    body: 'A pull request as an embedding: talk to Arduino hardware Espressif could not reach.',
+    body: 'Arduino support and voice control for hardware Espressif’s agent could not reach.',
     href: 'https://github.com/espressif/esp-claw/pull/11',
   },
   {
@@ -450,7 +417,7 @@ export const VERSIONS = [
   {
     version: 'v2',
     title: 'This page',
-    blurb: 'This is the current field: interdisciplinary collisions, a guide for people who want to know me, and a door to work together.',
+    blurb: 'The current site.',
     href: '/',
   },
   {
