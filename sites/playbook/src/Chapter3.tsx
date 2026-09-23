@@ -201,7 +201,7 @@ export function Chapter3({ onBack }: Chapter3Props) {
         </h2>
         <div className="doodle-card p-6 bg-white overflow-hidden">
           <img 
-            src="/circuit-diagram.png" 
+            src={`${import.meta.env.BASE_URL}circuit-diagram.png`} 
             alt="Circuit Diagram" 
             className="w-full rounded-xl border-4 border-black mb-6"
           />

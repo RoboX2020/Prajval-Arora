@@ -235,7 +235,7 @@ export function Chapter2({ onBack }: Chapter2Props) {
           {/* CIRCUIT DIAGRAM */}
           <div className="bg-white border-4 border-black rounded-xl p-6 md:p-8 relative flex items-center justify-center">
             <img 
-              src="/chapter2-diagram.png" 
+              src={`${import.meta.env.BASE_URL}chapter2-diagram.png`} 
               alt="Circuit Diagram" 
               className="w-full max-w-2xl rounded-xl border-4 border-black"
             />
