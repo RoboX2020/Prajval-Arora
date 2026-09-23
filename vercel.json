@@ -3,6 +3,16 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
-    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/playbook", "destination": "/playbook/index.html" },
+    { "source": "/playbook/", "destination": "/playbook/index.html" },
+    { "source": "/v1", "destination": "/index.html" },
+    { "source": "/v1/", "destination": "/index.html" },
+    { "source": "/v1/journey", "destination": "/index.html" },
+    { "source": "/v1/journey/", "destination": "/index.html" },
+    { "source": "/v1/garage", "destination": "/index.html" },
+    { "source": "/v1/garage/", "destination": "/index.html" },
+    { "source": "/shop", "destination": "/index.html" },
+    { "source": "/shop/", "destination": "/index.html" }
   ]
 }

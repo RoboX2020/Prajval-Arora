@@ -8,19 +8,21 @@ export const SignalBoard: React.FC = () => {
       <div className="mx-auto max-w-6xl px-5">
         <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Live traces</p>
         <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-          Embeddings — the places a person already exists, pulled onto this page.
+          Embeddings. Places I already exist, pulled onto this page.
         </h2>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#b8a894]">
-          GitHub, LinkedIn, and Instagram are the obvious three. The interesting ones are the joints: a contribution graph, a reel of a machine in the air, a calendar, a lab that is also a club.
+          GitHub, LinkedIn, and Instagram sit in plain sight. The interesting joints hide in a contribution graph, a reel of a machine in the air, a calendar, a lab that is also a club, a playbook on this domain.
         </p>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {EMBEDS.map((e) => (
+          {EMBEDS.map((e) => {
+            const offsite = e.href.startsWith('http');
+            return (
             <a
               key={e.id}
               href={e.href}
-              target="_blank"
-              rel="noreferrer"
+              target={offsite ? '_blank' : undefined}
+              rel={offsite ? 'noreferrer' : undefined}
               className="group flex flex-col border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60"
             >
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#d4b87a]">{e.kind}</span>
@@ -30,7 +32,8 @@ export const SignalBoard: React.FC = () => {
                 Open <ArrowUpRight size={12} />
               </span>
             </a>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">

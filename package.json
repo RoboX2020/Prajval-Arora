@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:playbook": "bash scripts/build-playbook.sh",
+    "build": "npm run build:playbook && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

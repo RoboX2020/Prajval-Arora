@@ -5,6 +5,7 @@ import { HomePage } from './components/HomePage';
 import { GameLayer } from './components/GameLayer';
 import { ShopPage } from './components/ShopPage';
 import { SiteHeader } from './components/SiteHeader';
+import { NotFoundPage } from './components/NotFoundPage';
 import { audioService } from './services/audioService';
 
 const CircuitArchive: React.FC = () => {
@@ -81,6 +82,7 @@ const App: React.FC = () => {
           <Route path="/v1/journey" element={<JourneyArchive />} />
           <Route path="/v1/garage" element={<GarageArchive />} />
           <Route path="/shop" element={<Navigate to="/v1/garage" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </BrowserRouter>

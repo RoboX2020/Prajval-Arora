@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, Mail, Phone, FileText } from 'lucide-react';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import {
   PERSON,
   LAWS,
@@ -25,6 +25,7 @@ const nav = [
   { href: '#now', label: 'Now' },
   { href: '#collisions', label: 'Work' },
   { href: '#practice', label: 'Practice' },
+  { href: '/playbook', label: 'Playbook' },
   { href: '#signals', label: 'Traces' },
   { href: '#connect', label: 'Connect' },
 ];
@@ -52,15 +53,13 @@ export const OriginPage: React.FC = () => {
               Arora
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#d8cbb6] md:text-xl">
-              I am valued for connecting branches that were never supposed to share a table — then making the thing that only exists at that table.
-              You do not hire creativity. Creativity arrives with independence of thought.
+              Connecting branches that never shared a table, then making the thing that only lives there. You do not hire creativity. It arrives with independent thought.
             </p>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894]">
-              Robotics and Autonomous Systems at Arizona State University. A mind that treats a factory cell, a clinic, a classroom, and a guitar as the same kind of problem: invent the missing joint.
+              Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar count as the same problem: invent the missing joint.
             </p>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
             <p className="mt-2 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
-            <p className="mt-2 text-sm leading-relaxed text-[#b8a894]">{PERSON.seeking}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#connect"
@@ -96,10 +95,10 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.sky} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">A reading</p>
             <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-              How to read me — whether you employ, collaborate, or already drink tea with me.
+              How to read me, whether you hire, collaborate, or already drink tea with me.
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-[#b8a894]">
-              The photograph looks up. So does the work. Start here, then follow the frame that matches why you came.
+              The photograph looks up. The work does too. Follow the frame that matches why you came.
             </p>
           </Spread>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
@@ -117,7 +116,7 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Friends first</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">The walk, not the pitch.</h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6]">
-              If you already know me, this is the grocery-bag version. Skip the résumé voice. The older sites still live under Version history.
+              If you already know me, this is the grocery-bag version. Skip the resume voice. Open Version history for the older sites.
             </p>
           </Spread>
         </section>
@@ -127,11 +126,11 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Now</p>
             <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">The live experiments</h2>
             <p className="mt-4 text-sm text-[#b8a894]">
-              Simulation, technician training, and a Stellantis cell in the same season — side quests that refused to stay side quests.
+              Simulation, technician training, and a Stellantis cell in the same season. Side quests that refused to stay side quests.
             </p>
           </Spread>
           <div className="mt-10 space-y-10">
-            <Spread media={FRAMES.mentor}>
+            <Spread media={FRAMES.blimp}>
               <div className="space-y-4">
                 {NOW.map((job) => (
                   <article key={job.title}>
@@ -156,7 +155,7 @@ export const OriginPage: React.FC = () => {
           <div className="mx-auto max-w-6xl px-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Collisions</p>
             <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-              Work that only exists because two fields were forced to share a room.
+              Work that only exists when two fields share a room.
             </h2>
 
             <div className="mt-16 space-y-10">
@@ -225,9 +224,9 @@ export const OriginPage: React.FC = () => {
 
         <section id="practice" className="mx-auto max-w-6xl space-y-24 px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Practice</p>
-          <h2 className="font-display text-4xl text-[#f0e6d4]">Where the hands were</h2>
+          <h2 className="font-display text-4xl text-[#f0e6d4]">Hands on the work</h2>
 
-          <Spread media={FRAMES.blimp}>
+          <Spread media={FRAMES.airport}>
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#d4b87a]">{PRACTICE[0].when}</p>
             <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">{PRACTICE[0].title}</h3>
             <p className="text-sm text-[#d4b87a]">{PRACTICE[0].place}</p>
@@ -251,7 +250,7 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Offstage</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">Play is not a footnote.</h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6]">
-              Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independence of thought includes joy.
+              Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.
             </p>
           </Spread>
         </section>
@@ -273,7 +272,7 @@ export const OriginPage: React.FC = () => {
 
         <section className="mx-auto max-w-6xl px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Proof, not a plea</p>
-          <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">Recognition as residue</h2>
+          <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">What remains after the work</h2>
           <ul className="mt-10 divide-y divide-[#3d3228] border-y border-[#3d3228]">
             {RECOGNITION.map((r) => (
               <li key={r.title} className="grid gap-1 py-5 md:grid-cols-12 md:items-baseline">
@@ -291,33 +290,19 @@ export const OriginPage: React.FC = () => {
             <Spread media={FRAMES.blazer}>
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Connect</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-                Write if you want a mind in the room — not a creative you can procure.
+                Write if you want a mind in the room, not a creative you can procure.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#b8a894]">
-                Summer 2027 internships, research, industrial cells, education, and strange prototypes. Friends can skip the formality.
+                Research, industrial cells, education, and strange prototypes. Friends, skip the formality.
               </p>
             </Spread>
 
-            <Spread media={FRAMES.airport} reverse>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">While the plot is in the air</p>
-              <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">Direct line</h3>
-              <div className="mt-6 grid gap-4">
-                <a href={`mailto:${PERSON.email}`} className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
-                  <Mail size={18} className="text-[#d4b87a]" />
-                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Email</span>
-                  <span>{PERSON.email}</span>
-                </a>
-                <a href={PERSON.phoneHref} className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
-                  <Phone size={18} className="text-[#d4b87a]" />
-                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Phone</span>
-                  <span>{PERSON.phone}</span>
-                </a>
-              </div>
-            </Spread>
-
-            <Spread media={FRAMES.walkway}>
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">In transit, still the main character</p>
+            <Spread media={FRAMES.walkway} reverse>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">In transit, still the main character</p>
               <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">The public trail</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#b8a894]">
+                Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.
+              </p>
               <div className="mt-6 grid gap-4">
                 <a href={PERSON.linkedin} target="_blank" rel="noreferrer" className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
                   <ArrowUpRight size={18} className="text-[#d4b87a]" />
