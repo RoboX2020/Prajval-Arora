@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail, Phone, FileText } from 'lucide-react';
 import {
   PERSON,
@@ -340,6 +341,12 @@ export const OriginPage: React.FC = () => {
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#8a7a68]">
             © {new Date().getFullYear()} {PERSON.name} · Independence of thought
           </p>
+          <Link
+            to="/aurelium"
+            className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#8a7a68] hover:text-[#d4b87a]"
+          >
+            Aurelium · Learn Anything
+          </Link>
           <VersionHistory />
         </div>
       </footer>
