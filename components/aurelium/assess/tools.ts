@@ -23,7 +23,7 @@ export const TOOL_DECLARATIONS: FunctionDeclaration[] = [
   {
     name: 'register_items',
     description:
-      'Register concrete checkable items from the goal, syllabus, and exam. Call once at the start. Call again only to add missing items. Existing items cannot be deleted. Do not call on later turns if coverage is already complete.',
+      'Register concrete checkable items once the learner has said what they need to know, or has pasted a syllabus or paper. Do not call on a greeting. Call again only to add missing items. Existing items cannot be deleted.',
     parametersJsonSchema: {
       type: 'object',
       properties: {
@@ -53,14 +53,13 @@ export const TOOL_DECLARATIONS: FunctionDeclaration[] = [
   {
     name: 'read_source',
     description:
-      'Read a small slice of the original goal, syllabus, or exam. Call only when you need wording you do not already have. Pass a short query so the result stays small.',
+      'Search what the learner already said or pasted. Call only when you need earlier wording that is not in the latest messages. Pass a short query.',
     parametersJsonSchema: {
       type: 'object',
       properties: {
-        source: { type: 'string', enum: ['goal', 'syllabus', 'exam'] },
-        query: { type: 'string', description: 'A short phrase to find. Omit only if you need the opening of the source.' },
+        query: { type: 'string', description: 'A short phrase to find in the conversation materials.' },
       },
-      required: ['source'],
+      required: ['query'],
     },
   },
   {
@@ -169,41 +168,23 @@ export function listOpen(state: SessionState): ToolEffect {
   };
 }
 
+function materialOf(state: SessionState): string {
+  return [state.goal, state.syllabus, state.exam, state.corpus].filter((part) => part && part.trim()).join('\n\n');
+}
+
 export function readSource(state: SessionState, raw: unknown): ToolEffect {
-  const source = (raw as { source?: unknown })?.source;
   const query = typeof (raw as { query?: unknown })?.query === 'string' ? (raw as { query: string }).query.trim() : '';
-  const text = source === 'goal' ? state.goal : source === 'syllabus' ? state.syllabus : source === 'exam' ? state.exam : '';
-  if (source !== 'goal' && source !== 'syllabus' && source !== 'exam') {
-    return { state, output: { error: 'source must be goal, syllabus, or exam' } };
-  }
-  if (!text.trim()) return { state, output: { source, excerpt: '', totalChars: 0 } };
-
+  const text = materialOf(state);
+  if (!text) return { state, output: { excerpt: '', totalChars: 0 } };
   if (!query) {
-    return {
-      state,
-      output: {
-        source,
-        excerpt: text.slice(0, 1600),
-        totalChars: text.length,
-        truncated: text.length > 1600,
-      },
-    };
+    return { state, output: { excerpt: text.slice(0, 1200), totalChars: text.length, truncated: text.length > 1200 } };
   }
-
   const at = text.toLowerCase().indexOf(query.toLowerCase());
-  if (at < 0) {
-    return { state, output: { source, excerpt: '', totalChars: text.length, query, matched: false } };
-  }
+  if (at < 0) return { state, output: { excerpt: '', totalChars: text.length, query, matched: false } };
   const start = Math.max(0, at - 180);
   return {
     state,
-    output: {
-      source,
-      excerpt: text.slice(start, start + 1400),
-      totalChars: text.length,
-      query,
-      matched: true,
-    },
+    output: { excerpt: text.slice(start, start + 1400), totalChars: text.length, query, matched: true },
   };
 }
 
