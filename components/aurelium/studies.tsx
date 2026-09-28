@@ -226,7 +226,7 @@ function Trajectory({ focus }: { focus: (typeof EXAMPLE_TURNS)[number]['focus'] 
   return (
     <div className="bg-[#F4E9CE]/35 px-2 pt-4">
       <svg viewBox="0 0 720 400" className="h-auto w-full" aria-hidden="true">
-        <line x1="40" y1="168" x2="220" y2="168" stroke="#4A3022" strokeOpacity="0.28" strokeDasharray="4 6" />
+        <line x1="72" y1="168" x2="640" y2="168" stroke="#4A3022" strokeOpacity="0.22" strokeDasharray="3 7" />
         <path
           d="M 72 168 C 170 168 230 78 340 74 C 470 70 520 180 600 300"
           fill="none"
@@ -245,7 +245,7 @@ function Trajectory({ focus }: { focus: (typeof EXAMPLE_TURNS)[number]['focus'] 
         <g opacity={show('components')}>
           <Arrow x={118} y={148} dx={62} dy={0} />
           <Arrow x={118} y={148} dx={0} dy={-52} />
-          <text x="136" y="118" fill="#241C15" fontSize="16" fontFamily="Source Sans 3, sans-serif">
+          <text x="150" y="108" fill="#241C15" fontSize="16" fontFamily="Source Sans 3, sans-serif">
             velocity components
           </text>
         </g>
@@ -258,8 +258,8 @@ function Trajectory({ focus }: { focus: (typeof EXAMPLE_TURNS)[number]['focus'] 
         <g opacity={show('descent')}>
           <circle cx="488" cy="148" r="6" fill="#241C15" />
           <Arrow x={488} y={156} dx={0} dy={46} />
-          <text x="430" y="132" fill="#241C15" fontSize="16" fontFamily="Source Sans 3, sans-serif">
-            one second later, moving downward
+          <text x="508" y="176" fill="#241C15" fontSize="16" fontFamily="Source Sans 3, sans-serif">
+            one second later
           </text>
         </g>
         <g opacity={show('misconception')}>
@@ -270,7 +270,7 @@ function Trajectory({ focus }: { focus: (typeof EXAMPLE_TURNS)[number]['focus'] 
         </g>
         <g opacity={show('transfer')}>
           <line x1="600" y1="168" x2="600" y2="300" stroke="#A87920" strokeWidth="2" />
-          <text x="392" y="236" fill="#241C15" fontSize="16" fontFamily="Source Sans 3, sans-serif">
+          <text x="360" y="372" fill="#241C15" fontSize="16" fontFamily="Source Sans 3, sans-serif">
             fifteen metres below launch
           </text>
         </g>
@@ -460,10 +460,8 @@ export function PhaseBoard() {
       <div id="phase-panel" role="tabpanel" aria-labelledby={`phase-tab-${index}`}>
         <p className="au-kicker">Decision gate</p>
         <p className="au-display mt-3 text-3xl leading-tight text-[#241C15] md:text-4xl">{phase.gate}</p>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-[#241C15]">
-          <span className="au-kicker mr-2">Product capability</span>
-          {phase.capability}
-        </p>
+        <p className="au-kicker mt-8">Product capability</p>
+        <p className="mt-2 max-w-xl text-base leading-relaxed text-[#241C15]">{phase.capability}</p>
       </div>
     </div>
   );

@@ -88,7 +88,7 @@ function Section({
 
 function SectionNav({ active }: { active: string }) {
   return (
-    <nav aria-label="On this page" className="flex w-max gap-x-5 gap-y-2 md:w-auto md:flex-wrap">
+    <nav aria-label="On this page" className="flex w-max gap-x-5">
       {NAV.map((item) => {
         const key = item.href.slice(1);
         const current = active === key;
