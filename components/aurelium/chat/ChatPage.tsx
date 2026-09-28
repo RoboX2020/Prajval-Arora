@@ -100,7 +100,6 @@ export const ChatPage: React.FC = () => {
   const [busy, setBusy] = useState(false);
   const [speak, setSpeak] = useState(false);
   const [sidebar, setSidebar] = useState(false);
-  const [error, setError] = useState('');
   const scroller = useRef<HTMLDivElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -165,7 +164,6 @@ export const ChatPage: React.FC = () => {
     setChats((list) => [chat, ...list]);
     setActiveId(chat.id);
     setDraft('');
-    setError('');
     setSidebar(false);
     setBusy(false);
   }
@@ -188,7 +186,6 @@ export const ChatPage: React.FC = () => {
     };
     setChats((current) => current.map((item) => (item.id === chat.id ? withUser : item)));
     setDraft('');
-    setError('');
     setBusy(true);
     stopSpeaking();
     const controller = new AbortController();
@@ -223,14 +220,13 @@ export const ChatPage: React.FC = () => {
     } catch (err) {
       if ((err as { name?: string }).name === 'AbortError') return;
       const message = err instanceof Error ? err.message : 'The model request failed.';
-      setError(message);
       setChats((current) =>
         current.map((item) =>
           item.id === chat.id
             ? {
                 ...item,
                 messages: item.messages.map((entry) =>
-                  entry.id === assistantId && !entry.text ? { ...entry, text: message } : entry,
+                  entry.id === assistantId ? { ...entry, text: entry.text ? `${entry.text}\n\n${message}` : message } : entry,
                 ),
               }
             : item,
@@ -372,7 +368,6 @@ export const ChatPage: React.FC = () => {
               </button>
             )}
           </div>
-          {error && <p className="mx-auto mt-2 max-w-3xl text-center text-sm text-[#4A3022]">{error}</p>}
           {speech.error && <p className="mx-auto mt-2 max-w-3xl text-center text-sm text-[#4A3022]">{speech.error}</p>}
         </form>
       </section>
