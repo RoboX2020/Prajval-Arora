@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { OriginPage } from './components/OriginPage';
+import { AureliumPage } from './components/aurelium/AureliumPage';
 import { HomePage } from './components/HomePage';
 import { GameLayer } from './components/GameLayer';
 import { ShopPage } from './components/ShopPage';
@@ -44,7 +45,7 @@ const App: React.FC = () => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const interactive = target.closest('button, a, [role="button"]');
-      if (interactive) {
+      if (interactive && !window.location.pathname.startsWith('/aurelium')) {
         audioService.playClickSound();
       }
     };
@@ -53,6 +54,7 @@ const App: React.FC = () => {
       const target = e.target as HTMLElement;
       const interactive = target.closest('button, a, [role="button"]');
 
+      if (window.location.pathname.startsWith('/aurelium')) return;
       if (interactive && e.relatedTarget) {
         const related = e.relatedTarget as HTMLElement;
         if (!interactive.contains(related)) {
@@ -81,6 +83,7 @@ const App: React.FC = () => {
           <Route path="/v1/journey" element={<JourneyArchive />} />
           <Route path="/v1/garage" element={<GarageArchive />} />
           <Route path="/shop" element={<Navigate to="/v1/garage" replace />} />
+          <Route path="/aurelium" element={<AureliumPage />} />
         </Routes>
       </div>
     </BrowserRouter>
