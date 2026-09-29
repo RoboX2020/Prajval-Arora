@@ -157,8 +157,8 @@ export const AureliumPage: React.FC = () => {
             Aurelium
           </a>
           <p className="hidden text-sm text-[#4A3022] md:block">Learn Anything</p>
-          <Link to="/aurelium/assess" className="shrink-0 text-sm text-[#4A3022] hover:text-[#241C15]">
-            Assess
+          <Link to="/aurelium" className="shrink-0 text-sm text-[#4A3022] hover:text-[#241C15]">
+            Chat
           </Link>
           <Link to="/" className="shrink-0 text-sm text-[#4A3022] hover:text-[#241C15]">
             <span className="sm:hidden">Home</span>
@@ -208,13 +208,13 @@ export const AureliumPage: React.FC = () => {
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#4A3022]">{NAME_NOTE}</p>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-[#241C15]">{PROMISE}</p>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#4A3022]">
-                The essay below is the concept. The assessment is the first working session.
+                The essay below is the concept. The chat is the working session.
               </p>
               <Link
-                to="/aurelium/assess"
+                to="/aurelium"
                 className="mt-6 inline-flex bg-[#4A3022] px-5 py-3 text-sm text-[#FBF8F1] hover:bg-[#241C15]"
               >
-                Start an assessment
+                Open the chat
               </Link>
 
               <div className="mt-12 grid gap-10 lg:grid-cols-12">

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { OriginPage } from './components/OriginPage';
 import { AureliumPage } from './components/aurelium/AureliumPage';
-import { AssessPage } from './components/aurelium/assess/AssessPage';
+import { ChatPage } from './components/aurelium/chat/ChatPage';
 import { HomePage } from './components/HomePage';
 import { GameLayer } from './components/GameLayer';
 import { ShopPage } from './components/ShopPage';
@@ -84,8 +84,9 @@ const App: React.FC = () => {
           <Route path="/v1/journey" element={<JourneyArchive />} />
           <Route path="/v1/garage" element={<GarageArchive />} />
           <Route path="/shop" element={<Navigate to="/v1/garage" replace />} />
-          <Route path="/aurelium" element={<AureliumPage />} />
-          <Route path="/aurelium/assess" element={<AssessPage />} />
+          <Route path="/aurelium" element={<ChatPage />} />
+          <Route path="/aurelium/concept" element={<AureliumPage />} />
+          <Route path="/aurelium/assess" element={<Navigate to="/aurelium" replace />} />
         </Routes>
       </div>
     </BrowserRouter>

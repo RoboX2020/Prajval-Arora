@@ -21,10 +21,15 @@ export type SessionState = {
   goal: string;
   syllabus: string;
   exam: string;
+  corpus: string;
   items: Item[];
   attempts: Attempt[];
   gaps: Record<string, string>;
 };
+
+export function blankState(): SessionState {
+  return { goal: '', syllabus: '', exam: '', corpus: '', items: [], attempts: [], gaps: {} };
+}
 
 export function isSecured(attempts: Attempt[], itemId: string): boolean {
   const mine = attempts.filter((attempt) => attempt.itemId === itemId);
