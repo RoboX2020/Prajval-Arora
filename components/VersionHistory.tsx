@@ -11,9 +11,10 @@ function isCurrent(href: string, path: string) {
 
 interface VersionHistoryProps {
   variant?: 'ink' | 'light';
+  compact?: boolean;
 }
 
-export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' }) => {
+export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink', compact = false }) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
@@ -46,7 +47,14 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
         aria-expanded={open}
       >
         <History size={14} />
-        Version history
+        {compact ? (
+          <>
+            <span className="hidden md:inline">Version history</span>
+            <span className="sr-only md:hidden">Version history</span>
+          </>
+        ) : (
+          'Version history'
+        )}
       </button>
 
       {open && (
