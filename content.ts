@@ -14,6 +14,7 @@ export const PERSON = {
   tapri: 'https://gotapri.com',
   huggingface: 'https://huggingface.co/iamprajval',
   instagram: 'https://www.instagram.com/reel/DReO46_EdtP/',
+  instagramProfile: 'https://www.instagram.com/i.am.prajjval/',
   instagramAir: 'https://www.instagram.com/reel/DSyhRm6CeOL/',
   instagramBot: 'https://www.instagram.com/p/DAojHutz0g4/',
   productHunt: 'https://vibeverseai.com',
