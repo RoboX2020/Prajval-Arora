@@ -217,6 +217,12 @@ export type Collision = {
 
 export const COLLISIONS: Collision[] = [
   {
+    id: 'axis', fields: ['Flight', 'Shared perspective'], title: 'AXIS',
+    result: 'One shared airspace. Two cockpit perspectives.',
+    body: 'A hackathon team prototype: simulated aircraft conflicts, climb/descend advisories, a 3D trajectory explorer and QR-linked cockpit views. A working browser demo, not a certified flight-safety system.',
+    link: '/axis', stat: 'October 2026',
+  },
+  {
     id: 'barrow',
     fields: ['Medicine', 'On-device AI'],
     title: 'AR speech therapy',

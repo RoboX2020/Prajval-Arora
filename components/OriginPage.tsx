@@ -31,6 +31,11 @@ const nav = [
 ];
 
 export const OriginPage: React.FC = () => {
+  React.useEffect(() => {
+    if (window.location.hash === '#collisions') {
+      document.getElementById('collisions')?.scrollIntoView({ block: 'start' });
+    }
+  }, []);
   const featured = COLLISIONS.filter((c) => c.photo || c.gallery);
   const rest = COLLISIONS.filter((c) => !c.photo && !c.gallery);
 
@@ -202,6 +207,12 @@ export const OriginPage: React.FC = () => {
                       className="mt-5 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]"
                     >
                       Open the trail <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                  {c.id === 'axis' && (
+                    <a href="https://axis.prajvalarora.com/" target="_blank" rel="noreferrer"
+                      className="mt-3 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">
+                      Try the live demo <ArrowUpRight size={14} />
                     </a>
                   )}
                 </article>

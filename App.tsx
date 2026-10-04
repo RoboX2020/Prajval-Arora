@@ -1,3 +1,4 @@
+import { AxisPage } from './components/AxisPage';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { OriginPage } from './components/OriginPage';
@@ -78,6 +79,7 @@ const App: React.FC = () => {
       <div className="w-full min-h-full">
         <Routes>
           <Route path="/" element={<OriginPage />} />
+          <Route path="/axis" element={<AxisPage />} />
           <Route path="/v1" element={<CircuitArchive />} />
           <Route path="/v1/journey" element={<JourneyArchive />} />
           <Route path="/v1/garage" element={<GarageArchive />} />
