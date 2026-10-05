@@ -1,4 +1,4 @@
-export type ProjectRecord = {slug:string; title:string; category:string; summary:string; overview:string; features:string[]; stack:string[]; flow:string[]; limits:string; sources:{label:string;href:string}[]; image?:string; imageAlt?:string; imageCaption?:string; gallery?:{src:string;alt:string;caption:string}[]; status:string; note?:string;};
+export type ProjectRecord = {slug:string; title:string; category:string; summary:string; overview:string; features:string[]; stack:string[]; flow:string[]; limits:string; sources:{label:string;href:string}[]; image?:string; imageAlt?:string; imageCaption?:string; gallery?:{src:string;alt:string;caption:string}[]; videos?:{src:string;poster:string;caption:string}[]; status:string; note?:string;};
 const gh=(repo:string)=>({label:'Public source repository',href:`https://github.com/RoboX2020/${repo}`});
 export const PROJECT_LIBRARY: ProjectRecord[] = [
 {slug:'gotapri',title:'GoTapri',category:'Community × collaboration',status:'Project archive',summary:'A place for early-stage builders to find their people, form teams and give their ideas a public home.',overview:'GoTapri grew from a simple observation: people had ideas, but many were trying to build alone. The platform brought team formation, startup pages and collaborator discovery into one place. This archive keeps the project accessible from my portfolio after the original domain lease ended.',features:['Team formation and collaborator discovery for young founders.','Public startup pages to give an idea a place people can find and join.','A builder community around feedback, mentorship and making things together.'],stack:['Community platform','Team matching','Startup profiles'],flow:['A builder brings an idea or a skill.','A public project page makes the work discoverable.','People find teams and collaborators to move the work forward.'],limits:'This is a record of the platform, not a claim that every service described in its early pitch remains available. The original domain is not treated as a working demo. Community reach and launch metrics are omitted here rather than presented without context.',sources:[{label:'Original founder post · June 2025',href:'https://www.linkedin.com/posts/prajvalarora_tapri-teambuilding-teenpreneur-activity-7339727831645528065-dzdY'}]},
@@ -52,4 +52,16 @@ river.limits='Research and literature review, not a built data center or a measu
 river.note='The original dam-siting paper is still being located. The excerpt here is from the later robotics-focused paper.';
 
 const go2=PROJECT_LIBRARY.find(p=>p.slug==='unitree-go2')!;
-go2.limits='Exploration screenshots from a lab report, not a verified physical-robot deployment or successful sim-to-real transfer.';
+go2.title='Unitree Training in Isaac Sim';
+go2.category='Physical AI × simulation';
+go2.status='Training exploration';
+go2.summary='Train a quadruped in simulation, with walking and flipping as the target skills.';
+go2.overview='My Unitree work includes Isaac Sim training aimed at teaching the robot to walk and flip. The clips below show the simulation work, including a parallel quadruped scene. A separate Go2 lab-report image records a PyBullet exploration with depth, RGB and lidar panels; it is not an Isaac Sim screenshot.';
+go2.stack=['Isaac Sim','Quadruped training','PyBullet exploration'];
+go2.features=['Isaac Sim training aimed at walking and flipping.','Parallel quadruped simulation visible in the training clip.','Separate PyBullet lab exploration with depth, RGB and lidar views.'];
+go2.limits='The clips document simulation work, not a benchmarked training result. Walking and flipping are the training goals; successful physical-robot deployment or sim-to-real transfer is not claimed here.';
+go2.note='The simulation clips were provided from my own project records. The lab-report image below is labeled separately to preserve which simulator it shows.';
+go2.videos=[
+ {src:'/projects/unitree-motion.mp4',poster:'/projects/unitree-motion-poster.jpg',caption:'Unitree simulation clip. Walking and flipping are the training goals, not a measured success claim.'},
+ {src:'/projects/unitree-training.mp4',poster:'/projects/unitree-training-poster.jpg',caption:'Isaac Sim training scene with multiple simulated quadrupeds. Recorded from the training interface.'}
+];
