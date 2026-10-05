@@ -56,8 +56,12 @@ go2.title='Unitree Training in Isaac Sim';
 go2.category='Physical AI × simulation';
 go2.status='Training exploration';
 go2.summary='Train a quadruped in simulation, with walking and flipping as the target skills.';
-go2.overview='My Unitree work includes Isaac Sim training aimed at teaching the robot to walk and flip. A separate Go2 lab-report image records a PyBullet exploration with depth, RGB and lidar panels; it is not an Isaac Sim screenshot.';
+go2.overview='My Unitree work includes Isaac Sim training aimed at teaching the robot to walk and flip. The clips below show the simulation work, including a parallel quadruped scene. A separate Go2 lab-report image records a PyBullet exploration with depth, RGB and lidar panels; it is not an Isaac Sim screenshot.';
 go2.stack=['Isaac Sim','Quadruped training','PyBullet exploration'];
 go2.features=['Isaac Sim training aimed at walking and flipping.','Parallel quadruped simulation visible in the training clip.','Separate PyBullet lab exploration with depth, RGB and lidar views.'];
-go2.limits='Walking and flipping are the training goals, not a benchmarked result. Successful physical-robot deployment or sim-to-real transfer is not claimed here.';
-
+go2.limits='The clips document simulation work, not a benchmarked training result. Walking and flipping are the training goals; successful physical-robot deployment or sim-to-real transfer is not claimed here.';
+go2.note='The simulation clips were provided from my own project records. The lab-report image below is labeled separately to preserve which simulator it shows.';
+go2.videos=[
+ {src:'/projects/unitree-motion.mp4',poster:'/projects/unitree-motion-poster.jpg',caption:'Unitree simulation clip. Walking and flipping are the training goals, not a measured success claim.'},
+ {src:'/projects/unitree-training.mp4',poster:'/projects/unitree-training-poster.jpg',caption:'Isaac Sim training scene with multiple simulated quadrupeds. Recorded from the training interface.'}
+];
