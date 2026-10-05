@@ -4,6 +4,8 @@
   "framework": "vite",
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
+    { "source": "/projects/:path*", "destination": "/index.html" },
+    { "source": "/projects", "destination": "/index.html" },
     { "source": "/axis", "destination": "/index.html" },
     { "source": "/axis/", "destination": "/index.html" },
     { "source": "/playbook", "destination": "/playbook/index.html" },

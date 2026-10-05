@@ -229,6 +229,7 @@ export const COLLISIONS: Collision[] = [
     result: 'A wearable that listens, sees, and coaches speech in the clinic.',
     body: 'At Barrow Institute: a Jetson Nano with local LLM inference, a stereo camera, and a birdbath AR display. Aphasia patients get pronunciation guidance. Apraxia patients hear a continuous narration of their surroundings. Built with Dr. Catherine’s research team. The clinic tests it now, moving toward an LLC.',
     stat: 'Clinical testing',
+    link: '/projects/ar-speech-therapy',
   },
   {
     id: 'stellantis',
@@ -237,6 +238,7 @@ export const COLLISIONS: Collision[] = [
     result: 'A physical line and its twin, commissioned for Detroit.',
     body: 'ASU and Wandelbots asked for a demonstrator. Dual URSe cobots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
     stat: 'In build',
+    link: '/projects/stellantis-cell',
   },
   {
     id: 'line',
@@ -245,6 +247,7 @@ export const COLLISIONS: Collision[] = [
     result: 'UR5, UR3, JAKA, Dobot, FANUC thinking, PLCs, conveyors, vision, air.',
     body: 'An Innovation Showcase cell with 6-DOF and 4-DOF coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety. A factory in miniature that still has to run.',
     stat: 'Showcase',
+    link: '/projects/manufacturing-line',
   },
   {
     id: 'go2',
@@ -253,6 +256,7 @@ export const COLLISIONS: Collision[] = [
     result: 'Train the dog in a twin, then argue with physics.',
     body: 'ROS 2, Isaac Sim, and Omniverse workflows for Unitree Go2. Reinforcement learning and digital twins first. Physics when the animal actually moves.',
     stat: 'Ongoing research',
+    link: '/projects/unitree-go2',
   },
   {
     id: 'honeywell',
@@ -260,9 +264,9 @@ export const COLLISIONS: Collision[] = [
     title: 'Honeywell jet cooling & heat exchangers',
     result: 'Bleed air as a coolant. Then the factory that would make the exchanger.',
     body: '2025: 2nd place and $5,000, cooling jet engines with bleed-air exhaust. 2026: 3rd place and $2,500, automated manufacturing for engine heat-exchange systems. Thermodynamics one year. Production the next.',
-    link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: '$7,500 across two years',
     photo: FRAMES.team,
+    link: '/projects/microtube-insertion',
   },
   {
     id: 'hack-play',
@@ -270,9 +274,9 @@ export const COLLISIONS: Collision[] = [
     title: 'Hackathons as the serious kind of play',
     result: 'Ludus est labor. The lecture hall at 2 a.m. still counts as a lab.',
     body: 'Honeywell was not a lone sprint. That season of play produced the winning team and the face that still peace-signs in a hall. Fun finished the thermodynamics.',
-    link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_engineering-hackathon-rocketscience-activity-7382467243932086272-1mfM',
     stat: 'Two years, two rooms',
     photo: FRAMES.hack,
+    link: '/projects/jet-cooling',
   },
   {
     id: 'riverside',
@@ -280,9 +284,9 @@ export const COLLISIONS: Collision[] = [
     title: 'Riverside data centers',
     result: 'Put the heat where a river already knows how to carry it.',
     body: 'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Spoken at Cronkite.',
-    link: 'https://www.linkedin.com/posts/prajvaldesignsmachines_microsoft-researchpaper-culture-activity-7340222850680688640-kP--',
     stat: '$2,500 Microsoft grant',
     photo: FRAMES.stage,
+    link: '/projects/riverside-data-centers',
   },
   {
     id: 'air-guitar',
@@ -290,8 +294,8 @@ export const COLLISIONS: Collision[] = [
     title: 'Air guitar',
     result: 'No strings. No frets. A wrist, an accelerometer, Karplus-Strong.',
     body: 'A wearable instrument with Arduino, inertial sensing, and a real-time sound engine. 300,000 Instagram views. The open-source repo grew with no campaign.',
-    link: 'https://github.com/RoboX2020/Air-Guitar',
     stat: '300k views',
+    link: '/projects/air-guitar',
   },
   {
     id: 'faith',
@@ -300,15 +304,16 @@ export const COLLISIONS: Collision[] = [
     result: 'The schools had no labs. Then 200 students could build.',
     body: 'Founded robotics labs in Kanpur schools. Kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
     stat: '200+ students',
+    link: '/projects/faith-labs',
   },
   {
     id: 'tapri',
     fields: ['Community', 'Ventures'],
     title: 'Tapri Builder Club',
     result: 'A tea stall for people who make things. ASU now charters it.',
-    body: 'Founded Tapri. Preside. 22,000 people, 2,200 members, and 40+ ventures (Ideacode, FlexFund, STEMverse). External hackathons with 5,000+ combined participants. The platform lives at gotapri.com. Restarted as a chartered club at ASU with Prof. Aram Chavez.',
-    link: 'https://gotapri.com',
+    body: 'Founded Tapri. Preside. 22,000 people, 2,200 members, and 40+ ventures (Ideacode, FlexFund, STEMverse). External hackathons with 5,000+ combined participants. The original GoTapri platform is preserved in the project archive. Restarted as a chartered club at ASU with Prof. Aram Chavez.',
     stat: '40+ ventures',
+    link: '/projects/gotapri',
   },
   {
     id: 'espclaw',
@@ -316,7 +321,7 @@ export const COLLISIONS: Collision[] = [
     title: 'ESP-Claw contribution',
     result: 'Talk to hardware that Espressif’s agent could not reach.',
     body: 'A PR to Espressif’s ESP-Claw AI agent framework. Arduino support the agent could not reach, plus natural-language control so people program hardware by speaking.',
-    link: 'https://github.com/espressif/esp-claw/pull/11',
+    link: '/projects/esp-claw',
   },
   {
     id: 'champ',
@@ -325,6 +330,7 @@ export const COLLISIONS: Collision[] = [
     result: 'First nationally, most budget-efficient, tenth in the world.',
     body: 'An omnidirectional robot with a mounted arm and its own local Wi-Fi server. Drive it from any phone. Built on $100 against four-figure budgets.',
     stat: '1st national · $100',
+    link: '/projects/robotics-championship',
   },
   {
     id: 'arms',
@@ -333,18 +339,19 @@ export const COLLISIONS: Collision[] = [
     result: 'Treasurer, marketing head, and software lead. Also a $10k payload conversation.',
     body: 'Software and operations for MSN-affiliated projects. Phoenix Drone LLC on a payload system under a $10,000 budget. Engineering with Drone Devils on a plane, a boat, and an FPV car.',
     stat: '2026 to Present',
+    link: '/projects/arms-asu',
   },
 ];
 
 export const MORE_WORK = [
-  { title: 'Air piano & vision mouse', body: 'Computer vision and MediaPipe. Any flat surface becomes keys or a cursor. No extra hardware.' },
-  { title: 'Caricature & Dobot drawing', body: 'Pixels to a pencil. Image-to-motor pipelines and OpenCV stroke paths drive robot arms.' },
-  { title: 'AI tic-tac-toe on paper', body: 'A physical arm sees your mark and draws its reply with inverse kinematics.' },
-  { title: 'LLM-driven spider robot', body: 'Natural language into multi-leg motion. Intelligence wired straight into hardware.' },
-  { title: 'Gaze glasses', body: 'A wearable where the cursor follows your eyes.' },
-  { title: 'CeliaLife & Kalki', body: 'Medical-history risk for doctors, and a platform so people can raise local problems.' },
-  { title: 'VibeVerse', body: 'A marketplace for AI-generated projects on Product Hunt. It lives at vibeverseai.com.' },
-  { title: 'Euler Ai', body: 'An animation agent that turns text into Desmos-quality visualizations for math educators.' },
+  { title: 'Air piano & vision mouse', link: '/projects/air-piano', body: 'Computer vision and MediaPipe. Any flat surface becomes keys or a cursor. No extra hardware.' },
+  { title: 'Caricature & Dobot drawing', link: '/projects/caricature-drawing', body: 'Pixels to a pencil. Image-to-motor pipelines and OpenCV stroke paths drive robot arms.' },
+  { title: 'AI tic-tac-toe on paper', link: '/projects/paper-tic-tac-toe', body: 'A physical arm sees your mark and draws its reply with inverse kinematics.' },
+  { title: 'LLM-driven spider robot', link: '/projects/spider-robot', body: 'Natural language into multi-leg motion. Intelligence wired straight into hardware.' },
+  { title: 'Gaze glasses', link: '/projects/air-mouse', body: 'A wearable where the cursor follows your eyes.' },
+  { title: 'CeliaLife & Kalki', link: '/projects/celialife', body: 'Medical-history risk for doctors, and a platform so people can raise local problems.' },
+  { title: 'VibeVerse', link: '/projects/vibeverse', body: 'A marketplace for AI-generated projects on Product Hunt. It lives at vibeverseai.com.' },
+  { title: 'Euler Ai', link: '/projects/euler-ai', body: 'An animation agent that turns text into Desmos-quality visualizations for math educators.' },
 ];
 
 export const SKILL_FIELDS = [

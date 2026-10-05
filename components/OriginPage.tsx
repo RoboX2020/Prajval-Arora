@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { PROJECT_LIBRARY } from '../projectData';
 import React from 'react';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import {
@@ -24,6 +26,7 @@ const nav = [
   { href: '#guide', label: 'Guide' },
   { href: '#now', label: 'Now' },
   { href: '#collisions', label: 'Work' },
+  { href: '/projects', label: 'Projects' },
   { href: '#practice', label: 'Practice' },
   { href: '/playbook', label: 'Playbook' },
   { href: '#signals', label: 'Traces' },
@@ -187,6 +190,7 @@ export const OriginPage: React.FC = () => {
               ))}
             </div>
 
+            <Link to="/projects" className="mt-12 inline-flex items-center gap-2 border border-[#d4b87a] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Explore the project library <ArrowUpRight size={14} /></Link>
             <div className="mt-16 grid gap-6 md:grid-cols-2">
               {rest.map((c) => (
                 <article key={c.id} className="flex flex-col border border-[#3d3228] bg-[#1c1814] p-6">
@@ -220,11 +224,24 @@ export const OriginPage: React.FC = () => {
             </div>
 
             <div className="mt-16">
+              <h3 className="font-display text-2xl text-[#f0e6d4]">From the public workbench</h3>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {PROJECT_LIBRARY.filter(p => ['partyplay','aether','esp32-ai-robot','life','skydrift'].includes(p.slug)).map(p => (
+                  <Link key={p.slug} to={'/projects/' + p.slug} className="border border-[#3d3228] bg-[#1c1814] p-5">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-[#d4b87a]">{p.category}</p>
+                    <h4 className="mt-3 font-display text-2xl text-[#f0e6d4]">{p.title}</h4>
+                    <p className="mt-3 text-xs leading-relaxed text-[#b8a894]">{p.summary}</p>
+                    <p className="mt-4 font-mono text-[10px] uppercase tracking-wider text-[#d4b87a]">Read the build ↗</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="mt-16">
               <h3 className="font-display text-2xl text-[#f0e6d4]">Other instruments</h3>
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {MORE_WORK.map((w) => (
                   <article key={w.title} className="border-t border-[#3d3228] pt-4">
-                    <h4 className="font-medium text-[#e6d9c4]">{w.title}</h4>
+                    <h4 className="font-medium text-[#e6d9c4]"><Link to={w.link}>{w.title} ↗</Link></h4>
                     <p className="mt-2 text-xs leading-relaxed text-[#8a7a68]">{w.body}</p>
                   </article>
                 ))}
