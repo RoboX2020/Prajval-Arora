@@ -348,7 +348,7 @@ export const MORE_WORK = [
   { title: 'Caricature & Dobot drawing', link: '/projects/caricature-drawing', body: 'Pixels to a pencil. Image-to-motor pipelines and OpenCV stroke paths drive robot arms.' },
   { title: 'AI tic-tac-toe on paper', link: '/projects/paper-tic-tac-toe', body: 'A physical arm sees your mark and draws its reply with inverse kinematics.' },
   { title: 'LLM-driven spider robot', link: '/projects/spider-robot', body: 'Natural language into multi-leg motion. Intelligence wired straight into hardware.' },
-  { title: 'Inertial air mouse', link: '/projects/air-mouse', body: 'Head-mounted motion sensing controls a cursor through Bluetooth HID.' },
+  { title: 'Inertial air mouse', link: '/projects/air-mouse', body: 'Motion sensing controls a cursor through an Arduino and Python serial listener.' },
   { title: 'CeliaLife & Kalki', link: '/projects/celialife', body: 'Medical-history risk for doctors, and a platform so people can raise local problems.' },
   { title: 'VibeVerse', link: '/projects/vibeverse', body: 'A marketplace for AI-generated projects on Product Hunt. The original domain was vibeverseai.com.' },
   { title: 'Euler Ai', link: '/projects/euler-ai', body: 'An animation agent that turns text into Desmos-quality visualizations for math educators.' },
