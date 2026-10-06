@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PROJECT_LIBRARY } from '../projectData';
 import React from 'react';
-import { ArrowUpRight, FileText } from 'lucide-react';
+import { ArrowUpRight, FileText, Mail } from 'lucide-react';
 import {
   PERSON,
   LAWS,
@@ -80,6 +80,12 @@ export const OriginPage: React.FC = () => {
                 className="inline-flex items-center gap-2 border border-[#c4a35a]/40 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#e6d9c4] hover:border-[#d4b87a]"
               >
                 <FileText size={14} /> Resume
+              </a>
+              <a
+                href="mailto:prajval.2029@gmail.com"
+                className="inline-flex items-center gap-2 border border-[#c4a35a]/40 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#e6d9c4] hover:border-[#d4b87a]"
+              >
+                <Mail size={14} /> Contact me
               </a>
             </div>
           </Spread>
