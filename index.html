@@ -40,6 +40,28 @@
         font-family: 'Outfit', sans-serif;
       }
 
+      /* One shared page width: keep small screens unchanged, give desktop
+         layouts room, and retain a comfortable reading measure inside them. */
+      .site-shell { max-width: 72rem; }
+      @media (min-width: 1024px) {
+        .site-shell {
+          width: calc(100% - clamp(3rem, 8vw, 10rem));
+          max-width: 110rem;
+        }
+        .hero-section { padding-top: clamp(2.5rem, 4vw, 4.5rem); }
+        .hero-section > div { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+        .hero-section > div > div:first-child { grid-column: auto; }
+        .hero-section > div > div:last-child {
+          grid-column: auto;
+          padding-inline: clamp(2.5rem, 4vw, 5rem);
+        }
+        .hero-section h1 { font-size: clamp(6.2rem, 7vw, 8rem); }
+        .hero-section p { max-width: 42rem; }
+      }
+      @media (min-width: 1536px) {
+        .hero-section > div { min-height: 43rem; }
+      }
+
       html {
         scroll-behavior: smooth;
       }

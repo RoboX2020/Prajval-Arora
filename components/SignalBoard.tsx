@@ -5,7 +5,7 @@ import { EMBEDS, PERSON } from '../content';
 export const SignalBoard: React.FC = () => {
   return (
     <section id="signals" className="border-y border-[#3d3228] bg-[#241c16]/80 py-24">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto site-shell px-5">
         <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Live traces</p>
         <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
           Embeddings. Places I already exist, pulled onto this page.

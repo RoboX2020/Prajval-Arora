@@ -21,12 +21,12 @@ export const AxisPage: React.FC = () => {
   }, []);
   return <div className="origin-root min-h-screen bg-[#1c1814] text-[#e6d9c4]">
     <header className="border-b border-[#3d3228] bg-[#241c16]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <div className="mx-auto flex site-shell items-center justify-between px-5 py-4">
         <Link to="/" className="font-display text-lg text-[#f0e6d4]">Prajval<span className="text-[#d4b87a]">.</span></Link>
         <a href="/#collisions" className={`${label} flex items-center gap-2`}><ArrowLeft size={14} /> Back to work</a>
       </div>
     </header>
-    <main className="mx-auto max-w-6xl px-5 pb-20">
+    <main className="mx-auto site-shell px-5 pb-20">
       <section className="grid gap-8 pb-10 pt-14 md:grid-cols-[1.5fr_1fr] md:pt-20">
         <div><p className={label}>Flight × shared perspective · October 2026</p>
           <h1 className="mt-5 font-display text-[clamp(4rem,12vw,8rem)] leading-none tracking-tight text-[#f0e6d4]">AXIS</h1>
@@ -47,6 +47,6 @@ export const AxisPage: React.FC = () => {
       <section className="grid gap-8 py-16 md:grid-cols-[1fr_2fr]"><div><p className={label}>The people</p><h2 className="mt-3 font-display text-3xl text-[#f0e6d4]">Built as a team.</h2></div><div className="space-y-5 text-sm leading-relaxed text-[#b8a894]"><p>AXIS was a hackathon team project, from shared ideation to the working demo. The phone cockpit and the separate 3D trajectory explorer are parts of the team's prototype. This page describes the combined build, not one person's sole work.</p></div></section>
       <section className="border-t border-[#3d3228] pt-12"><p className={label}>Build record · October 3-4, 2026</p><h2 className="mt-3 font-display text-3xl text-[#f0e6d4]">A weekend, made concrete.</h2><p className={`${body} mt-5 max-w-3xl`}>The weekend took AXIS from a shared aircraft simulation to a demo people could join: QR cockpit views, look-around controls, map-panel warnings, airliner models and the trajectory explorer. This page keeps the build and the team effort in view.</p><div className="mt-7 flex flex-wrap gap-6"><a href="https://docs.google.com/presentation/d/1WjElLi4xFiY_13qEzHInluhBHZR8w56ILL8sskMfuTE/edit?usp=sharing" target="_blank" rel="noreferrer" className={label}>Original presentation ↗</a><a href={repo} target="_blank" rel="noreferrer" className={label}>Repository & history ↗</a></div><p className="mt-7 max-w-3xl font-mono text-xs leading-relaxed text-[#8a7a68]">Documented at feature/qr-phone-cockpit · dcbc4f2. At this snapshot, main includes the predictor but not the phone-demo additions.</p></section>
     </main>
-    <footer className="border-t border-[#3d3228] px-5 py-6"><div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4"><Link to="/" className={label}>Prajval Arora</Link><a href={demo} target="_blank" rel="noreferrer" className={label}>Open AXIS ↗</a></div></footer>
+    <footer className="border-t border-[#3d3228] px-5 py-6"><div className="mx-auto flex site-shell flex-wrap justify-between gap-4"><Link to="/" className={label}>Prajval Arora</Link><a href={demo} target="_blank" rel="noreferrer" className={label}>Open AXIS ↗</a></div></footer>
   </div>;
 };

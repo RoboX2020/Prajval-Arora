@@ -31,7 +31,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
 
   return (
     <header className="origin-root sticky top-0 z-[70] border-b border-[#3d3228] bg-[#241c16] text-[#e6d9c4]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3">
+      <div className="mx-auto flex site-shell items-center justify-between gap-3 px-5 py-3">
         <Link to="/" className="shrink-0 font-display text-lg tracking-tight text-[#f0e6d4]">
           {PERSON.first}
           <span className="text-[#d4b87a]">.</span>
@@ -88,7 +88,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
           <div
             role="dialog"
             aria-label="Site menu"
-            className="mx-auto flex h-full w-full max-w-6xl flex-col"
+            className="mx-auto flex h-full w-full site-shell flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-[#3d3228] py-3">

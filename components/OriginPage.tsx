@@ -50,7 +50,7 @@ export const OriginPage: React.FC = () => {
       <SiteHeader nav={nav} />
 
       <main id="top" className="relative z-10" style={{ zIndex: 10 }}>
-        <section className="mx-auto max-w-6xl px-5 pb-8 pt-14 md:pt-20">
+        <section className="mx-auto site-shell hero-section px-5 pb-8 pt-14 md:pt-20">
           <Spread media={HERO_PHOTO} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">
               Independent thought · interdisciplinary build
@@ -86,7 +86,7 @@ export const OriginPage: React.FC = () => {
         </section>
 
         <section className="border-y border-[#3d3228] bg-[#241c16]/80">
-          <div className="mx-auto grid max-w-6xl gap-px md:grid-cols-2">
+          <div className="mx-auto grid site-shell gap-px md:grid-cols-2">
             {LAWS.map((item) => (
               <article key={item.law} className="px-5 py-8 md:px-8">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#8a7a68]">Conventional law</p>
@@ -99,7 +99,7 @@ export const OriginPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl space-y-10 px-5 py-24">
+        <section className="mx-auto site-shell space-y-10 px-5 py-24">
           <Spread media={FRAMES.sky} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">A reading</p>
             <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
@@ -119,7 +119,7 @@ export const OriginPage: React.FC = () => {
           </div>
         </section>
 
-        <section id="guide" className="mx-auto max-w-6xl px-5 pb-24">
+        <section id="guide" className="mx-auto site-shell px-5 pb-24">
           <Spread media={FRAMES.walk}>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Friends first</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">The walk, not the pitch.</h2>
@@ -129,7 +129,7 @@ export const OriginPage: React.FC = () => {
           </Spread>
         </section>
 
-        <section id="now" className="mx-auto max-w-6xl px-5 pb-24">
+        <section id="now" className="mx-auto site-shell px-5 pb-24">
           <Spread media={FRAMES.quest} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Now</p>
             <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">The live experiments</h2>
@@ -160,7 +160,7 @@ export const OriginPage: React.FC = () => {
         </section>
 
         <section id="collisions" className="border-t border-[#3d3228] bg-[#241c16]/50 py-24">
-          <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto site-shell px-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Collisions</p>
             <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
               Work that only exists when two fields share a room.
@@ -250,7 +250,7 @@ export const OriginPage: React.FC = () => {
           </div>
         </section>
 
-        <section id="practice" className="mx-auto max-w-6xl space-y-24 px-5 py-24">
+        <section id="practice" className="mx-auto site-shell space-y-24 px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Practice</p>
           <h2 className="font-display text-4xl text-[#f0e6d4]">Hands on the work</h2>
 
@@ -273,7 +273,7 @@ export const OriginPage: React.FC = () => {
           ))}
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 pb-24">
+        <section className="mx-auto site-shell px-5 pb-24">
           <Spread media={FRAMES.cinema} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Offstage</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">Play is not a footnote.</h2>
@@ -284,7 +284,7 @@ export const OriginPage: React.FC = () => {
         </section>
 
         <section id="field" className="border-y border-[#3d3228] bg-[#241c16]/70 py-24">
-          <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto site-shell px-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Field kit</p>
             <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">Tools, not a personality</h2>
             <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -298,7 +298,7 @@ export const OriginPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 py-24">
+        <section className="mx-auto site-shell px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Proof, not a plea</p>
           <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">What remains after the work</h2>
           <ul className="mt-10 divide-y divide-[#3d3228] border-y border-[#3d3228]">
@@ -314,7 +314,7 @@ export const OriginPage: React.FC = () => {
         <SignalBoard />
 
         <section id="connect" className="border-t border-[#3d3228] py-24">
-          <div className="mx-auto max-w-6xl space-y-10 px-5">
+          <div className="mx-auto site-shell space-y-10 px-5">
             <Spread media={FRAMES.blazer}>
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Connect</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
@@ -349,7 +349,7 @@ export const OriginPage: React.FC = () => {
       </main>
 
       <footer className="relative z-10 border-t border-[#3d3228] px-5 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex site-shell flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#8a7a68]">
             © {new Date().getFullYear()} {PERSON.name} · Independence of thought
           </p>
