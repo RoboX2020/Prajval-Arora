@@ -51,7 +51,7 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
 
       {open && (
         <div
-          className="fixed inset-0 z-[80] overflow-y-auto bg-[#1c1814]/92 p-4"
+          className="fixed inset-0 z-[80] overflow-y-auto bg-[#1c1814]/95 p-4"
           onClick={() => setOpen(false)}
           role="presentation"
         >
