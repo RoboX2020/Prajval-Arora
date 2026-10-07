@@ -16,6 +16,8 @@
     { "source": "/v1/journey/", "destination": "/index.html" },
     { "source": "/v1/garage", "destination": "/index.html" },
     { "source": "/v1/garage/", "destination": "/index.html" },
+    { "source": "/get-it-done", "destination": "/index.html" },
+    { "source": "/get-it-done/", "destination": "/index.html" },
     { "source": "/shop", "destination": "/index.html" },
     { "source": "/shop/", "destination": "/index.html" }
   ]
