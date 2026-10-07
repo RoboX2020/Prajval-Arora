@@ -1,5 +1,6 @@
 import { ProjectsPage, ProjectPage } from './components/ProjectLibrary';
 import { AxisPage } from './components/AxisPage';
+import { GetItDonePage } from './components/GetItDonePage';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { OriginPage } from './components/OriginPage';
@@ -81,6 +82,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<OriginPage />} />
           <Route path="/axis" element={<AxisPage />} />
+          <Route path="/get-it-done" element={<GetItDonePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/v1" element={<CircuitArchive />} />
