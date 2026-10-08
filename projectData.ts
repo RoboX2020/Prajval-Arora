@@ -95,3 +95,15 @@ for(const p of PROJECT_LIBRARY){if(extraSources[p.slug])p.sources.push(extraSour
 
 const arms=PROJECT_LIBRARY.find(p=>p.slug==='arms-asu')!;
 arms.gallery=[{src:'/projects/5-arms-mark.png',alt:'A R M S robotics organization mark',caption:'Organization mark included in my public drawing-robot repository. This is branding, not a photo of a completed robot.'}];
+
+PROJECT_LIBRARY.splice(1,0,{
+ slug:'get-done-code', title:'Get Done for Code', category:'Developer tools × motivation', status:'Extension, testing build 0.1.0',
+ summary:'Set your own coding goals. Hit one and a reward image you picked unlocks.',
+ overview:'The follow-up to Get Done, built for the editor instead of the homework page. It is a VS Code extension that also runs in Cursor and Antigravity, since all three are VS Code based, from one package. You choose what counts as progress in a setting called getDone.criteria. Each time you hit a goal, a side panel opens beside your code and shows the next reward image from your own list. Nothing is bundled or hosted: the images load straight from links you add, one at a time, in order, then cycle. Counts stay on your machine. Only the GitHub goal makes a network call, to GitHub\'s API for your own contribution count. The extension never reads or sends your code.',
+ features:['Lines goal: a reward every N new lines typed. Undo and redo are ignored, and a huge paste counts as at most 200 lines per change.','Saves goal: a reward every N file saves.','Minutes goal: a reward every N minutes of active typing.','GitHub goal: one reward on each day you make a GitHub contribution, checked through VS Code\'s built-in GitHub sign-in with read:user scope only, every 15 minutes by default.','A status bar item showing progress, plus commands to add a reward link, preview the next reward, check GitHub now, and reset.','Rewards open in a webview that only allows https images.'],
+ stack:['TypeScript','VS Code Extension API','GitHub API','Webview'],
+ flow:['Set goals, for example { "type": "lines", "every": 100 } and { "type": "github" }.','Add your own https image links with "Get Done: Add Reward Image Link".','Write code. The status bar tracks progress toward each goal.','When one is hit, the reward panel opens beside your editor with the next image.'],
+ limits:'Version 0.1.0, installed from a packaged .vsix for testing and not yet on the Marketplace. The screenshot renders the extension\'s own reward-panel markup in a browser with a sample reward image, since the panel is a plain HTML view; it is not a capture of the editor window. It is open source under the MIT license.',
+ image:'/projects/12-get-done-code-reward.png', imageAlt:'The reward panel: "Goal hit! Reward #1" above a reward image on a dark editor background', imageCaption:'The reward panel, using the extension\'s own markup with a sample image from the Get Done demo.',
+ sources:[{label:'Source repository on GitHub',href:'https://github.com/RoboX2020/get-done-code'},{label:'Get Done, the browser extension it grew from',href:'https://github.com/RoboX2020/get-it-done'}]
+} as ProjectRecord);
