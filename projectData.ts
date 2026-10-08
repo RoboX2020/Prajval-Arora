@@ -104,6 +104,6 @@ PROJECT_LIBRARY.splice(1,0,{
  stack:['TypeScript','VS Code Extension API','GitHub API','Webview'],
  flow:['Set goals, for example { "type": "lines", "every": 100 } and { "type": "github" }.','Add your own https image links with "Get Done: Add Reward Image Link".','Write code. The status bar tracks progress toward each goal.','When one is hit, the reward panel opens beside your editor with the next image.'],
  limits:'Version 0.1.0, installed from a packaged .vsix for testing and not yet on the Marketplace. The screenshot renders the extension\'s own reward-panel markup in a browser with a sample reward image, since the panel is a plain HTML view; it is not a capture of the editor window. It is open source under the MIT license.',
- image:'/projects/12-get-done-code-reward.png', imageAlt:'The reward panel: "Goal hit! Reward #1" above a reward image on a dark editor background', imageCaption:'The reward panel, using the extension\'s own markup with a sample image from the Get Done demo.',
+ image:'/projects/1-12-get-done-code-reward.png', imageAlt:'The reward panel: "Goal hit! Reward #1" above a reward image on a dark editor background', imageCaption:'The reward panel, using the extension\'s own markup with a sample image from the Get Done demo.',
  sources:[{label:'Source repository on GitHub',href:'https://github.com/RoboX2020/get-done-code'},{label:'Get Done, the browser extension it grew from',href:'https://github.com/RoboX2020/get-it-done'}]
 } as ProjectRecord);
