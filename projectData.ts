@@ -131,8 +131,8 @@ PROJECT_LIBRARY.unshift({
       "href": "https://tatwik19.github.io/labs/lab-03-isaac-sim/"
     }
   ],
-  "image": "https://github.com/user-attachments/assets/e1569838-0a38-40c5-a841-cf48bb178c50",
-  "imageAlt": "Isaac Sim screenshot from the co-authored TurtleBot laboratory guide",
-  "imageCaption": "Simulation screenshot from the Lab 3 manual, co-authored with Sai Srinivas Tatwik Meesala.",
+  "image": "https://github.com/user-attachments/assets/99e9b5b6-f4c5-4aa9-a58a-ecba57f7fb9f",
+  "imageAlt": "ROS 2 clock-publishing Action Graph from the co-authored TurtleBot laboratory guide",
+  "imageCaption": "Clock-publishing Action Graph from the Lab 3 manual, co-authored with Sai Srinivas Tatwik Meesala.",
   "note": "Co-authors: Prajval Arora and Sai Srinivas Tatwik Meesala. Instructor: Prof. Sangram Redkar. The full manual is the source for the lab's procedures and submission requirements."
 });
