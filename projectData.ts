@@ -95,3 +95,44 @@ for(const p of PROJECT_LIBRARY){if(extraSources[p.slug])p.sources.push(extraSour
 
 const arms=PROJECT_LIBRARY.find(p=>p.slug==='arms-asu')!;
 arms.gallery=[{src:'/projects/5-arms-mark.png',alt:'A R M S robotics organization mark',caption:'Organization mark included in my public drawing-robot repository. This is branding, not a photo of a completed robot.'}];
+
+// Lab 3: co-authored teaching resource; keep the original manual as the source.
+PROJECT_LIBRARY.unshift({
+  "slug": "isaac-sim-lab-3",
+  "title": "Isaac Sim + ROS 2: TurtleBot Lab",
+  "category": "Robotics simulation × teaching resources",
+  "status": "Co-authored lab guide",
+  "summary": "From a simulated TurtleBot to a ROS 2 robot: movement, sensors and a transform tree that makes sense.",
+  "overview": "I co-authored this RAS 545 Robotics Systems I laboratory guide with Sai Srinivas Tatwik Meesala, for Prof. Sangram Redkar at Arizona State University. Lab 3 takes a prepared TurtleBot 3 Burger stage in NVIDIA Isaac Sim and builds its ROS 2 integration one layer at a time. Each part ends with a validation checkpoint, so students can check the current layer before adding the next.",
+  "features": [
+    "Required Parts A-F: validate the USD stage, publish simulation time, receive velocity commands, add lidar and a camera, and publish odometry and TF.",
+    "Action Graph connection tables, ROS 2 diagnostic commands and troubleshooting checks alongside the procedures.",
+    "Checkpoint saves, screenshots, a lab report and a demonstration video make the expected evidence explicit.",
+    "Optional Parts G-J extend the lab into QoS, AMCL localization, Nav2 goal navigation and final diagnostics."
+  ],
+  "stack": [
+    "NVIDIA Isaac Sim",
+    "TurtleBot 3 Burger",
+    "ROS 2 Humble",
+    "OmniGraph",
+    "RViz2",
+    "Nav2"
+  ],
+  "flow": [
+    "Start with the supplied robot stage and verify its physics before connecting ROS 2.",
+    "Publish /clock, then connect /cmd_vel through differential-wheel control.",
+    "Add lidar and camera publishers, then build the odometry and TF chain.",
+    "Validate each required checkpoint. Continue to AMCL and Nav2 only for the optional extension."
+  ],
+  "limits": "This page presents our co-authored teaching material, not a claim of sole authorship, a deployed autonomous robot or measured navigation performance. The manual remains hosted on Tatwik's site. Localization and Nav2 are supplementary, not part of the required A-F submission.",
+  "sources": [
+    {
+      "label": "Read the full Lab 3 manual · Tatwik Meesala's site",
+      "href": "https://tatwik19.github.io/labs/lab-03-isaac-sim/"
+    }
+  ],
+  "image": "https://github.com/user-attachments/assets/e1569838-0a38-40c5-a841-cf48bb178c50",
+  "imageAlt": "Isaac Sim screenshot from the co-authored TurtleBot laboratory guide",
+  "imageCaption": "Simulation screenshot from the Lab 3 manual, co-authored with Sai Srinivas Tatwik Meesala.",
+  "note": "Co-authors: Prajval Arora and Sai Srinivas Tatwik Meesala. Instructor: Prof. Sangram Redkar. The full manual is the source for the lab's procedures and submission requirements."
+});
