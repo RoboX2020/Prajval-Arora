@@ -51,7 +51,7 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
 
       {open && (
         <div
-          className="fixed inset-0 z-[80] overflow-y-auto bg-[#1c1814]/92 p-4"
+          className="fixed inset-0 z-[80] overflow-y-auto bg-[#1c1814]/95 p-4"
           onClick={() => setOpen(false)}
           role="presentation"
         >
@@ -69,7 +69,7 @@ export const VersionHistory: React.FC<VersionHistoryProps> = ({ variant = 'ink' 
                   Previous selves of this site
                 </h2>
                 <p className="mt-2 max-w-md text-sm leading-relaxed text-[#b8a894]">
-                  The circuit atlas, the road trip, and the garage remain intact. They are how I used to introduce the work. This page is how I introduce the mind.
+                  The circuit atlas, the road trip, and the garage stay intact. They introduced the work. This page introduces the mind.
                 </p>
               </div>
               <button

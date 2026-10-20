@@ -303,7 +303,7 @@ export const GameLayer: React.FC<GameLayerProps> = ({ onBackToHome }) => {
           <p className="font-nunito text-lg md:text-xl mb-2 max-w-lg text-center text-gray-200">
             You explored <span className="font-bold text-amber-400">{stops.length}</span> milestones across the road of Prajval&apos;s story.
           </p>
-          <p className="font-nunito text-sm mb-8 text-gray-400">The road goes on forever — there&apos;s always more being built.</p>
+          <p className="font-nunito text-sm mb-8 text-gray-400">The road goes on forever. Someone always builds more.</p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={restartGame}
@@ -328,7 +328,7 @@ export const GameLayer: React.FC<GameLayerProps> = ({ onBackToHome }) => {
             <div className="text-5xl mb-3">🚙💨</div>
             <h1 className="font-display text-4xl mb-2 text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">My Journey</h1>
             <p className="text-gray-600 mb-6 font-nunito">
-              Drive through the life of Prajval Arora — from RC cars to AI robotics.
+              Drive through the life of Prajval Arora, from RC cars to AI robotics.
             </p>
 
             {/* Quick stats */}
