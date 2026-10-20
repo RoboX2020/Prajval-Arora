@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * Joint lattice — a pixel field that commissions itself around the cursor.
+ * Joint lattice. A pixel field that commissions itself around the cursor.
  * Not a photo mosaic: cells snap into joints, traces, and rings where fields meet.
  */
 export const JointLattice: React.FC = () => {
@@ -106,7 +106,7 @@ export const JointLattice: React.FC = () => {
         }
       }
 
-      // Orthogonal traces from cursor — joints, not a photo wall
+      // Orthogonal traces from cursor. Joints, not a photo wall.
       ctx.strokeStyle = 'rgba(196, 163, 90, 0.28)';
       ctx.lineWidth = 2;
       ctx.beginPath();

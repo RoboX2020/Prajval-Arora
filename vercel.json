@@ -2,12 +2,27 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "functions": {
-    "api/aurelium.ts": {
-      "maxDuration": 60
-    }
-  },
   "rewrites": [
-    { "source": "/((?!assets/|api/).*)", "destination": "/index.html" }
+    { "source": "/projects/bittle", "destination": "/projects/bittle/index.html" },
+    { "source": "/projects/bittle/", "destination": "/projects/bittle/index.html" },
+    { "source": "/lab-assistant", "destination": "/index.html" },
+    { "source": "/lab-assistant/", "destination": "/index.html" },
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/projects/:path*", "destination": "/index.html" },
+    { "source": "/projects", "destination": "/index.html" },
+    { "source": "/axis", "destination": "/index.html" },
+    { "source": "/axis/", "destination": "/index.html" },
+    { "source": "/playbook", "destination": "/playbook/index.html" },
+    { "source": "/playbook/", "destination": "/playbook/index.html" },
+    { "source": "/v1", "destination": "/index.html" },
+    { "source": "/v1/", "destination": "/index.html" },
+    { "source": "/v1/journey", "destination": "/index.html" },
+    { "source": "/v1/journey/", "destination": "/index.html" },
+    { "source": "/v1/garage", "destination": "/index.html" },
+    { "source": "/v1/garage/", "destination": "/index.html" },
+    { "source": "/get-it-done", "destination": "/index.html" },
+    { "source": "/get-it-done/", "destination": "/index.html" },
+    { "source": "/shop", "destination": "/index.html" },
+    { "source": "/shop/", "destination": "/index.html" }
   ]
 }

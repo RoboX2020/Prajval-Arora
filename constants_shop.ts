@@ -26,7 +26,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_esp_claw',
         title: "ESP-Claw (Espressif)",
-        description: "Open-source PR to Espressif's AI agent framework. Added Arduino support + natural-language hardware control — program hardware by talking to it.",
+        description: "I opened a PR to Espressif's AI agent framework. I added Arduino support and natural-language hardware control. You program hardware by talking to it.",
         price: "Open Source",
         image: "🦾",
         banner: "/banner_robot_3.png",
@@ -37,7 +37,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_air_guitar',
         title: "Air Guitar",
-        description: "Wearable instrument — strum in the air, hear guitar. Accelerometer + Arduino + Karplus-Strong synthesis. 300k+ views, organic repo traction.",
+        description: "I built a wearable instrument. Strum in the air and you hear guitar. Accelerometer, Arduino, Karplus-Strong. 300k+ views. The repo grew on its own.",
         price: "$29",
         image: "🎸",
         banner: "/banner_robot_3.png",
@@ -59,7 +59,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_faith_labs',
         title: "FAITH Labs",
-        description: "Founder. Built robotics labs in Kanpur schools — procured kits, designed curriculum, taught 200+ students. Led a team to 1st Regionals / 10th Nationals.",
+        description: "I founded labs. I procured kits, designed curriculum, and taught 200+ students in Kanpur schools. I led a team to 1st Regionals and 10th Nationals.",
         price: "Education",
         image: "🔬",
         banner: "/banner_robot_3.png",
@@ -89,7 +89,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_bot_champ',
         title: "Intl. Robotics Champ",
-        description: "1st National + Most Budget-Efficient award at the International Robotics Championship — omni-directional arm robot built on a $100 budget. 10th Intl.",
+        description: "I took 1st National and Most Budget-Efficient at the International Robotics Championship. I built an omni-directional arm robot on a $100 budget and placed 10th internationally.",
         price: "Award",
         image: "🏆",
         banner: "/banner_robot_3.png",
@@ -118,7 +118,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     },
     {
         id: 's_shark_technic',
-        title: "Shark Technic — Best Pitch",
+        title: "Shark Technic. Best Pitch",
         description: "1st place, Best Startup Pitch at ASU's Shark Technic Challenge. Also reached Round 2 of the Masters Union CEO Challenge.",
         price: "Award",
         image: "🦈",
@@ -140,7 +140,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_air_piano',
         title: "Air Piano",
-        description: "Computer vision project — maps hand position to piano keys, turning any flat surface into a keyboard using only a camera.",
+        description: "I map hand position to piano keys with computer vision. Any flat surface becomes a keyboard. You only need a camera.",
         price: "Open Source",
         image: "🎹",
         banner: "/banner_code_4.png",
@@ -150,7 +150,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_air_mouse',
         title: "Air Mouse",
-        description: "Wearable mouse interface — control your digital world with hand movements via a camera.",
+        description: "I built a wearable mouse. You control the digital world with hand movements and a camera.",
         price: "Prototype",
         image: "🖱️",
         banner: "/banner_robot_3.png",
@@ -190,7 +190,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_spider',
         title: "AI Hardware Link",
-        description: "Controlling a spider robot directly with an LLM — natural-language commands drive complex multi-leg movement.",
+        description: "I control a spider robot with an LLM. Natural-language commands drive complex multi-leg movement.",
         price: "Prototype",
         image: "🕷️",
         banner: "/banner_tech_1.png",
@@ -200,7 +200,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_celia',
         title: "Celia Life",
-        description: "AI health prediction — records medical status and surfaces potential disease risks for doctors.",
+        description: "I record medical status and surface potential disease risks for doctors.",
         price: "HealthTech",
         image: "🧬",
         banner: "/banner_social_2.png",
@@ -210,7 +210,7 @@ export const SHOP_ITEMS: ShopItem[] = [
     {
         id: 's_kalki',
         title: "Kalki App",
-        description: "Social activism platform — raise voices against bad societal norms and gather support.",
+        description: "I built a platform where people raise voices against bad societal norms and gather support.",
         price: "Non-Profit",
         image: "🔥",
         banner: "/banner_social_2.png",

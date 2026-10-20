@@ -1,12 +1,15 @@
+import { LabAssistantPage } from './components/LabAssistantPage';
+import { ProjectsPage, ProjectPage } from './components/ProjectLibrary';
+import { AxisPage } from './components/AxisPage';
+import { GetItDonePage } from './components/GetItDonePage';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { OriginPage } from './components/OriginPage';
-import { AureliumPage } from './components/aurelium/AureliumPage';
-import { ChatPage } from './components/aurelium/chat/ChatPage';
 import { HomePage } from './components/HomePage';
 import { GameLayer } from './components/GameLayer';
 import { ShopPage } from './components/ShopPage';
 import { SiteHeader } from './components/SiteHeader';
+import { NotFoundPage } from './components/NotFoundPage';
 import { audioService } from './services/audioService';
 
 const CircuitArchive: React.FC = () => {
@@ -46,7 +49,7 @@ const App: React.FC = () => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const interactive = target.closest('button, a, [role="button"]');
-      if (interactive && !window.location.pathname.startsWith('/aurelium')) {
+      if (interactive) {
         audioService.playClickSound();
       }
     };
@@ -55,7 +58,6 @@ const App: React.FC = () => {
       const target = e.target as HTMLElement;
       const interactive = target.closest('button, a, [role="button"]');
 
-      if (window.location.pathname.startsWith('/aurelium')) return;
       if (interactive && e.relatedTarget) {
         const related = e.relatedTarget as HTMLElement;
         if (!interactive.contains(related)) {
@@ -80,13 +82,16 @@ const App: React.FC = () => {
       <div className="w-full min-h-full">
         <Routes>
           <Route path="/" element={<OriginPage />} />
+          <Route path="/lab-assistant" element={<LabAssistantPage />} />
+          <Route path="/axis" element={<AxisPage />} />
+          <Route path="/get-it-done" element={<GetItDonePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/v1" element={<CircuitArchive />} />
           <Route path="/v1/journey" element={<JourneyArchive />} />
           <Route path="/v1/garage" element={<GarageArchive />} />
           <Route path="/shop" element={<Navigate to="/v1/garage" replace />} />
-          <Route path="/aurelium" element={<ChatPage />} />
-          <Route path="/aurelium/concept" element={<AureliumPage />} />
-          <Route path="/aurelium/assess" element={<Navigate to="/aurelium" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </BrowserRouter>

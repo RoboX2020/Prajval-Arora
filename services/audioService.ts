@@ -3,7 +3,7 @@ class AudioService {
   private muted: boolean = false;
   private noiseBuffer: AudioBuffer | null = null;
 
-  // Master bus — everything routes through here so muting is instant & global.
+  // Master bus. Everything routes through here so muting is instant and global.
   private masterGain: GainNode | null = null;
 
   // Continuous engine (Hill-Climb-style putter that revs with speed)
@@ -222,9 +222,9 @@ class AudioService {
 
     const t = ctx.currentTime;
 
-    // 1. The sharp high "click" (click-jacket snapping) — Cherry MX Blue character
+    // 1. The sharp high "click" (click-jacket snapping). Cherry MX Blue character
     this.burst(ctx, t, { type: 'bandpass', freq: 2600, q: 1.1, gain: 0.5, duration: 0.012 });
-    // 2. The "clack" — keycap plastic edge
+    // 2. The "clack". Keycap plastic edge
     this.burst(ctx, t + 0.001, { type: 'highpass', freq: 1500, q: 0.7, gain: 0.22, duration: 0.02 });
     // 3. Bottom-out "thock" body
     this.thock(ctx, t + 0.002, 180, 0.5);
