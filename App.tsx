@@ -1,4 +1,5 @@
 import { LabAssistantPage } from './components/LabAssistantPage';
+import { ContributionsPage } from './components/ContributionsPage';
 import { ProjectsPage, ProjectPage } from './components/ProjectLibrary';
 import { AxisPage } from './components/AxisPage';
 import { GetItDonePage } from './components/GetItDonePage';
@@ -83,6 +84,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<OriginPage />} />
           <Route path="/lab-assistant" element={<LabAssistantPage />} />
+          <Route path="/contributions" element={<ContributionsPage />} />
           <Route path="/axis" element={<AxisPage />} />
           <Route path="/get-it-done" element={<GetItDonePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
