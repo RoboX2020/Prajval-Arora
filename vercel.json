@@ -5,6 +5,8 @@
   "rewrites": [
     { "source": "/projects/bittle", "destination": "/projects/bittle/index.html" },
     { "source": "/projects/bittle/", "destination": "/projects/bittle/index.html" },
+    { "source": "/contributions", "destination": "/index.html" },
+    { "source": "/contributions/", "destination": "/index.html" },
     { "source": "/lab-assistant", "destination": "/index.html" },
     { "source": "/lab-assistant/", "destination": "/index.html" },
     { "source": "/", "destination": "/index.html" },
