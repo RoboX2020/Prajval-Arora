@@ -7,6 +7,13 @@
     <title>Prajval Arora. Independent thought, interdisciplinary build</title>
     <meta name="description" content="Prajval Arora: robotics, automation, community, and work that only exists where fields collide. Arizona State University, Robotics and Autonomous Systems." />
     <meta name="google-site-verification" content="1aStwzjeDzQ3IaRf2zHYvf-ETdD4odrcVdpWuug2Kps" />
+    <script>
+      try {
+        if (localStorage.getItem('site-theme') === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) { /* private mode: default dark */ }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -205,6 +212,48 @@
         80% { clip: rect(24px, 9999px, 86px, 0); }
         100% { clip: rect(42px, 9999px, 18px, 0); }
       }
+    
+      /* Light theme: remap of the shared dark palette, toggled by html.light.
+         Only the main site palette is remapped; self-themed sections
+         (aurelium, games, archives) keep their own look. */
+      html.light body { background-color: #faf7f2; color: #2a2118; }
+      html.light .bg-\[\#1c1814\] { background-color: #faf7f2; }
+      html.light .bg-\[\#1c1814\]\/95 { background-color: rgb(250 247 242 / 0.95); }
+      html.light .bg-\[\#241c16\] { background-color: #ffffff; }
+      html.light .bg-\[\#241c16\]\/50 { background-color: rgb(255 255 255 / 0.5); }
+      html.light .bg-\[\#241c16\]\/60 { background-color: rgb(255 255 255 / 0.6); }
+      html.light .bg-\[\#241c16\]\/70 { background-color: rgb(255 255 255 / 0.7); }
+      html.light .bg-\[\#241c16\]\/80 { background-color: rgb(255 255 255 / 0.8); }
+      html.light .bg-\[\#14120f\] { background-color: #f1eae0; }
+      html.light .bg-\[\#211b16\] { background-color: #f1eae0; }
+      html.light .bg-\[\#c4a35a\]\/10 { background-color: rgb(168 121 32 / 0.08); }
+      html.light .border-\[\#3d3228\] { border-color: #e2d7c3; }
+      html.light .border-\[\#3d3228\]\/70 { border-color: rgb(226 215 195 / 0.7); }
+      html.light .border-\[\#5a4a32\] { border-color: #d8cbb2; }
+      html.light .border-\[\#665139\] { border-color: #d8cbb2; }
+      html.light .border-\[\#d4b87a\] { border-color: #a87920; }
+      html.light .border-\[\#c4a35a\]\/40 { border-color: rgb(168 121 32 / 0.4); }
+      html.light .border-\[\#c4a35a\]\/50 { border-color: rgb(168 121 32 / 0.5); }
+      html.light .border-\[\#c4a35a\]\/60 { border-color: rgb(168 121 32 / 0.6); }
+      html.light .divide-\[\#3d3228\] > :not([hidden]) ~ :not([hidden]) { border-color: #e2d7c3; }
+      html.light .text-\[\#e6d9c4\] { color: #2a2118; }
+      html.light .text-\[\#f0e6d4\] { color: #1c1814; }
+      html.light .text-\[\#d8cbb6\] { color: #54483a; }
+      html.light .text-\[\#c4b49a\] { color: #54483a; }
+      html.light .text-\[\#b8a894\] { color: #6d5f4b; }
+      html.light .text-\[\#9a8a76\] { color: #84765f; }
+      html.light .text-\[\#8a7a68\] { color: #84765f; }
+      html.light .text-\[\#d4b87a\] { color: #a87920; }
+      html.light .hover\:text-\[\#d4b87a\]:hover { color: #a87920; }
+      html.light .hover\:text-\[\#f0e6d4\]:hover { color: #1c1814; }
+      html.light .hover\:border-\[\#d4b87a\]:hover { border-color: #a87920; }
+      html.light .hover\:border-\[\#c4a35a\]\/50:hover { border-color: rgb(168 121 32 / 0.5); }
+      html.light .hover\:border-\[\#c4a35a\]\/60:hover { border-color: rgb(168 121 32 / 0.6); }
+      html.light .hover\:border-\[\#8a714c\]:hover { border-color: #a87920; }
+      html.light .hover\:bg-\[\#1c1814\]:hover { background-color: #f1eae0; }
+      html.light .hover\:bg-\[\#282018\]:hover { background-color: #e9e1d2; }
+      html.light .outline-\[\#d4b87a\] { outline-color: #a87920; }
+      html.light .decoration-\[\#c4a35a\]\/80 { text-decoration-color: rgb(168 121 32 / 0.8); }
     </style>
   <script type="importmap">
 {
