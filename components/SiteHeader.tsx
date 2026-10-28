@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { PERSON } from '../content';
 import { VersionHistory } from './VersionHistory';
+import { ThemeToggle } from './ThemeToggle';
 
 export type HeaderNavItem = { href: string; label: string };
 
@@ -64,6 +65,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
               Current site
             </Link>
           )}
+          <ThemeToggle />
           <VersionHistory />
           {home && nav && (
             <button
