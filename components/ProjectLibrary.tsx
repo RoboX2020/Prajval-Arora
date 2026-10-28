@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 import { PROJECT_LIBRARY, ProjectRecord } from '../projectData';
 import { COLLISIONS } from '../content';
 import { NotFoundPage } from './NotFoundPage';
 const label='font-mono text-[10px] uppercase tracking-[0.2em] text-[#d4b87a]';
-function Header(){return <header className="border-b border-[#3d3228] bg-[#241c16]"><div className="mx-auto flex site-shell items-center justify-between px-5 py-4"><Link to="/" className="font-display text-lg text-[#f0e6d4]">Prajval<span className="text-[#d4b87a]">.</span></Link><Link to="/projects" className={`${label} flex items-center gap-2`}><ArrowLeft size={14}/> Project library</Link></div></header>}
+function Header(){return <header className="border-b border-[#3d3228] bg-[#241c16]"><div className="mx-auto flex site-shell items-center justify-between px-5 py-4"><Link to="/" className="font-display text-lg text-[#f0e6d4]">Prajval<span className="text-[#d4b87a]">.</span></Link><span className="flex items-center gap-3"><Link to="/projects" className={`${label} flex items-center gap-2`}><ArrowLeft size={14}/> Project library</Link><ThemeToggle/></span></div></header>}
 function useTitle(title:string){useEffect(()=>{let old=document.title;document.title=title+' · Prajval Arora';window.scrollTo(0,0);return()=>{document.title=old}},[title])}
 function ProjectVideo({video}:{video:{src:string;poster:string;caption:string}}){return <><img loading="lazy" src={video.src.replace('.mp4','.gif')} alt={video.caption} className="max-h-[640px] w-full border border-[#3d3228] object-contain"/><a href={video.src} download className="mt-3 inline-block font-mono text-[10px] uppercase tracking-wider text-[#d4b87a]">Download original clip ↗</a></>}
 function cardMedia(p:ProjectRecord){
