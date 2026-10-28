@@ -9,10 +9,10 @@
     <meta name="google-site-verification" content="1aStwzjeDzQ3IaRf2zHYvf-ETdD4odrcVdpWuug2Kps" />
     <script>
       try {
-        if (localStorage.getItem('site-theme') === 'light') {
+        if (localStorage.getItem('site-theme') !== 'dark') {
           document.documentElement.classList.add('light');
         }
-      } catch (e) { /* private mode: default dark */ }
+      } catch (e) { document.documentElement.classList.add('light'); }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
