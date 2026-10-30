@@ -26,6 +26,259 @@ import { VersionHistory } from './VersionHistory';
 
 
 
+
+// Same facts at every level for the Collisions cards, keyed by card id.
+// Field tags, titles and stats stay fixed; the hack-play one-liner carries
+// a Latin phrase and is exempt like the poetic captions. Types are loose
+// here because content.ts owns the card shape.
+const COLLISION_TEXT: Record<string, { result?: WordVariants; body: WordVariants }> = {
+  axis: {
+    result: [
+      'One sky. Two pilot views.',
+      'One shared sky, two cockpit views.',
+      'One shared airspace. Two cockpit perspectives.',
+      'One shared airspace. Two cockpit perspectives.',
+      'A shared airspace rendered from two cockpit perspectives.',
+      'A shared airspace rendered from two distinct cockpit perspectives.',
+    ],
+    body: [
+      'A hackathon team project: pretend planes that might hit each other, advice to climb or descend, a 3D map of flight paths, and pilot views you open with a QR code. It works in a browser. It is a demo, not a real flight-safety system.',
+      'A hackathon team prototype: simulated plane conflicts, climb/descend advice, a 3D path explorer, and QR-linked cockpit views. A working browser demo - not a certified flight-safety system.',
+      'A hackathon team prototype: simulated aircraft conflicts, climb/descend advisories, a 3D trajectory explorer and QR-linked cockpit views. A working browser demo, not a certified flight-safety system.',
+      'A hackathon team prototype: simulated aircraft conflicts, climb/descend advisories, a 3D trajectory explorer and QR-linked cockpit views. A working browser demo, not a certified flight-safety system.',
+      'A hackathon team prototype simulating aircraft conflicts, with climb/descend advisories, a 3D trajectory explorer, and QR-linked cockpit views; a functional browser demo rather than a certified flight-safety system.',
+      'A hackathon team prototype simulating aircraft conflicts, comprising climb/descend advisories, a three-dimensional trajectory explorer, and QR-linked cockpit views; a functional browser demonstration rather than a certified flight-safety system.',
+    ],
+  },
+  barrow: {
+    result: [
+      'A wearable that listens, sees, and helps people talk.',
+      'A wearable that listens, sees, and coaches speech.',
+      'A wearable that listens, sees, and coaches speech in the clinic.',
+      'A wearable that listens, sees, and coaches speech in the clinic.',
+      'A wearable that perceives and coaches speech within the clinic.',
+      'A wearable apparatus that perceives and coaches speech within a clinical setting.',
+    ],
+    body: [
+      "At Barrow Institute: a small computer runs the AI on the device itself, two cameras see depth, and a little display shows tips. It helps people who struggle to find words practice sounds, and it can describe the world out loud. Built with Dr. Catherine's research team. The clinic is testing it now, and it may become a company.",
+      "At Barrow Institute: a Jetson Nano runs AI on the device, a stereo camera sees, and an AR display coaches. People with aphasia get pronunciation help; people with apraxia hear their surroundings narrated. Built with Dr. Catherine's research team. The clinic is testing it, moving toward a company.",
+      "At Barrow Institute: a Jetson Nano with local LLM inference, a stereo camera, and a birdbath AR display. Aphasia patients get pronunciation guidance. Apraxia patients hear a continuous narration of their surroundings. Built with Dr. Catherine's research team. The clinic tests it now, moving toward an LLC.",
+      "At Barrow Institute: a Jetson Nano with local LLM inference, a stereo camera, and a birdbath AR display. Aphasia patients get pronunciation guidance. Apraxia patients hear a continuous narration of their surroundings. Built with Dr. Catherine's research team. The clinic tests it now, moving toward an LLC.",
+      "At Barrow Institute: local LLM inference on a Jetson Nano, stereo vision, and a birdbath AR display provide pronunciation guidance for aphasia patients and continuous environmental narration for apraxia patients. Developed with Dr. Catherine's research team; clinical evaluation is underway, with incorporation planned.",
+      "At Barrow Institute: local large-language-model inference on a Jetson Nano, stereo vision, and a birdbath AR display furnish pronunciation guidance for patients with aphasia and continuous environmental narration for patients with apraxia. Developed in collaboration with Dr. Catherine's research team; clinical evaluation is underway, with incorporation anticipated.",
+    ],
+  },
+  stellantis: {
+    result: [
+      'A real robot line and its computer twin, built for Detroit.',
+      'A physical line and its digital twin, commissioned for Detroit.',
+      'A physical line and its twin, commissioned for Detroit.',
+      'A physical line and its twin, commissioned for Detroit.',
+      'A physical line and its digital twin, commissioned for Detroit.',
+      'A physical production line and its digital twin, commissioned for Detroit.',
+    ],
+    body: [
+      'ASU and a company called Wandelbots asked for a robot demo. Two URSe robot arms, grippers, cameras that see, networking, practice in a simulator, and getting it all running live.',
+      'ASU and Wandelbots asked for a demonstrator: two URSe cobot arms, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
+      'ASU and Wandelbots asked for a demonstrator. Dual URSe cobots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
+      'ASU and Wandelbots asked for a demonstrator. Dual URSe cobots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
+      'ASU and Wandelbots commissioned a demonstrator comprising dual URSe cobots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
+      'ASU and Wandelbots commissioned a demonstrator comprising dual URSe collaborative robots, end-effectors, machine vision, cell networking, Isaac Sim validation, and live commissioning.',
+    ],
+  },
+  line: {
+    result: [
+      'Robot arms, PLCs, conveyors, cameras, and air - working together.',
+      'UR5, UR3, JAKA, Dobot, FANUC thinking, PLCs, conveyors, vision, air.',
+      'UR5, UR3, JAKA, Dobot, FANUC thinking, PLCs, conveyors, vision, air.',
+      'UR5, UR3, JAKA, Dobot, FANUC thinking, PLCs, conveyors, vision, air.',
+      'UR5, UR3, JAKA, Dobot, FANUC methodologies, PLCs, conveyors, vision, and pneumatics.',
+      'UR5, UR3, JAKA, Dobot, and FANUC methodologies with PLCs, conveyors, machine vision, and pneumatics.',
+    ],
+    body: [
+      'A small copy of a factory for a showcase: big and small robot arms working together, PLC logic, factory networking, warehouse steps, and safety rules. It is tiny, but it really has to run.',
+      'An Innovation Showcase cell with big and small robot arms in coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety. A factory in miniature that still has to run.',
+      'An Innovation Showcase cell with 6-DOF and 4-DOF coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety. A factory in miniature that still has to run.',
+      'An Innovation Showcase cell with 6-DOF and 4-DOF coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety. A factory in miniature that still has to run.',
+      'An Innovation Showcase cell featuring 6-DOF and 4-DOF coordination, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety - a factory in miniature that must nevertheless operate.',
+      'An Innovation Showcase cell featuring coordinated 6-DOF and 4-DOF manipulators, structured PLC logic, Ethernet/IP, warehouse workflows, and robot-cell safety - a factory in miniature that must nevertheless operate.',
+    ],
+  },
+  go2: {
+    result: [
+      'Teach the dog in a computer first. Then argue with physics.',
+      'Train the dog in a twin, then argue with physics.',
+      'Train the dog in a twin, then argue with physics.',
+      'Train the dog in a twin, then argue with physics.',
+      'Train the quadruped in its twin, then negotiate with physics.',
+      'Train the quadruped within its digital twin, then negotiate with physics.',
+    ],
+    body: [
+      "I train a Unitree robot dog inside NVIDIA's simulator first. It learns there. Then the real dog has to do it in the real world, where physics pushes back.",
+      'ROS 2, Isaac Sim, and Omniverse for the Unitree Go2. Reinforcement learning and digital twins first; physics when the real dog moves.',
+      'ROS 2, Isaac Sim, and Omniverse workflows for Unitree Go2. Reinforcement learning and digital twins first. Physics when the animal actually moves.',
+      'ROS 2, Isaac Sim, and Omniverse workflows for Unitree Go2. Reinforcement learning and digital twins first. Physics when the animal actually moves.',
+      'ROS 2, Isaac Sim, and Omniverse workflows for the Unitree Go2: reinforcement learning and digital twins first, physical dynamics once the platform actually moves.',
+      'ROS 2, Isaac Sim, and Omniverse workflows for the Unitree Go2 platform: reinforcement learning and digital twins precede the physical dynamics encountered once the platform is in motion.',
+    ],
+  },
+  honeywell: {
+    result: [
+      'Cool the engine with its own air. Then design the factory that builds the part.',
+      'Bleed air as a coolant. Then the factory that would make the exchanger.',
+      'Bleed air as a coolant. Then the factory that would make the exchanger.',
+      'Bleed air as a coolant. Then the factory that would make the exchanger.',
+      'Bleed air employed as a coolant; subsequently, the factory that would manufacture the exchanger.',
+      'Bleed air employed as a coolant; subsequently, the production facility that would manufacture the exchanger.',
+    ],
+    body: [
+      '2025: second place and $5,000 for cooling jet engines with their own exhaust air. 2026: third place and $2,500 for machines that build engine cooling parts. One year the science. The next year the factory.',
+      '2025: 2nd place and $5,000 for cooling jet engines with bleed-air exhaust. 2026: 3rd place and $2,500 for automated manufacturing of engine heat-exchange systems. Thermodynamics one year, production the next.',
+      '2025: 2nd place and $5,000, cooling jet engines with bleed-air exhaust. 2026: 3rd place and $2,500, automated manufacturing for engine heat-exchange systems. Thermodynamics one year. Production the next.',
+      '2025: 2nd place and $5,000, cooling jet engines with bleed-air exhaust. 2026: 3rd place and $2,500, automated manufacturing for engine heat-exchange systems. Thermodynamics one year. Production the next.',
+      '2025: second place and $5,000 for cooling jet engines with bleed-air exhaust; 2026: third place and $2,500 for automated manufacturing of engine heat-exchange systems. Thermodynamics one year, production the next.',
+      'In 2025, second place and $5,000 for cooling jet engines with bleed-air exhaust; in 2026, third place and $2,500 for automated manufacturing of engine heat-exchange systems - thermodynamics one year, production the next.',
+    ],
+  },
+  'hack-play': {
+    // The result line carries a Latin phrase and is exempt like the captions.
+    body: [
+      'Honeywell was not a one-time sprint. That season of playing built the winning team - and the photo of me peace-signing in a hall. Having fun got the thermodynamics done.',
+      'Honeywell was not a lone sprint. That season of play produced the winning team and the face that still peace-signs in a hall. Fun finished the thermodynamics.',
+      'Honeywell was not a lone sprint. That season of play produced the winning team and the face that still peace-signs in a hall. Fun finished the thermodynamics.',
+      'Honeywell was not a lone sprint. That season of play produced the winning team and the face that still peace-signs in a hall. Fun finished the thermodynamics.',
+      'Honeywell was no solitary sprint: that season of play produced the winning team and the face that still peace-signs in a hall. Fun completed the thermodynamics.',
+      'Honeywell was no solitary sprint: that season of play yielded the winning team and the countenance that still peace-signs in a hall. Fun completed the thermodynamics.',
+    ],
+  },
+  riverside: {
+    result: [
+      'Put the heat where a river already carries it away.',
+      'Put the heat where a river already knows how to carry it.',
+      'Put the heat where a river already knows how to carry it.',
+      'Put the heat where a river already knows how to carry it.',
+      'Site the heat where a river already conveys it.',
+      'Site the heat where a river already conveys it.',
+    ],
+    body: [
+      'My own research: cool data centers with dam water that already carries heat away. TKS and Microsoft gave a $2,500 grant, and I wrote papers and gave talks about it.',
+      'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Spoken at Cronkite.',
+      'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Spoken at Cronkite.',
+      'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Spoken at Cronkite.',
+      'Independent research on dam-based cooling for sustainable data centers, supported by TKS and Microsoft with a $2,500 grant and subsequent publications; presented at Cronkite.',
+      'Independent research on dam-based cooling for sustainable data centers, supported by TKS and Microsoft through a $2,500 grant and subsequent publications, and presented at Cronkite.',
+    ],
+  },
+  'air-guitar': {
+    result: [
+      'No strings. No frets. A wrist, a motion sensor, and real sound.',
+      'No strings. No frets. A wrist, an accelerometer, Karplus-Strong.',
+      'No strings. No frets. A wrist, an accelerometer, Karplus-Strong.',
+      'No strings. No frets. A wrist, an accelerometer, Karplus-Strong.',
+      'No strings, no frets: a wrist, an accelerometer, and Karplus-Strong synthesis.',
+      'No strings, no frets: a wrist, an accelerometer, and Karplus-Strong synthesis.',
+    ],
+    body: [
+      'A guitar with no strings: a wrist band with an Arduino and a motion sensor makes real sound as you strum the air. 300,000 people watched it on Instagram. The free code grew with no ads.',
+      'A wearable instrument with an Arduino, motion sensing, and a real-time sound engine. 300,000 Instagram views; the open-source repo grew with no campaign.',
+      'A wearable instrument with Arduino, inertial sensing, and a real-time sound engine. 300,000 Instagram views. The open-source repo grew with no campaign.',
+      'A wearable instrument with Arduino, inertial sensing, and a real-time sound engine. 300,000 Instagram views. The open-source repo grew with no campaign.',
+      'A wearable instrument built on Arduino, inertial sensing, and a real-time sound engine; 300,000 Instagram views, and an open-source repository that grew without promotion.',
+      'A wearable instrument constructed on Arduino with inertial sensing and a real-time sound engine; it garnered 300,000 Instagram views, and its open-source repository grew absent any campaign.',
+    ],
+  },
+  faith: {
+    result: [
+      'The schools had no labs. Then 200 students could build.',
+      'The schools had no labs. Then 200 students could build.',
+      'The schools had no labs. Then 200 students could build.',
+      'The schools had no labs. Then 200 students could build.',
+      'The schools had no laboratories; subsequently, 200 students could build.',
+      'The schools had no laboratories; subsequently, 200 students could build.',
+    ],
+    body: [
+      'I started robot labs in schools in Kanpur that had none - kits, lessons, and teaching. My teams won 1st in the region and 10th in the country, and our $100 robot beat $1,000 machines.',
+      'Founded robotics labs in Kanpur schools: kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
+      'Founded robotics labs in Kanpur schools. Kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
+      'Founded robotics labs in Kanpur schools. Kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
+      'Established robotics laboratories in Kanpur schools, providing kits, curriculum, and instruction; coached teams to first place regionally and tenth nationally at the International Robotics Championship, including a $100 omnidirectional robot that defeated $1,000 machines.',
+      'Established robotics laboratories in Kanpur schools, furnishing kits, curriculum, and instruction; coached teams to first place regionally and tenth nationally at the International Robotics Championship, including a $100 omnidirectional robot that defeated machines costing $1,000.',
+    ],
+  },
+  tapri: {
+    result: [
+      'A tea stall for people who make things. ASU now charters it.',
+      'A tea stall for people who make things. ASU now charters it.',
+      'A tea stall for people who make things. ASU now charters it.',
+      'A tea stall for people who make things. ASU now charters it.',
+      'A tea stall for people who make things, now chartered by ASU.',
+      'A tea stall for people who make things, now chartered by ASU.',
+    ],
+    body: [
+      'I started Tapri, a club for people who build things, and I run it. 22,000 people reached, 2,200 members, more than 40 ventures. Its hackathons had over 5,000 people. The old platform is saved in the archive. Now it is an official club at ASU with Professor Aram Chavez.',
+      'Founded Tapri and preside over it. 22,000 people, 2,200 members, 40+ ventures, and hackathons with 5,000+ combined participants. The original GoTapri platform is preserved in the archive; restarted as a chartered ASU club with Prof. Aram Chavez.',
+      'Founded Tapri. Preside. 22,000 people, 2,200 members, and 40+ ventures (Ideacode, FlexFund, STEMverse). External hackathons with 5,000+ combined participants. The original GoTapri platform is preserved in the project archive. Restarted as a chartered club at ASU with Prof. Aram Chavez.',
+      'Founded Tapri. Preside. 22,000 people, 2,200 members, and 40+ ventures (Ideacode, FlexFund, STEMverse). External hackathons with 5,000+ combined participants. The original GoTapri platform is preserved in the project archive. Restarted as a chartered club at ASU with Prof. Aram Chavez.',
+      'Founded Tapri and currently preside: 22,000 people reached, 2,200 members, and over 40 ventures (Ideacode, FlexFund, STEMverse), with external hackathons exceeding 5,000 combined participants. The original GoTapri platform is preserved in the project archive; the club has been re-established as a chartered ASU organization with Prof. Aram Chavez.',
+      'Founded Tapri and currently preside: 22,000 individuals reached, 2,200 members, and in excess of 40 ventures (Ideacode, FlexFund, STEMverse), with external hackathons exceeding 5,000 combined participants. The original GoTapri platform is preserved in the project archive; the organization has been re-established as a chartered ASU club under Prof. Aram Chavez.',
+    ],
+  },
+  espclaw: {
+    result: [
+      'Talk to hardware the AI agent could not reach before.',
+      "Talk to hardware that Espressif's agent could not reach.",
+      "Talk to hardware that Espressif's agent could not reach.",
+      "Talk to hardware that Espressif's agent could not reach.",
+      "Address hardware that Espressif's agent could not previously reach.",
+      "Address hardware that Espressif's agent could not previously reach.",
+    ],
+    body: [
+      "I added code to Espressif's AI agent so it can talk to Arduino boards it could not reach before. Now people can program hardware just by speaking.",
+      "A PR to Espressif's ESP-Claw AI agent framework: Arduino support the agent could not reach, plus natural-language control so people program hardware by speaking.",
+      "A PR to Espressif's ESP-Claw AI agent framework. Arduino support the agent could not reach, plus natural-language control so people program hardware by speaking.",
+      "A PR to Espressif's ESP-Claw AI agent framework. Arduino support the agent could not reach, plus natural-language control so people program hardware by speaking.",
+      "A pull request to Espressif's ESP-Claw AI agent framework, adding previously unsupported Arduino targets and natural-language control so hardware can be programmed by speech.",
+      "A pull request to Espressif's ESP-Claw AI agent framework, contributing previously unsupported Arduino targets alongside natural-language control such that hardware may be programmed through speech.",
+    ],
+  },
+  champ: {
+    result: [
+      'First in the country, cheapest build, tenth in the world.',
+      'First nationally, most budget-efficient, tenth in the world.',
+      'First nationally, most budget-efficient, tenth in the world.',
+      'First nationally, most budget-efficient, tenth in the world.',
+      'First nationally, most budget-efficient, tenth internationally.',
+      'First nationally, most budget-efficient, tenth internationally.',
+    ],
+    body: [
+      'A robot that rolls in any direction, with an arm, and its own Wi-Fi - you drive it from any phone. Built for $100 against teams with thousands.',
+      'An omnidirectional robot with a mounted arm and its own local Wi-Fi server - drive it from any phone. Built on $100 against four-figure budgets.',
+      'An omnidirectional robot with a mounted arm and its own local Wi-Fi server. Drive it from any phone. Built on $100 against four-figure budgets.',
+      'An omnidirectional robot with a mounted arm and its own local Wi-Fi server. Drive it from any phone. Built on $100 against four-figure budgets.',
+      'An omnidirectional robot with a mounted arm and an onboard local Wi-Fi server, drivable from any phone, constructed for $100 against four-figure budgets.',
+      'An omnidirectional robot with a mounted arm and an onboard local Wi-Fi server, operable from any telephone, constructed for $100 against four-figure budgets.',
+    ],
+  },
+  arms: {
+    result: [
+      'Treasurer, marketing head, and software lead. Plus a $10k payload project.',
+      'Treasurer, marketing head, and software lead. Also a $10k payload conversation.',
+      'Treasurer, marketing head, and software lead. Also a $10k payload conversation.',
+      'Treasurer, marketing head, and software lead. Also a $10k payload conversation.',
+      'Treasurer, marketing head, and software lead; additionally, a $10k payload engagement.',
+      'Treasurer, marketing head, and software lead; additionally, a $10k payload engagement.',
+    ],
+    body: [
+      'I handle money, marketing, and software for a flight club at ASU. We are working on a payload project with a drone company under a $10,000 budget, and I build a plane, a boat, and a fast little car with the Drone Devils.',
+      'Software and operations for MSN-affiliated projects. Phoenix Drone LLC on a payload system under a $10,000 budget. Engineering with Drone Devils on a plane, a boat, and an FPV car.',
+      'Software and operations for MSN-affiliated projects. Phoenix Drone LLC on a payload system under a $10,000 budget. Engineering with Drone Devils on a plane, a boat, and an FPV car.',
+      'Software and operations for MSN-affiliated projects. Phoenix Drone LLC on a payload system under a $10,000 budget. Engineering with Drone Devils on a plane, a boat, and an FPV car.',
+      'Software and operations for MSN-affiliated projects, including a payload system with Phoenix Drone LLC under a $10,000 budget, and engineering with Drone Devils across a plane, a boat, and an FPV car.',
+      'Software and operations for MSN-affiliated projects, encompassing a payload system with Phoenix Drone LLC under a $10,000 budget and engineering with Drone Devils across a plane, a boat, and an FPV car.',
+    ],
+  },
+};
+
 // Same facts at every level for the Practice roles, keyed by role title.
 // Titles, places and dates stay fixed; the AMASS poetic caption is exempt.
 const PRACTICE_BODIES: Record<string, WordVariants> = {
@@ -356,8 +609,15 @@ export const OriginPage: React.FC = () => {
         <section id="collisions" className="border-t border-[#3d3228] bg-[#241c16]/50 py-24">
           <div className="mx-auto site-shell px-5">
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Collisions</p>
-            <h2 className="mt-3 max-w-3xl font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-              Work that only exists when two fields share a room.
+            <h2 className="mt-3 max-w-3xl font-display font-wordy text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
+              <Words v={[
+                'Projects that mix two different things.',
+                'Work that only happens when two fields meet.',
+                'Work that only exists when two fields share a room.',
+                'Work that exists only where two fields meet.',
+                'Work realizable only at the conjunction of two fields.',
+                'Work realizable exclusively at the conjunction of two distinct fields.',
+              ]} />
             </h2>
 
             <div className="mt-16 space-y-10">
@@ -368,8 +628,8 @@ export const OriginPage: React.FC = () => {
                     {c.stat ? ` · ${c.stat}` : ''}
                   </p>
                   <h3 className="mt-3 font-display text-3xl text-[#f0e6d4] md:text-4xl">{c.title}</h3>
-                  <p className="mt-3 text-base italic text-[#c4b49a]">{c.result}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6]">{c.body}</p>
+                  <p className="mt-3 text-base italic text-[#c4b49a]"><Words v={COLLISION_TEXT[c.id]?.result ?? [c.result,c.result,c.result,c.result,c.result,c.result]} /></p>
+                  <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6] font-wordy"><Words v={COLLISION_TEXT[c.id].body} /></p>
                   {c.link && (
                     <a
                       href={c.link}
@@ -395,8 +655,8 @@ export const OriginPage: React.FC = () => {
                     {c.stat && <span className="ml-auto text-[#8a7a68]">{c.stat}</span>}
                   </div>
                   <h3 className="mt-4 font-display text-3xl text-[#f0e6d4]">{c.title}</h3>
-                  <p className="mt-2 text-base italic text-[#c4b49a]">{c.result}</p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-[#b8a894]">{c.body}</p>
+                  <p className="mt-2 text-base italic text-[#c4b49a]"><Words v={COLLISION_TEXT[c.id]?.result ?? [c.result,c.result,c.result,c.result,c.result,c.result]} /></p>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-[#b8a894] font-wordy"><Words v={COLLISION_TEXT[c.id].body} /></p>
                   {c.link && (
                     <a
                       href={c.link}
