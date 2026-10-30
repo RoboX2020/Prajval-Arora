@@ -25,6 +25,36 @@ import { VersionHistory } from './VersionHistory';
 
 
 
+
+// Same facts at every level for the Practice roles, keyed by role title.
+// Titles, places and dates stay fixed; the AMASS poetic caption is exempt.
+const PRACTICE_BODIES: Record<string, WordVariants> = {
+  'Robotics Software and Electronics Lead': [
+    'I was in charge of the robot brain and electronics for a blimp that flies and spots things by itself. Cameras, a Jetson computer, wires, and control code - all one system.',
+    'I led the software and electronics for a self-flying blimp that spots objects: ROS 2, cameras, a Jetson computer, and control code in one stack.',
+    'I led ROS 2, embedded electronics, computer vision, and perception for an autonomous blimp that detects objects in flight - sensors, Jetson compute, electrical hardware, and control software in one stack.',
+    'Led ROS 2, embedded electronics, computer vision, and perception for an autonomous blimp that detects objects in flight. Sensors, Jetson compute, electrical hardware, and control software in one stack.',
+    'Led ROS 2, embedded electronics, computer vision, and perception for an autonomous lighter-than-air platform performing in-flight object detection; sensors, Jetson compute, electrical hardware, and control software formed one integrated stack.',
+    'Leadership of ROS 2, embedded electronics, computer vision, and perception for an autonomous lighter-than-air platform performing in-flight object detection; sensors, Jetson compute, electrical hardware, and control software constituted a single integrated stack.',
+  ],
+  'AR Assistant Developer': [
+    'I helped build a device that helps people practice talking. A small computer runs the AI on the device itself, two cameras see depth, and the clinic is testing it now.',
+    'An AR speech-therapy device: local AI on a Jetson Nano, stereo cameras, an AR display, and speech-guidance software. The clinic is testing it now.',
+    'AR speech-therapy device: local LLM inference on a Jetson Nano, stereo vision, a birdbath AR display, and speech-guidance pipelines - hardware, camera calibration, and C++/Python prototypes. The clinic tests it now.',
+    'AR speech-therapy device: Jetson Nano local LLM inference, stereo vision, a birdbath AR display, and speech-guidance pipelines. Hardware, camera calibration, and C++/Python prototypes. The clinic tests it now.',
+    'AR speech-therapy device encompassing local LLM inference on a Jetson Nano, stereo vision, a birdbath AR display, and speech-guidance pipelines; responsibilities spanned hardware, camera calibration, and C++/Python prototypes. Clinical evaluation is underway.',
+    'An augmented-reality speech-therapy device comprising local large-language-model inference on a Jetson Nano, stereo vision, a birdbath AR display, and speech-guidance pipelines; responsibilities spanned hardware, camera calibration, and C++/Python prototypes. Clinical evaluation is presently underway.',
+  ],
+  'Head of Research and Development': [
+    'I ran the building team: robots, internet-connected gadgets, computer designs, 3D printing, putting electronics together, and coaching student teams for competitions.',
+    'Led R&D: robotics, IoT, CAD and SolidWorks prototypes, 3D printing, electronics assembly, and mentoring student teams for competitions.',
+    'Robotics, IoT, CAD and SolidWorks prototyping, 3D printing, electronics assembly, and student-team mentoring for competitions.',
+    'Robotics, IoT, CAD and SolidWorks prototyping, 3D printing, electronics assembly, and student-team mentoring for competitions.',
+    'Robotics, IoT, CAD and SolidWorks prototyping, 3D printing, electronics assembly, and mentorship of student competition teams.',
+    'Robotics, Internet-of-Things development, CAD and SolidWorks prototyping, additive manufacturing, electronics assembly, and mentorship of student competition teams.',
+  ],
+};
+
 // Same facts at every level for the "Now" job bullets, keyed by the exact
 // bullet text in content.ts. Job titles, places and dates stay fixed.
 const NOW_POINTS: Record<string, WordVariants> = {
@@ -416,13 +446,20 @@ export const OriginPage: React.FC = () => {
 
         <section id="practice" className="mx-auto site-shell space-y-24 px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Practice</p>
-          <h2 className="font-display text-4xl text-[#f0e6d4]">Hands on the work</h2>
+          <h2 className="font-display font-wordy text-4xl text-[#f0e6d4]"><Words v={[
+            'My jobs so far',
+            'The work so far',
+            'Hands on the work',
+            'Hands on the work',
+            'Applied practice',
+            'Documented professional practice',
+          ]} /></h2>
 
           <Spread media={FRAMES.airport}>
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#d4b87a]">{PRACTICE[0].when}</p>
             <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">{PRACTICE[0].title}</h3>
             <p className="text-sm text-[#d4b87a]">{PRACTICE[0].place}</p>
-            <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6]">{PRACTICE[0].body}</p>
+            <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6] font-wordy"><Words v={PRACTICE_BODIES[PRACTICE[0].title]} /></p>
           </Spread>
 
           {PRACTICE.slice(1).map((job) => (
@@ -431,7 +468,7 @@ export const OriginPage: React.FC = () => {
               <div className="md:col-span-9">
                 <h3 className="font-display text-2xl text-[#f0e6d4]">{job.title}</h3>
                 <p className="text-sm text-[#d4b87a]">{job.place}</p>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#b8a894]">{job.body}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#b8a894] font-wordy"><Words v={PRACTICE_BODIES[job.title]} /></p>
               </div>
             </article>
           ))}
