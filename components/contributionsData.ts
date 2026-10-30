@@ -14,6 +14,24 @@ export interface Contribution {
 
 export const CONTRIBUTIONS: Contribution[] = [
   {
+    repo: 'Z3Prover/z3', repoUrl: 'https://github.com/Z3Prover/z3', pr: 11468,
+    url: 'https://github.com/Z3Prover/z3/pull/11468',
+    title: 'Fix null model crash in pd-maxres',
+    merged: 'Oct 30, 2026', shot: 'Z3Prover-z3-11468.png',
+    problem: 'With Z3’s pd-maxres MaxSMT engine and its linear relaxation turned off, the SAT solver can report satisfiable without producing a model. The engine then dereferenced that missing model and crashed with a segmentation fault, even on a single soft constraint.',
+    fix: 'Fall back to the best cached assignment when no fresh model exists, matching how the rest of the file already handles missing models; when nothing is cached either, the existing empty-result path applies.',
+    changes: '6 lines changed in src/opt/maxcore.cpp. Verified the crash on the original code, then the fix, across all four engine/relaxation configurations, plus synthetic and randomized MaxSMT problems.',
+  },
+  {
+    repo: 'Z3Prover/z3', repoUrl: 'https://github.com/Z3Prover/z3', pr: 11469,
+    url: 'https://github.com/Z3Prover/z3/pull/11469',
+    title: 'Commit relaxation-seeded optima in pd-maxres',
+    merged: 'Oct 30, 2026', shot: 'Z3Prover-z3-11469.png',
+    problem: 'With Z3’s pd-maxres MaxSMT engine, the linear relaxation can hand the solver an assignment that already attains the proven lower bound before its correction loop runs. The solver stopped without recording that result as an optimum, so nothing was pinned when later priorities were optimized, and reported optima came out too small (0 instead of 3 in the reporter’s case).',
+    fix: 'When the bounds meet, the current assignment is provably optimal. I record it as a feasible optimum at the loop exit, the same way the loop’s own early-exit branch does, so the soft literals get pinned and later priorities respect this objective’s optimum.',
+    changes: '7 lines added in src/opt/maxcore.cpp. Verified against the default engine on the reporter’s case plus synthetic and randomized MaxSMT problems in every engine/relaxation configuration.',
+  },
+  {
     repo: 'robotology/yarp', repoUrl: 'https://github.com/robotology/yarp', pr: 3401,
     url: 'https://github.com/robotology/yarp/pull/3401',
     title: 'Fix Thrift code generation for nested map values',
