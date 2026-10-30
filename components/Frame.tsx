@@ -81,7 +81,7 @@ export const Spread: React.FC<{
   children: React.ReactNode;
 }> = ({ media, reverse, children }) => {
   return (
-    <div className="grid overflow-hidden rounded-2xl border border-[#3d3228] md:grid-cols-12 md:items-start">
+    <div className="grid overflow-hidden rounded-2xl border border-[#3d3228] md:grid-cols-12 md:items-stretch">
       <div className={`md:col-span-5 md:self-start ${reverse ? 'md:order-2' : ''}`}>
         <Frame media={media} natural />
       </div>
