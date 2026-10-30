@@ -40,7 +40,7 @@ export const GetItDonePage: React.FC = () => {
           <h1 className="mt-5 font-display text-[clamp(3.5rem,10vw,7rem)] leading-none tracking-tight text-[#f0e6d4]">Get Done</h1>
           <p className="mt-5 font-display text-2xl italic text-[#d4b87a] md:text-3xl">Finish a question.<br />Get a picture.</p>
         </div>
-        <div className="flex flex-col justify-end"><p className={body}>A Chrome and Edge extension that turns homework into a small reward loop. Paste a list of image links, one per question, and a side panel flashes the next one each time you finish a problem.</p>
+        <div className="flex flex-col justify-end"><p className={body}>I built this Chrome and Edge extension to get myself through homework. Paste a list of image links, one per question, and a side panel flashes the next one each time you finish a problem.</p>
           <div className="mt-6 flex flex-wrap gap-4"><a className={`${label} inline-flex items-center gap-1 border border-[#d4b87a] px-4 py-3`} href={zip}>Download ZIP <ArrowUpRight size={14} /></a><a className={`${label} inline-flex items-center gap-1 px-1 py-3`} href={repo} target="_blank" rel="noreferrer">Source on GitHub <ArrowUpRight size={14} /></a></div>
         </div>
       </section>
