@@ -3,6 +3,8 @@ import { ContributionsPage } from './components/ContributionsPage';
 import { ProjectsPage, ProjectPage } from './components/ProjectLibrary';
 import { AxisPage } from './components/AxisPage';
 import { GetItDonePage } from './components/GetItDonePage';
+import { WorkWithMePage } from './components/WorkWithMePage';
+import { SkillsPage } from './components/SkillsPage';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { OriginPage } from './components/OriginPage';
@@ -86,6 +88,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<OriginPage />} />
           <Route path="/lab-assistant" element={<LabAssistantPage />} />
+          <Route path="/work-with-me" element={<WorkWithMePage />} />
+          <Route path="/skills" element={<SkillsPage />} />
           <Route path="/contributions" element={<ContributionsPage />} />
           <Route path="/axis" element={<AxisPage />} />
           <Route path="/get-it-done" element={<GetItDonePage />} />

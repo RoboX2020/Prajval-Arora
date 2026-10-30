@@ -636,6 +636,7 @@ export const OriginPage: React.FC = () => {
               ]} />
             </p>
           </Spread>
+            <a href="/skills" className="mt-6 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Everything I can do ↗</a>
         </section>
 
         <section id="now" className="mx-auto site-shell px-5 pb-24">
@@ -652,6 +653,7 @@ export const OriginPage: React.FC = () => {
                 'Simulation, technician training, and a Stellantis cell within a single season - ancillary pursuits that declined, ultimately, to remain ancillary.',
               ]} />
             </p>
+            <a href="/work-with-me" className="mt-6 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Work with me ↗</a>
           </Spread>
           <div className="mt-10 space-y-10">
             <Spread media={FRAMES.blimp}>
