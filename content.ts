@@ -21,7 +21,7 @@ export const PERSON = {
     school: 'Arizona State University',
     degree: 'B.S.E. Robotics and Autonomous Systems Engineering',
     when: 'Expected 2029',
-    extra: 'Harvard Certificate of Internship and Entrepreneurship, Summer 2025',
+    extra: 'Harvard Undergraduate Ventures-TECH Summer Program (HUVTSP), Summer 2025',
   },
 };
 
@@ -275,7 +275,7 @@ export const COLLISIONS: Collision[] = [
     fields: ['Climate', 'Compute'],
     title: 'Riverside data centers',
     result: 'Put the heat where a river already knows how to carry it.',
-    body: 'Solo research on dam-based cooling for sustainable data centers. TKS and Microsoft: a $2,500 grant, then papers on the same problem. Spoken at Cronkite.',
+    body: 'Solo research on dam-based cooling for sustainable data centers. A $2,500 Microsoft Research grant, then papers on the same problem. Spoken at Cronkite.',
     stat: '$2,500 Microsoft grant',
     photo: FRAMES.stage,
     link: '/projects/riverside-data-centers',
@@ -294,7 +294,7 @@ export const COLLISIONS: Collision[] = [
     fields: ['Education', 'Robotics'],
     title: 'FAITH Labs',
     result: 'The schools had no labs. Then 200 students could build.',
-    body: 'Founded robotics labs in Kanpur schools. Kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship, including a $100 omni-robot that beat $1,000 machines.',
+    body: 'Founded robotics labs in Kanpur schools. Kits, curriculum, teaching. Coached teams to 1st regional and 10th national at the International Robotics Championship.',
     stat: '200+ students',
     link: '/projects/faith-labs',
   },
@@ -319,9 +319,9 @@ export const COLLISIONS: Collision[] = [
     id: 'champ',
     fields: ['Constraint', 'Mechanics'],
     title: 'International Robotics Championship',
-    result: 'First nationally, most budget-efficient, tenth in the world.',
-    body: 'An omnidirectional robot with a mounted arm and its own local Wi-Fi server. Drive it from any phone. Built on $100 against four-figure budgets.',
-    stat: '1st national · $100',
+    result: 'First regionally, tenth nationally.',
+    body: 'An omnidirectional robot with a mounted arm and its own local Wi-Fi server. Drive it from any phone.',
+    stat: '1st regional · 10th national',
     link: '/projects/robotics-championship',
   },
   {
@@ -373,11 +373,11 @@ export const RECOGNITION = [
   { title: 'Honeywell Hackathon 2025', detail: '2nd place · $5,000 · jet cooling via bleed air' },
   { title: 'Honeywell Hackathon 2026', detail: '3rd place · $2,500 · automated heat-exchanger manufacturing' },
   { title: 'Microsoft Research grant', detail: '$2,500 · dam-based data-center cooling' },
-  { title: 'International Robotics Championship', detail: '1st national, most budget-efficient, 10th international' },
+  { title: 'International Robotics Championship', detail: '1st regional · 10th national' },
   { title: 'Shark Technic, ASU', detail: '1st · best startup pitch' },
   { title: 'Masters Union CEO Challenge', detail: 'Round 2' },
   { title: 'BrainOBrain', detail: 'State topper' },
-  { title: 'Harvard', detail: 'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast' },
+  { title: 'HUVTSP', detail: 'Harvard Undergraduate Ventures-TECH Summer Program · Summer 2025' },
 ];
 
 export const PHOTOS = {
