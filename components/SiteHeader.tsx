@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { PERSON } from '../content';
 import { VersionHistory } from './VersionHistory';
+import { IntensitySlider } from './IntensitySlider';
 import { ThemeToggle } from './ThemeToggle';
 
 export type HeaderNavItem = { href: string; label: string };
@@ -80,6 +81,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ nav, archiveLabel }) => 
           )}
         </div>
       </div>
+
+      <IntensitySlider />
 
       {menuOpen && home && nav && (
         <div

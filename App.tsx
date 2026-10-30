@@ -12,6 +12,7 @@ import { ShopPage } from './components/ShopPage';
 import { SiteHeader } from './components/SiteHeader';
 import { NotFoundPage } from './components/NotFoundPage';
 import { audioService } from './services/audioService';
+import { IntensityProvider } from './intensity';
 
 const CircuitArchive: React.FC = () => {
   const [view, setView] = React.useState<'home' | 'game'>('home');
@@ -80,6 +81,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+      <IntensityProvider>
       <div className="w-full min-h-full">
         <Routes>
           <Route path="/" element={<OriginPage />} />
@@ -96,6 +98,7 @@ const App: React.FC = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
+      </IntensityProvider>
     </BrowserRouter>
   );
 };

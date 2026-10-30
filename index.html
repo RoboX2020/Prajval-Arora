@@ -17,7 +17,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700&family=Comic+Neue:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
       html, body, #root {
         min-height: 100%;
@@ -41,6 +41,37 @@
       }
       .font-nunito {
         font-family: 'Nunito', sans-serif;
+      }
+      .font-wordy {
+        font-family: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', 'Segoe Print', cursive;
+        font-weight: 700;
+      }
+      .word-intensity-range {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 150px;
+        height: 2px;
+        background: repeating-linear-gradient(to right, #5a4a32 0 24px, transparent 24px 28px);
+        background-color: #3d3228;
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+      }
+      .word-intensity-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #d4a24a;
+        border: 2px solid #f0e6d4;
+      }
+      .word-intensity-range::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #d4a24a;
+        border: 2px solid #f0e6d4;
       }
 
       .origin-root {

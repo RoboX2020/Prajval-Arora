@@ -16,6 +16,7 @@ import {
   FRAMES,
 } from '../content';
 import { SiteHeader } from './SiteHeader';
+import { Words } from '../intensity';
 import { JointLattice } from './JointLattice';
 import { PixelSprites } from './PixelSprites';
 import { Spread } from './Frame';
@@ -60,11 +61,25 @@ export const OriginPage: React.FC = () => {
               <br />
               Arora
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#d8cbb6] md:text-xl">
-              Connecting branches that never shared a table, then making the thing that only lives there. You do not hire creativity. It arrives with independent thought.
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#d8cbb6] md:text-xl font-wordy">
+              <Words v={[
+                'I take ideas from different places and put them together. Then I build something new. You cannot buy ideas. They show up when you think for yourself.',
+                'I mix fields that never met before, then build the thing that only works where they meet. You cannot hire creativity. It shows up when you think for yourself.',
+                "I connect fields that never shared a table, then build the thing that can only exist there. You can't hire creativity - it arrives with independent thought.",
+                'My work connects disciplines that rarely interact, and builds what becomes possible only at that intersection. Creativity is not something you hire; it arrives with independent thought.',
+                'I operate across disciplines that seldom intersect, engineering systems realizable only at that junction. Creativity cannot be procured; it is a byproduct of independent thought.',
+                'This practice integrates disparate domains that have historically lacked points of contact, yielding artifacts realizable exclusively at their intersection. Creativity, construed as an emergent property of independent cognition, resists commodification.',
+              ]} />
             </p>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894]">
-              Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar count as the same problem: invent the missing joint.
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894] font-wordy">
+              <Words v={[
+                "I study robots at Arizona State University. A factory, a doctor's office, a classroom, and a guitar look like the same puzzle to me: find the missing piece that joins things.",
+                'I study robotics at Arizona State University. A factory cell, a clinic, a classroom, and a guitar are the same problem to me: invent the missing joint.',
+                'I study Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar count as the same problem: invent the missing joint.',
+                'I study Robotics and Autonomous Systems at Arizona State University, and I treat a factory cell, a clinic, a classroom, and a guitar as one shared problem: invent the missing joint.',
+                'I study Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar reduce to a common problem class: the synthesis of the missing joint.',
+                'As a student of Robotics and Autonomous Systems at Arizona State University, I frame the factory cell, the clinic, the classroom, and the guitar as isomorphic instances of a single problem: the invention of the missing joint.',
+              ]} />
             </p>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
             <p className="mt-2 font-display text-2xl leading-tight text-[#f0e6d4]">{PERSON.role}</p>
@@ -109,10 +124,24 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.sky} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">A reading</p>
             <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-              How to read me, whether you hire, collaborate, or already drink tea with me.
+              <Words v={[
+                'How to read me - if you want to hire me, build with me, or already share tea with me.',
+                'How to read me, whether you want to hire me, work with me, or already drink tea with me.',
+                'How to read me, whether you hire, collaborate, or already drink tea with me.',
+                'How to read me, whether you are hiring, collaborating, or already a friend over tea.',
+                'How to read this work, whether you arrive as an employer, a collaborator, or a friend.',
+                'A guide to interpreting this work, addressed equally to prospective employers, collaborators, and friends.',
+              ]} />
             </h2>
-            <p className="mt-5 text-sm leading-relaxed text-[#b8a894]">
-              The photograph looks up. The work does too. Follow the frame that matches why you came.
+            <p className="mt-5 text-sm leading-relaxed text-[#b8a894] font-wordy">
+              <Words v={[
+                'The photo looks up. My work looks up too. Pick the part below that matches why you came.',
+                'The photo looks up. The work does too. Follow the card that matches why you came.',
+                'The photograph looks up. The work does too. Follow the frame that matches why you came.',
+                'The photograph looks up, and so does the work. Follow the frame that matches your reason for visiting.',
+                'The photograph gazes upward, as does the work. Proceed via the frame corresponding to your intent.',
+                'The photograph is oriented upward, mirroring the trajectory of the work; the reader is invited to select the interpretive frame corresponding to their purpose.',
+              ]} />
             </p>
           </Spread>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
@@ -129,8 +158,15 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.walk}>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Friends first</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">The walk, not the pitch.</h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6]">
-              If you already know me, this is the grocery-bag version. Skip the resume voice. Open Version history for the older sites.
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6] font-wordy">
+              <Words v={[
+                'Already know me? This is the grocery-bag version - no resume talk. Old versions of the site live in Version history.',
+                'If you already know me, this is the grocery-bag version. Skip the resume voice. Older sites live in Version history.',
+                'If you already know me, this is the grocery-bag version. Skip the resume voice. Open Version history for the older sites.',
+                'If you already know me, what follows is the grocery-bag version - the resume voice stays off. Earlier sites remain in Version history.',
+                'For those already acquainted: what follows is the informal register. The resume voice is suspended; prior iterations reside in Version history.',
+                'For existing acquaintances, the ensuing account adopts the informal register; the resume voice is suspended, and antecedent iterations of this site remain accessible under Version history.',
+              ]} />
             </p>
           </Spread>
         </section>
