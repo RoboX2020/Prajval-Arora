@@ -19,7 +19,7 @@ import { SiteHeader } from './SiteHeader';
 import { Words, WordVariants } from '../intensity';
 import { JointLattice } from './JointLattice';
 import { PixelSprites } from './PixelSprites';
-import { Frame, Spread } from './Frame';
+import { Spread } from './Frame';
 import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
 
@@ -389,13 +389,13 @@ const NOW_POINTS: Record<string, WordVariants> = {
     'Teaching assistant for Prof. Sangram Redkar\'s TSMC PLC and automation training cohorts (Fall 2026): hands-on instruction across PLCs, HMI, pneumatics, and circuits.',
     'Teaching assistantship within Prof. Sangram Redkar\'s TSMC PLC and automation training cohorts (Fall 2026), providing hands-on instruction across programmable logic controllers, human-machine interfaces, pneumatics, and electrical circuits.',
   ],
-  'TA for RAS 545 Robotics Systems I - co-authored the Isaac Sim lab guides the course runs on.': [
-    'I am also a TA for RAS 545, a robotics course. I co-wrote the Isaac Sim lab guides its students follow.',
-    'TA for RAS 545 Robotics Systems I - I co-wrote the Isaac Sim lab guides its students work through.',
-    'TA for RAS 545 Robotics Systems I - co-authored the Isaac Sim lab guides the course runs on.',
-    'TA for RAS 545 Robotics Systems I - co-authored the Isaac Sim lab guides the course runs on.',
-    'Teaching assistant for RAS 545 Robotics Systems I; co-author of the Isaac Sim laboratory guides used by the course.',
-    'Teaching assistantship for RAS 545 Robotics Systems I, including co-authorship of the NVIDIA Isaac Sim laboratory guides upon which the course instruction runs.',
+  "TA for RAS 545 Robotics Systems I - co-author of the course's Isaac Sim lab guides.": [
+    'I am also a TA for RAS 545, a robotics course. I co-wrote its Isaac Sim lab guides.',
+    "TA for RAS 545 Robotics Systems I - I co-wrote the course's Isaac Sim lab guides.",
+    "TA for RAS 545 Robotics Systems I - co-author of the course's Isaac Sim lab guides.",
+    "TA for RAS 545 Robotics Systems I - co-author of the course's Isaac Sim lab guides.",
+    "Teaching assistant for RAS 545 Robotics Systems I; co-author of the course's Isaac Sim laboratory guides.",
+    "Teaching assistantship for RAS 545 Robotics Systems I, encompassing co-authorship of the course's NVIDIA Isaac Sim laboratory guides.",
   ],
   'Program Allen-Bradley PLCs and HMI for lab builds, including a wafer-handling training cell with Dobot robots and conveyors.': [
     'I program Allen-Bradley PLCs and touch screens for lab builds - one is a training cell that moves practice wafers with Dobot robot arms and conveyor belts.',
@@ -722,9 +722,8 @@ export const OriginPage: React.FC = () => {
             <a href="/work-with-me" className="mt-8 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Work with me ↗</a>
           </Spread>
           <div className="mt-10 space-y-10">
-            <div className="overflow-hidden rounded-2xl border border-[#3d3228]">
-              <Frame media={FRAMES.blimp} natural />
-              <div className="grid gap-10 bg-[#241c16] px-6 py-8 md:grid-cols-3 md:px-10 md:py-12">
+            <Spread media={FRAMES.blimp}>
+              <div className="space-y-8">
                 {NOW.map((job) => (
                   <article key={job.title}>
                     <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">{job.when}</p>
@@ -741,7 +740,7 @@ export const OriginPage: React.FC = () => {
                   </article>
                 ))}
               </div>
-            </div>
+            </Spread>
           </div>
         </section>
 
