@@ -279,6 +279,76 @@ const COLLISION_TEXT: Record<string, { result?: WordVariants; body: WordVariants
   },
 };
 
+
+// Same facts at every level for the Recognition rows. Award names stay
+// fixed; only the detail text adapts.
+const RECOGNITION_DETAIL: Record<string, WordVariants> = {
+  'Honeywell Hackathon 2025': [
+    '2nd place · $5,000 · cooling jets with their own air',
+    '2nd place · $5,000 · jet cooling via bleed air',
+    '2nd place · $5,000 · jet cooling via bleed air',
+    '2nd place · $5,000 · jet cooling via bleed air',
+    '2nd place · $5,000 · jet cooling via bleed-air exhaust',
+    'Second place · $5,000 · jet cooling via bleed-air exhaust',
+  ],
+  'Honeywell Hackathon 2026': [
+    '3rd place · $2,500 · machines that build engine cooling parts',
+    '3rd place · $2,500 · automated heat-exchanger manufacturing',
+    '3rd place · $2,500 · automated heat-exchanger manufacturing',
+    '3rd place · $2,500 · automated heat-exchanger manufacturing',
+    '3rd place · $2,500 · automated heat-exchanger manufacturing',
+    'Third place · $2,500 · automated heat-exchanger manufacturing',
+  ],
+  'Microsoft Research grant': [
+    '$2,500 · cooling data centers with dam water',
+    '$2,500 · dam-based data-center cooling',
+    '$2,500 · dam-based data-center cooling',
+    '$2,500 · dam-based data-center cooling',
+    '$2,500 · dam-based data-center cooling',
+    '$2,500 · dam-based data-center cooling research',
+  ],
+  'International Robotics Championship': [
+    '1st in the country, cheapest build, 10th in the world',
+    '1st national, most budget-efficient, 10th international',
+    '1st national, most budget-efficient, 10th international',
+    '1st national, most budget-efficient, 10th international',
+    '1st national, most budget-efficient, 10th international',
+    'First nationally, most budget-efficient, tenth internationally',
+  ],
+  'Shark Technic, ASU': [
+    '1st · best startup pitch',
+    '1st · best startup pitch',
+    '1st · best startup pitch',
+    '1st · best startup pitch',
+    '1st · best startup pitch',
+    'First place · best startup pitch',
+  ],
+  'Masters Union CEO Challenge': [
+    'Round 2',
+    'Round 2',
+    'Round 2',
+    'Round 2',
+    'Round 2',
+    'Advanced to the second round',
+  ],
+  'BrainOBrain': [
+    'State topper',
+    'State topper',
+    'State topper',
+    'State topper',
+    'State topper',
+    'State topper',
+  ],
+  'Harvard': [
+    'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast',
+    'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast',
+    'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast',
+    'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast',
+    'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast',
+    'Certificate of Internship and Entrepreneurship, 2025 · UV-TECH, VC-backed internship, faculty mentors, Spotify podcast',
+  ],
+};
+
 // Same facts at every level for the Practice roles, keyed by role title.
 // Titles, places and dates stay fixed; the AMASS poetic caption is exempt.
 const PRACTICE_BODIES: Record<string, WordVariants> = {
@@ -739,7 +809,14 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Offstage</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">Play is not a footnote.</h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6]">
-              Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.
+              <Words v={{
+                1: 'Bollywood, live news on the wall, arms open. The same person who sets up robot lines also acts. Thinking for yourself includes joy.',
+                2: 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.',
+                3: 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.',
+                4: 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.',
+                5: 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.',
+                6: 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.',
+              }} />
             </p>
           </Spread>
         </section>
@@ -761,12 +838,21 @@ export const OriginPage: React.FC = () => {
 
         <section className="mx-auto site-shell px-5 py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Proof, not a plea</p>
-          <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">What remains after the work</h2>
+          <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">
+            <Words v={{
+              1: 'What I won',
+              2: 'Proof',
+              3: 'What remains after the work',
+              4: 'What remains after the work',
+              5: 'What remains after the work',
+              6: 'What remains after the work',
+            }} />
+          </h2>
           <ul className="mt-10 divide-y divide-[#3d3228] border-y border-[#3d3228]">
             {RECOGNITION.map((r) => (
               <li key={r.title} className="grid gap-1 py-5 md:grid-cols-12 md:items-baseline">
                 <h3 className="font-display text-xl text-[#f0e6d4] md:col-span-5">{r.title}</h3>
-                <p className="text-sm text-[#b8a894] md:col-span-7">{r.detail}</p>
+                <Words v={(RECOGNITION_DETAIL[r.title] || [r.detail, r.detail, r.detail, r.detail, r.detail, r.detail]) as WordVariants} />
               </li>
             ))}
           </ul>
@@ -779,10 +865,24 @@ export const OriginPage: React.FC = () => {
             <Spread media={FRAMES.blazer}>
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Connect</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
-                Write if you want a mind in the room, not a creative you can procure.
+                <Words v={{
+                  1: 'Write to me if you want to think together.',
+                  2: 'Write if you want a mind in the room, not a vendor.',
+                  3: 'Write if you want a mind in the room, not a creative you can procure.',
+                  4: 'Write if you want a mind in the room, not a creative you can procure.',
+                  5: 'Write if you want a mind in the room, not a creative you can procure.',
+                  6: 'Write if you want a mind in the room, not a creative you can procure.',
+                }} />
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-[#b8a894]">
-                Research, industrial cells, education, and strange prototypes. Friends, skip the formality.
+                <Words v={{
+                  1: 'Research, robot lines, teaching, and weird builds. Friends can just say hi.',
+                  2: 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.',
+                  3: 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.',
+                  4: 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.',
+                  5: 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.',
+                  6: 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.',
+                }} />
               </p>
             </Spread>
 
@@ -790,7 +890,14 @@ export const OriginPage: React.FC = () => {
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">In transit, still the main character</p>
               <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">The public trail</h3>
               <p className="mt-3 text-sm leading-relaxed text-[#b8a894]">
-                Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.
+                <Words v={{
+                  1: 'Write on LinkedIn or GitHub. Or book half an hour on the calendar in Traces.',
+                  2: 'Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.',
+                  3: 'Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.',
+                  4: 'Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.',
+                  5: 'Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.',
+                  6: 'Write on LinkedIn or GitHub. Book thirty minutes on the calendar in Traces.',
+                }} />
               </p>
               <div className="mt-6 grid gap-4">
                 <a href={PERSON.linkedin} target="_blank" rel="noreferrer" className="border border-[#3d3228] bg-[#1c1814] p-5 hover:border-[#c4a35a]/60">
