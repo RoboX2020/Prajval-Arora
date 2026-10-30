@@ -131,12 +131,12 @@ export const OriginPage: React.FC = () => {
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#d8cbb6] md:text-xl font-wordy">
               <Words v={[
-                "Hi, I'm Prajval. I make robots. A robot dog. A robot arm for a factory. A car that drives itself inside a computer. This site shows them.",
-                "I build robots - a robot dog, a factory arm, and a car that drives itself in a simulator. Most of my projects mix two fields that don't usually meet.",
-                "I build robots and the systems around them - a robot dog, an industrial factory cell, a driving simulator. Most of my projects start where two fields meet that usually don't.",
-                'I build robotic systems and the work around them: a robot dog, a commissioned industrial cell, a driving simulator. Most projects begin where two fields that rarely meet overlap.',
-                'I develop robotic systems and their supporting infrastructure: a quadruped platform, an industrial automation cell, and a simulation environment for autonomous driving. Most projects sit at the intersection of two fields that rarely interact.',
-                "The author's work concerns robotic systems and their adjacent infrastructure - a quadruped platform, a commissioned industrial automation cell, and a simulation environment for autonomous driving - with projects characteristically situated at the intersection of domains that infrequently interact.",
+                "Hi, I'm Prajval. I work with robots. I help a robot dog see and move. I make a robot arm work with factory controls. I built a tiny make-believe town inside a computer. This site shows them.",
+                "I work with robots: I help a robot dog see and move, I connect a robot arm to factory controls, and I built a make-believe town in a computer for a hackathon. Most of my projects mix two fields that don't usually meet.",
+                "I work with robots and the systems around them - a robot dog that sees, a robot arm wired into factory controls, a make-believe town running in a browser. Most of my projects start where two fields meet that usually don't.",
+                'I work on robotic systems and their supporting software: a quadruped with camera feedback in the loop, a robot arm integrated with PLC controls, and a browser-based simulation built at a hackathon. Most projects begin where two fields that rarely meet overlap.',
+                'My projects span a quadruped platform with camera feedback in its control loop, a robot arm integrated with a PLC in a staged process, and a browser-based multi-agent simulation. Most sit at the intersection of two fields that rarely interact.',
+                "The author's projects encompass a quadruped platform incorporating camera feedback within its control loop, a robotic manipulator integrated with a programmable logic controller in a staged process, and a browser-based multi-agent simulation; each is characteristically situated at the intersection of domains that infrequently interact.",
               ]} />
             </p>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894] font-wordy">
