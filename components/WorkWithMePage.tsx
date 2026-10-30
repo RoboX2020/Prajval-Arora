@@ -29,7 +29,7 @@ const OPEN_WORK = [
   {
     name: 'Tapri Builder Club',
     kind: 'Club · founded and run by me',
-    body: 'The easiest door in. Tapri is the club I founded and run for people who build things - 2,200 members and 40+ ventures launched through it. If you make things and want a room full of people who do too, start here.',
+    body: 'The easiest door in. Tapri is the club I founded for people who build things - 2,200 members, 40+ ventures, and hackathons with thousands of participants - now chartered at ASU with Prof. Aram Chavez. If you make things and want a room full of people who do too, start here.',
   },
   {
     name: 'FAITH Labs',
