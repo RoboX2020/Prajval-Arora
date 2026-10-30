@@ -17,15 +17,18 @@ function ratioClass(media: FrameMedia) {
   return 'aspect-[3/4]';
 }
 
-export const Frame: React.FC<{ media: FrameMedia; className?: string; fill?: boolean }> = ({
+export const Frame: React.FC<{ media: FrameMedia; className?: string; fill?: boolean; natural?: boolean }> = ({
   media,
   className = '',
   fill = false,
+  natural = false,
 }) => {
   const [videoFailed, setVideoFailed] = useState(false);
   const mediaClass = fill
     ? 'absolute inset-0 h-full w-full object-cover object-center'
-    : `block w-full ${ratioClass(media)} object-cover object-center`;
+    : natural
+      ? 'block w-full h-auto'
+      : `block w-full ${ratioClass(media)} object-cover object-center`;
 
   const overlay = (
     <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] bg-gradient-to-t from-[#1c1814] via-[#1c1814]/80 to-transparent px-4 pb-4 pt-20">
@@ -78,9 +81,9 @@ export const Spread: React.FC<{
   children: React.ReactNode;
 }> = ({ media, reverse, children }) => {
   return (
-    <div className="grid overflow-hidden border border-[#3d3228] md:grid-cols-12 md:items-stretch">
-      <div className={`md:col-span-5 ${reverse ? 'md:order-2' : ''}`}>
-        <Frame media={media} fill />
+    <div className="grid overflow-hidden rounded-2xl border border-[#3d3228] md:grid-cols-12 md:items-start">
+      <div className={`md:col-span-5 md:self-start ${reverse ? 'md:order-2' : ''}`}>
+        <Frame media={media} natural />
       </div>
       <div
         className={`flex flex-col justify-center bg-[#241c16] px-6 py-8 md:col-span-7 md:px-10 md:py-12 ${
