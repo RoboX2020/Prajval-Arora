@@ -24,6 +24,52 @@ import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
 
 
+
+// Same facts at every level for the "Now" job bullets, keyed by the exact
+// bullet text in content.ts. Job titles, places and dates stay fixed.
+const NOW_POINTS: Record<string, WordVariants> = {
+  "Support Prof. Sangram Redkar's TSMC PLC and automation training cohorts through hands-on instruction.": [
+    'I help Professor Sangram Redkar teach factory PLC and automation classes.',
+    "I help Prof. Sangram Redkar teach TSMC's PLC and automation classes, hands-on.",
+    "I support Prof. Sangram Redkar's TSMC PLC and automation training cohorts with hands-on instruction.",
+    "Support Prof. Sangram Redkar's TSMC PLC and automation training cohorts through hands-on instruction.",
+    "Hands-on instructional support for Prof. Sangram Redkar's TSMC PLC and automation training cohorts.",
+    'Provision of hands-on instructional support to the TSMC PLC and automation training cohorts led by Prof. Sangram Redkar.',
+  ],
+  'Allen-Bradley PLCs, HMI, Dobot and conveyor integration, UR programming, color sorting, pneumatics, and circuits.': [
+    'The work: Allen-Bradley PLCs, touch screens, a Dobot robot arm with conveyor belts, UR robots, sorting by color, air-powered parts, and circuits.',
+    'Allen-Bradley PLCs, HMI screens, Dobot arm plus conveyor integration, UR robot programming, color sorting, pneumatics, and circuits.',
+    'Allen-Bradley PLCs, HMI, Dobot and conveyor integration, UR programming, color sorting, pneumatics, and circuits.',
+    'Allen-Bradley PLCs, HMI, Dobot and conveyor integration, UR programming, color sorting, pneumatics, and circuits.',
+    'Allen-Bradley PLCs, HMI, Dobot-conveyor integration, UR programming, color sorting, pneumatics, and circuits.',
+    'Allen-Bradley programmable logic controllers, human-machine interfaces, Dobot and conveyor integration, UR manipulator programming, color sorting, pneumatics, and circuits.',
+  ],
+  'Ongoing Isaac Sim and reinforcement-learning work with a Unitree robot dog.': [
+    "Right now I'm also teaching a Unitree robot dog in NVIDIA's Isaac Sim, using trial-and-error learning.",
+    'Ongoing Isaac Sim and reinforcement-learning work with a Unitree robot dog.',
+    'Ongoing Isaac Sim and reinforcement-learning work with a Unitree robot dog.',
+    'Ongoing Isaac Sim and reinforcement-learning work with a Unitree robot dog.',
+    'Continuing Isaac Sim and reinforcement-learning work on a Unitree quadruped.',
+    'Ongoing work in Isaac Sim and reinforcement learning with a Unitree quadruped platform.',
+  ],
+  'Building a dual-URSe industrial automation cell for the Stellantis Detroit event.': [
+    "I'm building a two-robot factory demo for a Stellantis event in Detroit.",
+    'Building a dual-URSe automation cell for the Stellantis Detroit event.',
+    'Building a dual-URSe industrial automation cell for the Stellantis Detroit event.',
+    'Building a dual-URSe industrial automation cell for the Stellantis Detroit event.',
+    'Construction of a dual-URSe industrial automation cell for the Stellantis Detroit event.',
+    'Development of a dual-URSe industrial automation cell in preparation for the Stellantis Detroit event.',
+  ],
+  'Hardware, end-effectors, machine vision, networking, Isaac Sim twins, and commissioning in one cell.': [
+    'All of it in one setup: hardware, robot grippers, cameras that see, networking, a computer twin in Isaac Sim, and getting it running.',
+    'Hardware, grippers, machine vision, networking, Isaac Sim digital twins, and commissioning - all in one cell.',
+    'Hardware, end-effectors, machine vision, networking, Isaac Sim twins, and commissioning in one cell.',
+    'Hardware, end-effectors, machine vision, networking, Isaac Sim twins, and commissioning in one cell.',
+    'Hardware, end-effectors, machine vision, networking, Isaac Sim digital twins, and commissioning within a single cell.',
+    'Hardware, end-effectors, machine vision, networking, Isaac Sim digital twins, and commissioning within a single integrated cell.',
+  ],
+};
+
 // Same facts at every level for the "Conventional law" cards. The struck
 // law lines stay fixed (they are rhetorical devices, like the captions);
 // only the plain-language answer under each one follows the slider.
@@ -243,8 +289,15 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.quest} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Now</p>
             <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">The live experiments</h2>
-            <p className="mt-4 text-sm text-[#b8a894]">
-              Simulation, technician training, and a Stellantis cell in the same season. Side quests that refused to stay side quests.
+            <p className="mt-4 text-sm text-[#b8a894] font-wordy">
+              <Words v={[
+                'Robot simulations, teaching technicians, and a Stellantis robot demo - all at the same time. The side projects became the main thing.',
+                'Simulation, technician training, and a Stellantis cell in the same season. The side quests stopped being side quests.',
+                'Simulation, technician training, and a Stellantis cell in the same season. Side quests that refused to stay side quests.',
+                'Simulation, technician training, and a Stellantis cell within a single season; the side quests did not remain side quests.',
+                'Simulation, technician training, and a Stellantis cell concurrently; ancillary pursuits that declined to remain ancillary.',
+                'Simulation, technician training, and a Stellantis cell within a single season - ancillary pursuits that declined, ultimately, to remain ancillary.',
+              ]} />
             </p>
           </Spread>
           <div className="mt-10 space-y-10">
@@ -257,8 +310,8 @@ export const OriginPage: React.FC = () => {
                     <p className="text-sm text-[#8a7a68]">{job.place}</p>
                     <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#d8cbb6]">
                       {job.points.map((p) => (
-                        <li key={p} className="border-l border-[#c4a35a]/50 pl-4">
-                          {p}
+                        <li key={p} className="border-l border-[#c4a35a]/50 pl-4 font-wordy">
+                          <Words v={NOW_POINTS[p] ?? [p, p, p, p, p, p]} />
                         </li>
                       ))}
                     </ul>
