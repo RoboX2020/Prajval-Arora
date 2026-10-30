@@ -610,6 +610,14 @@ export const OriginPage: React.FC = () => {
                 'The reader is directed to the entry card corresponding to their intent.',
               ]} />
             </p>
+            <div className="mt-8 divide-y divide-[#3d3228] border-y border-[#3d3228]">
+              {READERS.map((r, i) => (
+                <div key={r.who} className="flex items-baseline gap-4 py-4">
+                  <span className="font-mono text-[11px] text-[#c4a35a]">0{i + 1}</span>
+                  <span className="font-display text-xl text-[#e6d9c4] md:text-2xl">{r.who}</span>
+                </div>
+              ))}
+            </div>
           </Spread>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {READERS.map((r) => (
@@ -625,7 +633,7 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.walk}>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Friends first</p>
             <h2 className="mt-3 font-display font-wordy text-4xl text-[#f0e6d4]">The walk, not the pitch.</h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6] font-wordy">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6] md:text-lg font-wordy">
               <Words v={[
                 'Know me already? This is the short version. Old websites are in Version history.',
                 'If you already know me, this is the short version - no resume talk. Older sites live under Version history.',
@@ -635,15 +643,32 @@ export const OriginPage: React.FC = () => {
                 'For prior acquaintances, the ensuing summary adopts an informal register; antecedent iterations of this site remain accessible under Version history.',
               ]} />
             </p>
+            <dl className="mt-8 divide-y divide-[#3d3228] border-y border-[#3d3228]">
+              <div className="grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:items-baseline">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Study</dt>
+                <dd className="text-base leading-relaxed text-[#e6d9c4]">Robotics and Autonomous Systems at ASU, class of 2029</dd>
+              </div>
+              <div className="grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:items-baseline">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Building</dt>
+                <dd className="text-base leading-relaxed text-[#e6d9c4]">Robot-dog simulation, technician training, and a Stellantis demo cell</dd>
+              </div>
+              <div className="grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:items-baseline">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Old sites</dt>
+                <dd className="text-base leading-relaxed text-[#e6d9c4]">Older versions of this site live under Version history, in the footer</dd>
+              </div>
+              <div className="grid gap-1 py-4 md:grid-cols-[7rem_1fr] md:items-baseline">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">Skills</dt>
+                <dd><a href="/skills" className="inline-flex min-h-11 items-center font-mono text-[11px] uppercase tracking-[0.18em] text-[#d4b87a] hover:text-[#f0e6d4]">Everything I can do ↗</a></dd>
+              </div>
+            </dl>
           </Spread>
-            <a href="/skills" className="mt-6 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Everything I can do ↗</a>
         </section>
 
         <section id="now" className="mx-auto site-shell px-5 pb-24">
           <Spread media={FRAMES.quest} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Now</p>
             <h2 className="mt-2 font-display text-4xl text-[#f0e6d4]">The live experiments</h2>
-            <p className="mt-4 text-sm text-[#b8a894] font-wordy">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-[#b8a894] md:text-lg font-wordy">
               <Words v={[
                 'Robot simulations, teaching technicians, and a Stellantis robot demo - all at the same time. The side projects became the main thing.',
                 'Simulation, technician training, and a Stellantis cell in the same season. The side quests stopped being side quests.',
@@ -653,7 +678,16 @@ export const OriginPage: React.FC = () => {
                 'Simulation, technician training, and a Stellantis cell within a single season - ancillary pursuits that declined, ultimately, to remain ancillary.',
               ]} />
             </p>
-            <a href="/work-with-me" className="mt-6 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Work with me ↗</a>
+            <div className="mt-8 space-y-6">
+              {NOW.map((job) => (
+                <div key={job.title} className="border-l-2 border-[#c4a35a]/60 pl-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a7a68]">{job.when}</p>
+                  <p className="mt-1 font-display text-2xl leading-tight text-[#f0e6d4] md:text-3xl">{job.title}</p>
+                  <p className="mt-1 text-sm text-[#b8a894]">{job.place}</p>
+                </div>
+              ))}
+            </div>
+            <a href="/work-with-me" className="mt-8 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Work with me ↗</a>
           </Spread>
           <div className="mt-10 space-y-10">
             <Spread media={FRAMES.blimp}>
@@ -700,8 +734,8 @@ export const OriginPage: React.FC = () => {
                     {c.stat ? ` · ${c.stat}` : ''}
                   </p>
                   <h3 className="mt-3 font-display text-3xl text-[#f0e6d4] md:text-4xl">{c.title}</h3>
-                  <p className="mt-3 text-base italic text-[#c4b49a]"><Words v={COLLISION_TEXT[c.id]?.result ?? [c.result,c.result,c.result,c.result,c.result,c.result]} /></p>
-                  <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6] font-wordy"><Words v={COLLISION_TEXT[c.id].body} /></p>
+                  <p className="mt-3 font-display text-xl italic text-[#c4b49a] md:text-2xl"><Words v={COLLISION_TEXT[c.id]?.result ?? [c.result,c.result,c.result,c.result,c.result,c.result]} /></p>
+                  <p className="mt-5 text-base leading-relaxed text-[#d8cbb6] md:text-lg font-wordy"><Words v={COLLISION_TEXT[c.id].body} /></p>
                   {c.link && (
                     <a
                       href={c.link}
@@ -789,9 +823,10 @@ export const OriginPage: React.FC = () => {
 
           <Spread media={FRAMES.airport}>
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#d4b87a]">{PRACTICE[0].when}</p>
-            <h3 className="mt-2 font-display text-3xl text-[#f0e6d4]">{PRACTICE[0].title}</h3>
-            <p className="text-sm text-[#d4b87a]">{PRACTICE[0].place}</p>
-            <p className="mt-4 text-sm leading-relaxed text-[#d8cbb6] font-wordy"><Words v={PRACTICE_BODIES[PRACTICE[0].title]} /></p>
+            <h3 className="mt-2 font-display text-4xl leading-tight text-[#f0e6d4]">{PRACTICE[0].title}</h3>
+            <p className="mt-1 text-sm text-[#d4b87a]">{PRACTICE[0].place}</p>
+            <p className="mt-5 font-display text-xl italic text-[#c4b49a]">{PRACTICE[0].latin}</p>
+            <p className="mt-5 text-base leading-relaxed text-[#d8cbb6] md:text-lg font-wordy"><Words v={PRACTICE_BODIES[PRACTICE[0].title]} /></p>
           </Spread>
 
           {PRACTICE.slice(1).map((job) => (
@@ -810,7 +845,7 @@ export const OriginPage: React.FC = () => {
           <Spread media={FRAMES.cinema} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Offstage</p>
             <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">Play is not a footnote.</h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6]">
+            <p className="mt-6 max-w-xl font-display text-xl italic leading-relaxed text-[#d8cbb6] md:text-2xl">
               <Words v={['Bollywood, live news on the wall, arms open. The same person who sets up robot lines also acts. Thinking for yourself includes joy.', 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.', 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.', 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.', 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.', 'Bollywood, a wall of live news, arms open. The same person who commissions a cell also likes to act. Independent thought includes joy.']} />
             </p>
           </Spread>
@@ -857,7 +892,7 @@ export const OriginPage: React.FC = () => {
               <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
                 <Words v={['Write to me if you want to think together.', 'Write if you want a mind in the room, not a vendor.', 'Write if you want a mind in the room, not a creative you can procure.', 'Write if you want a mind in the room, not a creative you can procure.', 'Write if you want a mind in the room, not a creative you can procure.', 'Write if you want a mind in the room, not a creative you can procure.']} />
               </h2>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#b8a894]">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#b8a894] md:text-xl">
                 <Words v={['Research, robot lines, teaching, and weird builds. Friends can just say hi.', 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.', 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.', 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.', 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.', 'Research, industrial cells, education, and strange prototypes. Friends, skip the formality.']} />
               </p>
             </Spread>
