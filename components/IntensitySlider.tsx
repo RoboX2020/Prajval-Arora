@@ -35,7 +35,7 @@ export const IntensitySlider: React.FC = () => {
           <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#b8a894]">Research paper</span>
         </span>
         <span className="text-[13px] leading-snug text-[#d8cbb6]">
-          Now reading: <span className="font-wordy text-[#d4b87a]">{readingLabel(level)}</span>
+          Now reading: <span className="font-wordy text-[#e4570d]">{readingLabel(level)}</span>
         </span>
       </div>
     </div>

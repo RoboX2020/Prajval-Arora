@@ -16,12 +16,80 @@ import {
   FRAMES,
 } from '../content';
 import { SiteHeader } from './SiteHeader';
-import { Words } from '../intensity';
+import { Words, WordVariants } from '../intensity';
 import { JointLattice } from './JointLattice';
 import { PixelSprites } from './PixelSprites';
 import { Spread } from './Frame';
 import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
+
+
+// Same facts at every level for the "Conventional law" cards. The struck
+// law lines stay fixed (they are rhetorical devices, like the captions);
+// only the plain-language answer under each one follows the slider.
+const LAW_BREAKS: Record<string, WordVariants> = {
+  'Stay in one major.': [
+    'Robots need metal, code, and people. I work with all three - plus factories that have not been built yet.',
+    'Robotics mixes mechanics, code, and people - and factories that do not exist yet.',
+    'Robotics here mixes mechanics, code, and people - and the plants (factories) that do not exist yet.',
+    'Robotics combines mechanics, code, and people - and the industrial plants that have yet to be built.',
+    'The discipline integrates mechanics, computation, and human factors, extending to industrial plants not yet constructed.',
+    'The discipline integrates mechanics, computation, and human factors, with application targets including industrial plants not yet constructed.',
+  ],
+  'Hire creativity.': [
+    'I think for myself. That is where new ideas come from.',
+    'You work with someone who thinks for himself. New ideas come with that.',
+    'When you work with me you get someone who thinks for himself. New ideas follow - creativity is not a job title.',
+    'You work with an independent mind; creativity follows from that rather than from a job title.',
+    'Engagement is with an independent mind; creativity is an emergent property thereof, not a job title.',
+    'Engagement is with an independent mind; creativity is construed as an emergent property thereof rather than a purchasable job function.',
+  ],
+  'Prototype or ship.': [
+    'I do both. School labs, classwork, factory robots, and my clubs all help the next thing get built.',
+    'Both. Labs, classes, factory cells, and communities all feed the next build.',
+    'Both - labs, coursework, factory cells, and the communities around them all feed the next build.',
+    'Both. Labs, curriculum, cells, and communities each make the next thing possible.',
+    'Both. Laboratories, curriculum, cells, and communities collectively enable the next iteration.',
+    'Both imperatives are satisfied: laboratories, curriculum, cells, and communities collectively furnish the preconditions for the next artifact.',
+  ],
+  'Keep art away from industry.': [
+    'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.',
+    'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.',
+    'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.',
+    'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.',
+    'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.',
+    'A guitar with no strings. A robot that draws faces. A line that thinks in vision and air.',
+  ],
+};
+
+// Same facts at every level for the three reader cards. Card titles stay
+// fixed (they act like navigation); only the body follows the slider.
+const READER_BODIES: Record<string, WordVariants> = {
+  'If you build teams': [
+    "I'm in my second year of robot college at ASU. I teach robots in a simulator, set up factory robots, teach factory workers about PLCs, and turn computer drawings into real machines. Read Currently, Practice, and Work. Then write to me like a person, not a job ad.",
+    'RAS sophomore at ASU. I train robots in Isaac Sim, set up industrial cells, teach PLC technicians, and take hardware from CAD onto a live network. Read Currently, Practice, and Collisions - then write as a peer, not a vacancy.',
+    'RAS sophomore at ASU. I train robots in Isaac Sim, commission industrial cells, teach PLC technicians, and take hardware from CAD onto a live network. Read Currently, Practice, and Collisions - then write to me as a peer, not a vacancy.',
+    'RAS sophomore at ASU, already training robots in Isaac Sim, commissioning industrial cells, teaching PLC technicians, and taking hardware from CAD onto a live network. Read Currently, Practice, and Collisions, then write as a peer rather than a vacancy.',
+    'A second-year RAS undergraduate at ASU, presently training robotic policies in Isaac Sim, commissioning industrial cells, instructing PLC technicians, and carrying hardware from CAD onto a live network. See Currently, Practice, and Collisions; correspondence in a peer register is preferred.',
+    'The author is a second-year undergraduate in Robotics and Autonomous Systems at ASU, presently engaged in training robotic policies in Isaac Sim, commissioning industrial cells, instructing PLC technicians, and transitioning hardware from CAD to a live network. The reader is directed to Currently, Practice, and Collisions; correspondence is welcomed in a peer register rather than that of a vacancy announcement.',
+  ],
+  'If you want to make something': [
+    "My projects mix things that don't usually go together: helping people speak with small AI, airplane air systems with manufacturing, signals with wearables, warehouses with helper robots. Start with Work. Then book time or write to me on LinkedIn.",
+    'The projects mix fields that usually stay apart: speech therapy with on-device AI, bleed-air physics with manufacturing, signal processing with wearables, warehouses with cobots. Start with Collisions, then book time or write on LinkedIn.',
+    'The projects mix fields that usually stay apart: speech therapy with on-device LLMs, bleed-air thermodynamics with manufacturing, DSP with wearables, warehouses with cobots. Start with Collisions - then book time or write on LinkedIn.',
+    'Branches that usually refuse each other: speech therapy and on-device LLMs, bleed-air thermodynamics and manufacturing, DSP and wearables, warehouses and cobots. Start with Collisions, then book time or write on LinkedIn.',
+    'Domain pairings that typically remain disjoint: speech therapy with on-device LLMs, bleed-air thermodynamics with manufacturing, DSP with wearables, and warehouses with cobots. Begin with Collisions; subsequently book time or correspond via LinkedIn.',
+    'The work spans domain pairings that typically remain disjoint: speech therapy with on-device large language models, bleed-air thermodynamics with manufacturing, digital signal processing with wearables, and warehouse logistics with collaborative robots. The reader is directed to begin with Collisions and subsequently to book time or correspond via LinkedIn.',
+  ],
+  'If you already know me': [
+    "This shows what I've done since we last talked. Look at Now, Tapri, FAITH, and Connect. Old websites are in Version history.",
+    "A map of what's happened since we last talked. Skip to Now, Tapri, FAITH, and Connect. Older sites live under Version history.",
+    "A map of what's happened since the last tea stall conversation. Skip to Now, Tapri, FAITH, and Connect. Older sites live under Version history.",
+    'A map of what has happened since the last tea stall conversation. Skip to Now, Tapri, FAITH, and Connect. Older websites live under Version history.',
+    'A record of activity since the last tea stall conversation. Proceed to Now, Tapri, FAITH, and Connect; prior site iterations reside under Version history.',
+    'A record of activity since the most recent tea stall conversation. The reader is directed to Now, Tapri, FAITH, and Connect; prior iterations of this site reside under Version history.',
+  ],
+};
 
 const nav = [
   { href: '#guide', label: 'Guide' },
@@ -56,29 +124,29 @@ export const OriginPage: React.FC = () => {
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">
               Independent thought · interdisciplinary build
             </p>
-            <h1 className="mt-5 font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.88] tracking-tight text-[#f0e6d4]">
+            <h1 className="mt-5 font-display font-wordy text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.88] tracking-tight text-[#f0e6d4]">
               Prajval
               <br />
               Arora
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#d8cbb6] md:text-xl font-wordy">
               <Words v={[
-                'I take ideas from different places and put them together. Then I build something new. You cannot buy ideas. They show up when you think for yourself.',
-                'I mix fields that never met before, then build the thing that only works where they meet. You cannot hire creativity. It shows up when you think for yourself.',
-                "I connect fields that never shared a table, then build the thing that can only exist there. You can't hire creativity - it arrives with independent thought.",
-                'My work connects disciplines that rarely interact, and builds what becomes possible only at that intersection. Creativity is not something you hire; it arrives with independent thought.',
-                'I operate across disciplines that seldom intersect, engineering systems realizable only at that junction. Creativity cannot be procured; it is a byproduct of independent thought.',
-                'This practice integrates disparate domains that have historically lacked points of contact, yielding artifacts realizable exclusively at their intersection. Creativity, construed as an emergent property of independent cognition, resists commodification.',
+                "Hi, I'm Prajval. I make robots. A robot dog. A robot arm for a factory. A car that drives itself inside a computer. This site shows them.",
+                "I build robots - a robot dog, a factory arm, and a car that drives itself in a simulator. Most of my projects mix two fields that don't usually meet.",
+                "I build robots and the systems around them - a robot dog, an industrial factory cell, a driving simulator. Most of my projects start where two fields meet that usually don't.",
+                'I build robotic systems and the work around them: a robot dog, a commissioned industrial cell, a driving simulator. Most projects begin where two fields that rarely meet overlap.',
+                'I develop robotic systems and their supporting infrastructure: a quadruped platform, an industrial automation cell, and a simulation environment for autonomous driving. Most projects sit at the intersection of two fields that rarely interact.',
+                "The author's work concerns robotic systems and their adjacent infrastructure - a quadruped platform, a commissioned industrial automation cell, and a simulation environment for autonomous driving - with projects characteristically situated at the intersection of domains that infrequently interact.",
               ]} />
             </p>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#b8a894] font-wordy">
               <Words v={[
-                "I study robots at Arizona State University. A factory, a doctor's office, a classroom, and a guitar look like the same puzzle to me: find the missing piece that joins things.",
-                'I study robotics at Arizona State University. A factory cell, a clinic, a classroom, and a guitar are the same problem to me: invent the missing joint.',
-                'I study Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar count as the same problem: invent the missing joint.',
-                'I study Robotics and Autonomous Systems at Arizona State University, and I treat a factory cell, a clinic, a classroom, and a guitar as one shared problem: invent the missing joint.',
-                'I study Robotics and Autonomous Systems at Arizona State University. A factory cell, a clinic, a classroom, and a guitar reduce to a common problem class: the synthesis of the missing joint.',
-                'As a student of Robotics and Autonomous Systems at Arizona State University, I frame the factory cell, the clinic, the classroom, and the guitar as isomorphic instances of a single problem: the invention of the missing joint.',
+                'I go to college at Arizona State University. I learn how robots work. After class, I build my own.',
+                "I study robotics at Arizona State University. After class I build my own projects - that's most of this site.",
+                "I study Robotics and Autonomous Systems at Arizona State University, class of 2029. When I'm not in class I'm usually building one of the projects below.",
+                'I study Robotics and Autonomous Systems at Arizona State University, expecting to graduate in 2029. Outside coursework I build the projects shown below.',
+                'I am an undergraduate in Robotics and Autonomous Systems at Arizona State University (expected 2029); independent projects constitute the majority of this site.',
+                'The author is an undergraduate student of Robotics and Autonomous Systems at Arizona State University (anticipated conferral 2029); the independent projects documented herein constitute the majority of this site.',
               ]} />
             </p>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-[#d4b87a]">Currently</p>
@@ -114,7 +182,7 @@ export const OriginPage: React.FC = () => {
                 <p className="mt-2 font-display text-2xl text-[#9a8a76] line-through decoration-[#c4a35a]/80 decoration-2">
                   {item.law}
                 </p>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-[#d8cbb6]">{item.break}</p>
+                <p className="mt-4 max-w-md text-base leading-relaxed text-[#d8cbb6] font-wordy"><Words v={LAW_BREAKS[item.law]} /></p>
               </article>
             ))}
           </div>
@@ -123,32 +191,32 @@ export const OriginPage: React.FC = () => {
         <section className="mx-auto site-shell space-y-10 px-5 py-24">
           <Spread media={FRAMES.sky} reverse>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">A reading</p>
-            <h2 className="mt-3 font-display text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
+            <h2 className="mt-3 font-display font-wordy text-4xl leading-tight text-[#f0e6d4] md:text-5xl">
               <Words v={[
-                'How to read me - if you want to hire me, build with me, or already share tea with me.',
-                'How to read me, whether you want to hire me, work with me, or already drink tea with me.',
-                'How to read me, whether you hire, collaborate, or already drink tea with me.',
-                'How to read me, whether you are hiring, collaborating, or already a friend over tea.',
-                'How to read this work, whether you arrive as an employer, a collaborator, or a friend.',
-                'A guide to interpreting this work, addressed equally to prospective employers, collaborators, and friends.',
+                'Who are you? Pick one: you give people jobs, you want to build something together, or you already know me.',
+                'This site works three ways: if you hire people, if you want to build together, or if you already know me.',
+                'Three ways to read this site - hiring me, building with me, or you already know me.',
+                'This site reads three ways, depending on whether you are hiring, collaborating, or already know me.',
+                'This site supports three reading paths, indexed by visitor intent: hiring, collaboration, or prior acquaintance.',
+                'This site admits three reading paths, indexed by visitor intent: prospective employment, prospective collaboration, or prior acquaintance.',
               ]} />
             </h2>
             <p className="mt-5 text-sm leading-relaxed text-[#b8a894] font-wordy">
               <Words v={[
-                'The photo looks up. My work looks up too. Pick the part below that matches why you came.',
-                'The photo looks up. The work does too. Follow the card that matches why you came.',
-                'The photograph looks up. The work does too. Follow the frame that matches why you came.',
-                'The photograph looks up, and so does the work. Follow the frame that matches your reason for visiting.',
-                'The photograph gazes upward, as does the work. Proceed via the frame corresponding to your intent.',
-                'The photograph is oriented upward, mirroring the trajectory of the work; the reader is invited to select the interpretive frame corresponding to their purpose.',
+                'Tap the card that sounds like you.',
+                'Pick the card below that sounds like you.',
+                'Pick the card below that fits why you came.',
+                'Select the card below that matches your reason for visiting.',
+                'Select the entry card corresponding to your intent.',
+                'The reader is directed to the entry card corresponding to their intent.',
               ]} />
             </p>
           </Spread>
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {READERS.map((r) => (
               <article key={r.who} className="border border-[#3d3228] bg-[#241c16] p-6">
-                <h3 className="font-display text-2xl text-[#d4b87a]">{r.who}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#b8a894]">{r.body}</p>
+                <h3 className="font-display font-wordy text-2xl text-[#d4b87a]">{r.who}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-[#b8a894] font-wordy"><Words v={READER_BODIES[r.who]} /></p>
               </article>
             ))}
           </div>
@@ -157,15 +225,15 @@ export const OriginPage: React.FC = () => {
         <section id="guide" className="mx-auto site-shell px-5 pb-24">
           <Spread media={FRAMES.walk}>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#d4b87a]">Friends first</p>
-            <h2 className="mt-3 font-display text-4xl text-[#f0e6d4]">The walk, not the pitch.</h2>
+            <h2 className="mt-3 font-display font-wordy text-4xl text-[#f0e6d4]">The walk, not the pitch.</h2>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d8cbb6] font-wordy">
               <Words v={[
-                'Already know me? This is the grocery-bag version - no resume talk. Old versions of the site live in Version history.',
-                'If you already know me, this is the grocery-bag version. Skip the resume voice. Older sites live in Version history.',
-                'If you already know me, this is the grocery-bag version. Skip the resume voice. Open Version history for the older sites.',
-                'If you already know me, what follows is the grocery-bag version - the resume voice stays off. Earlier sites remain in Version history.',
-                'For those already acquainted: what follows is the informal register. The resume voice is suspended; prior iterations reside in Version history.',
-                'For existing acquaintances, the ensuing account adopts the informal register; the resume voice is suspended, and antecedent iterations of this site remain accessible under Version history.',
+                'Know me already? This is the short version. Old websites are in Version history.',
+                'If you already know me, this is the short version - no resume talk. Older sites live under Version history.',
+                'Already know me? This section is the short version, no resume talk. Older versions of this site are under Version history.',
+                'If we already know each other, what follows is the informal short version; earlier iterations of this site remain under Version history.',
+                'For prior acquaintances: an informal summary follows. Previous iterations of this site are archived under Version history.',
+                'For prior acquaintances, the ensuing summary adopts an informal register; antecedent iterations of this site remain accessible under Version history.',
               ]} />
             </p>
           </Spread>
