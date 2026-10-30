@@ -133,9 +133,20 @@ export const NOW = [
     place: 'Arizona State University, Polytechnic',
     when: 'Sept 2026 to Present',
     points: [
-      "Support Prof. Sangram Redkar's TSMC PLC and automation training cohorts through hands-on instruction.",
-      'Allen-Bradley PLCs, HMI, Dobot and conveyor integration, UR programming, color sorting, pneumatics, and circuits.',
-      'Ongoing Isaac Sim and reinforcement-learning work with a Unitree robot dog.',
+      "TA for Prof. Sangram Redkar's TSMC PLC and automation training cohorts, Fall 2026 - hands-on instruction with PLCs, HMI, pneumatics, and circuits.",
+      'TA for RAS 545 Robotics Systems I - co-authored the Isaac Sim lab guides the course runs on.',
+      'Program Allen-Bradley PLCs and HMI for lab builds, including a wafer-handling training cell with Dobot robots and conveyors.',
+      'Program Universal Robots arms for PLC integration and the control logic for a color-sorting system.',
+      'Develop Isaac Sim simulation and reinforcement-learning workflows, with ongoing Unitree robot-dog training.',
+    ],
+  },
+  {
+    title: 'Automation and PLC Co-Instructor',
+    place: 'TSMC Training Program',
+    when: 'Jul 2026 to Present',
+    points: [
+      'Train technicians on PLC programming, Allen-Bradley PLCs, structured text, sensors, conveyors, pneumatics, and robot-cell safety.',
+      'Demonstrate troubleshooting across Ethernet, USB, EtherCAT, digital I/O, IP communications, and equipment commissioning.',
     ],
   },
   {
