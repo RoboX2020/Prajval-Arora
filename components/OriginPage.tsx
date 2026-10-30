@@ -389,6 +389,14 @@ const NOW_POINTS: Record<string, WordVariants> = {
     'Teaching assistant for Prof. Sangram Redkar\'s TSMC PLC and automation training cohorts (Fall 2026): hands-on instruction across PLCs, HMI, pneumatics, and circuits.',
     'Teaching assistantship within Prof. Sangram Redkar\'s TSMC PLC and automation training cohorts (Fall 2026), providing hands-on instruction across programmable logic controllers, human-machine interfaces, pneumatics, and electrical circuits.',
   ],
+  'TA for RAS 456.': [
+    'I am a TA for another robotics course too: RAS 456.',
+    'TA for a second course as well: RAS 456.',
+    'TA for RAS 456.',
+    'TA for RAS 456.',
+    'Teaching assistant for a second course, RAS 456.',
+    'An additional teaching assistantship for RAS 456.',
+  ],
   "TA for RAS 545 Robotics Systems I - co-author of the course's Isaac Sim lab guides.": [
     'I am also a TA for RAS 545, a robotics course. I co-wrote its Isaac Sim lab guides.',
     "TA for RAS 545 Robotics Systems I - I co-wrote the course's Isaac Sim lab guides.",

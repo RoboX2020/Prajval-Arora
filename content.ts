@@ -135,6 +135,7 @@ export const NOW = [
     points: [
       "TA for Prof. Sangram Redkar's TSMC PLC and automation training cohorts, Fall 2026 - hands-on instruction with PLCs, HMI, pneumatics, and circuits.",
       "TA for RAS 545 Robotics Systems I - co-author of the course's Isaac Sim lab guides.",
+      'TA for RAS 456.',
       'Program Allen-Bradley PLCs and HMI for lab builds, including a wafer-handling training cell with Dobot robots and conveyors.',
       'Program Universal Robots arms for PLC integration and the control logic for a color-sorting system.',
       'Develop Isaac Sim simulation and reinforcement-learning workflows, with ongoing Unitree robot-dog training.',
