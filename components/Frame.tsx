@@ -82,10 +82,8 @@ export const Spread: React.FC<{
 }> = ({ media, reverse, children }) => {
   return (
     <div className="grid overflow-hidden rounded-2xl border border-[#3d3228] md:grid-cols-12 md:items-stretch">
-      <div className={`md:col-span-5 md:self-stretch ${reverse ? 'md:order-2' : ''}`}>
-        <div className="md:sticky md:top-24">
-          <Frame media={media} natural />
-        </div>
+      <div className={`md:col-span-5 md:self-start ${reverse ? 'md:order-2' : ''}`}>
+        <Frame media={media} natural />
       </div>
       <div
         className={`flex flex-col justify-center bg-[#241c16] px-6 py-8 md:col-span-7 md:px-10 md:py-12 ${

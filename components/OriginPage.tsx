@@ -19,7 +19,7 @@ import { SiteHeader } from './SiteHeader';
 import { Words, WordVariants } from '../intensity';
 import { JointLattice } from './JointLattice';
 import { PixelSprites } from './PixelSprites';
-import { Spread } from './Frame';
+import { Frame, Spread } from './Frame';
 import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
 
@@ -722,8 +722,9 @@ export const OriginPage: React.FC = () => {
             <a href="/work-with-me" className="mt-8 inline-flex min-h-11 items-center border border-[#d4b87a] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">Work with me ↗</a>
           </Spread>
           <div className="mt-10 space-y-10">
-            <Spread media={FRAMES.blimp}>
-              <div className="space-y-4">
+            <div className="overflow-hidden rounded-2xl border border-[#3d3228]">
+              <Frame media={FRAMES.blimp} natural />
+              <div className="grid gap-10 bg-[#241c16] px-6 py-8 md:grid-cols-3 md:px-10 md:py-12">
                 {NOW.map((job) => (
                   <article key={job.title}>
                     <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#d4b87a]">{job.when}</p>
@@ -740,7 +741,7 @@ export const OriginPage: React.FC = () => {
                   </article>
                 ))}
               </div>
-            </Spread>
+            </div>
           </div>
         </section>
 
