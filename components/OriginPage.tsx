@@ -22,6 +22,7 @@ import { PixelSprites } from './PixelSprites';
 import { Spread } from './Frame';
 import { SignalBoard } from './SignalBoard';
 import { VersionHistory } from './VersionHistory';
+import { BuildIntro } from './BuildIntro';
 
 
 
@@ -541,7 +542,27 @@ const nav = [
   { href: '#connect', label: 'Connect' },
 ];
 
+let introPlayed = false;
+
 export const OriginPage: React.FC = () => {
+  const [showIntro, setShowIntro] = React.useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('nointro') || params.has('introRM')) return false;
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return false;
+    if (params.has('introFreeze')) return true; // inspection always allowed
+    if (introPlayed) return false;
+    return true;
+  });
+  const introFreeze = React.useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    const v = new URLSearchParams(window.location.search).get('introFreeze');
+    if (v === null) return null;
+    const n = parseInt(v, 10);
+    return Number.isFinite(n) && n >= 0 ? Math.min(n, 5600) : null;
+  }, []);
+
   React.useEffect(() => {
     if (window.location.hash === '#collisions') {
       document.getElementById('collisions')?.scrollIntoView({ block: 'start' });
@@ -552,6 +573,15 @@ export const OriginPage: React.FC = () => {
 
   return (
     <div className="origin-root relative min-h-screen bg-[#1c1814] text-[#e6d9c4]">
+      {showIntro && (
+        <BuildIntro
+          freeze={introFreeze}
+          onDone={() => {
+            introPlayed = true;
+            setShowIntro(false);
+          }}
+        />
+      )}
       <JointLattice />
       <PixelSprites />
 
