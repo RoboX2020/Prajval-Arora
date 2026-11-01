@@ -560,7 +560,7 @@ export const OriginPage: React.FC = () => {
     const v = new URLSearchParams(window.location.search).get('introFreeze');
     if (v === null) return null;
     const n = parseInt(v, 10);
-    return Number.isFinite(n) && n >= 0 ? Math.min(n, 5600) : null;
+    return Number.isFinite(n) && n >= 0 ? Math.min(n, 16000) : null;
   }, []);
 
   React.useEffect(() => {
