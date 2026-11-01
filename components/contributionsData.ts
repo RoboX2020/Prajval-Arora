@@ -14,6 +14,15 @@ export interface Contribution {
 
 export const CONTRIBUTIONS: Contribution[] = [
   {
+    repo: 'petercorke/bdsim', repoUrl: 'https://github.com/petercorke/bdsim', pr: 142,
+    url: 'https://github.com/petercorke/bdsim/pull/142',
+    title: 'Render the screenshot region for PNG export',
+    merged: 'Oct 31, 2026', shot: 'petercorke-bdsim-142.png',
+    problem: 'bdedit\u2019s PNG export (bdedit -p out.png model.bd) failed headless: it rendered the whole scene at 3x oversampling into one image and cropped the screenshot region out of it. For the example diagram that meant allocating a 27619x9508 image (~2 GB); the allocation failed and the Qt subprocess aborted with an inactive-painter error.',
+    fix: 'Render only the screenshot region into a right-sized image, the same approach the SVG export already uses, and raise a clear error if the allocation still fails.',
+    changes: '+14/-18 lines in src/bdedit/interface.py, plus 19 lines of new headless tests. Reproduced the crash first, then the full suite passed offscreen: 487 passed, 9 skipped.',
+  },
+  {
     repo: 'Z3Prover/z3', repoUrl: 'https://github.com/Z3Prover/z3', pr: 11468,
     url: 'https://github.com/Z3Prover/z3/pull/11468',
     title: 'Fix null model crash in pd-maxres',
