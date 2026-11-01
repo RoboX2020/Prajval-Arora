@@ -4,10 +4,11 @@ import React from 'react';
  * BuildIntro - the "15 cursors speed-build the site" loading intro.
  *
  * Plays once per full page load on the home page. A swarm of cursor arrows
- * flies in, terminal cards flash generic web-build commands, and ghost
- * wireframes stamp the page top-to-bottom; each finished band dissolves to
- * reveal the real page underneath. Skippable by click/tap/Escape, disabled
- * for prefers-reduced-motion.
+ * flies in, and each ghost element appears exactly where a cursor darts:
+ * crew arrows stamp wireframe rects one by one, terminals type generic
+ * web-build lines, then the crew sweeps the cover off each band left to
+ * right, revealing the real page underneath, header first. Skippable by
+ * click/tap/Escape, disabled for prefers-reduced-motion.
  *
  * Debug (preview only): ?introFreeze=<ms> renders a paused frame at that
  * timestamp for inspection; ?nointro skips; ?introRM=1 forces the
@@ -16,6 +17,7 @@ import React from 'react';
 
 const TOTAL = 5600; // ms of choreography
 const ARROWS = 15;
+const WIPE = 500; // cover sweep duration per band
 
 // Warm ramp on the site's ember/cream palette.
 const COLORS = [
@@ -29,8 +31,8 @@ const TAGS = [
   'media', 'pages', 'footer', 'slider', 'polish',
 ];
 
-// Band windows: each band builds for BUILD ms, then dissolves.
-const BUILD = 700;
+// Band windows: build for BUILD ms, then sweep the cover off.
+const BUILD = 640;
 const bandStart = (k: number) => 1000 + (k - 1) * 760;
 const BAND_TOP = [0, 15, 38, 60, 80]; // vh
 const BAND_H = [15, 23, 22, 20, 20]; // vh
@@ -43,6 +45,15 @@ const TERMINALS: Array<[string, string]> = [
   ['$ mount work', 'cards, photos, links'],
   ['$ final pass', 'palette: ember on cream'],
 ];
+
+// Ghost wireframe rects per band: [left% vw, top% of band, width% vw, height% of band, stampOffsetMs]
+const RECTS: Record<number, Array<[number, number, number, number, number]>> = {
+  1: [[2, 18, 10, 60, 0], [16, 30, 7, 36, 70], [26, 30, 7, 36, 140], [36, 30, 9, 36, 210], [48, 30, 8, 36, 280], [59, 30, 9, 36, 350], [71, 30, 7, 36, 420], [82, 30, 8, 36, 490]],
+  2: [[4, 8, 30, 84, 0], [40, 14, 34, 22, 130], [40, 44, 24, 14, 260], [40, 64, 28, 12, 390], [78, 20, 16, 50, 320]],
+  3: [[4, 10, 44, 80, 0], [54, 10, 42, 36, 170], [54, 54, 42, 36, 340]],
+  4: [[4, 14, 28, 70, 0], [36, 14, 28, 70, 160], [68, 14, 28, 70, 320]],
+  5: [[4, 20, 60, 56, 0], [70, 32, 24, 30, 220]],
+};
 
 // Deterministic pseudo-random from an index.
 const pr = (i: number, salt: number) => {
@@ -62,45 +73,52 @@ const spawn = (i: number): Pt => {
   return { x: 10 + t * 80, y: 108 };
 };
 
+// Parked spot for arrows not on the active crew: a loose row near the bottom.
+const park = (i: number): Pt => ({ x: 6 + ((i * 37) % 82), y: 86 + (i % 3) * 3 });
+
 // Build keyframes for one arrow across the whole timeline.
 const flyKeyframes = (i: number): string => {
   const crew = i % 5; // which band this arrow works on
   const stops: Array<[number, Pt]> = [];
-  const push = (ms: number, p: Pt) => stops.push([Math.min(100, (ms / TOTAL) * 100), p]);
+  let last = -1;
+  const push = (ms: number, p: Pt) => {
+    const t2 = Math.max(ms, last + 8);
+    last = t2;
+    stops.push([Math.min(100, (t2 / TOTAL) * 100), p]);
+  };
 
-  const home: Pt = { x: 8 + pr(i, 2) * 84, y: 18 + pr(i, 3) * 64 };
   push(0, spawn(i));
-  push(900, home);
+  push(900, park(i));
 
   for (let k = 1; k <= 5; k++) {
     const s = bandStart(k);
     if (crew === k - 1) {
-      // Active: dart into the band and jiggle while stamping.
-      const bx = 12 + pr(i, 10 + k) * 70;
-      const by = BAND_TOP[k - 1] + 2 + pr(i, 20 + k) * (BAND_H[k - 1] - 6);
-      push(s + 60, { x: bx, y: by });
-      push(s + 220, { x: bx + 6, y: by + 3 });
-      push(s + 380, { x: bx - 5, y: by + 6 });
-      push(s + 560, { x: bx + 3, y: by - 2 });
+      const rects = RECTS[k];
+      const mine = rects.filter((_, ri) => ri % 3 === Math.floor(i / 5));
+      // Dart to each assigned rect exactly when it stamps in.
+      mine.forEach(([l, tp, , h, off]) => {
+        const cx = l + 2;
+        const cy = BAND_TOP[k - 1] + ((tp + h / 2) / 100) * BAND_H[k - 1];
+        push(s + 60 + off - 70 > 0 ? s + 60 + off - 70 : s + 10, { x: cx, y: cy });
+        push(s + 60 + off + 60, { x: cx + 1.5, y: cy + 1 });
+      });
+      // Then ride the cover sweep left to right, staggered lanes.
+      const lane = Math.floor(i / 5);
+      const y = BAND_TOP[k - 1] + BAND_H[k - 1] * (0.3 + lane * 0.2);
+      push(s + BUILD, { x: 1, y });
+      push(s + BUILD + WIPE * 0.5, { x: 50, y: y + (lane - 1) * 2 });
+      push(s + BUILD + WIPE, { x: 99, y });
     } else {
-      // Idle drift near home.
-      push(s + 300, { x: home.x + (pr(i, 30 + k) - 0.5) * 14, y: home.y + (pr(i, 40 + k) - 0.5) * 10 });
+      // Parked: small bob only.
+      const p = park(i);
+      push(s + 300, { x: p.x + (pr(i, 30 + k) - 0.5) * 4, y: p.y + (pr(i, 40 + k) - 0.5) * 2 });
     }
   }
-  push(4950, { x: 44 + pr(i, 50) * 12, y: 46 + pr(i, 51) * 8 }); // gather
+  push(5300, { x: 44 + pr(i, 50) * 12, y: 46 + pr(i, 51) * 8 }); // gather
   push(TOTAL, { x: 108 + pr(i, 52) * 8, y: 112 }); // exit bottom-right
 
   const body = stops.map(([p, pt]) => `${p.toFixed(2)}% { left: ${pt.x.toFixed(1)}vw; top: ${pt.y.toFixed(1)}vh; }`).join('\n');
   return `@keyframes fly-${i} {\n${body}\n}`;
-};
-
-// Ghost wireframe rects per band: [left%, top%(of band), width%, height%(of band), delayOffsetMs]
-const RECTS: Record<number, Array<[number, number, number, number, number]>> = {
-  1: [[2, 18, 10, 60, 0], [16, 30, 7, 36, 90], [26, 30, 7, 36, 150], [36, 30, 9, 36, 210], [48, 30, 8, 36, 270], [59, 30, 9, 36, 330], [71, 30, 7, 36, 390], [82, 30, 8, 36, 450]],
-  2: [[4, 8, 30, 84, 0], [40, 14, 34, 22, 120], [40, 44, 24, 14, 240], [40, 64, 28, 12, 360], [78, 20, 16, 50, 300]],
-  3: [[4, 10, 44, 80, 0], [54, 10, 42, 36, 150], [54, 54, 42, 36, 300]],
-  4: [[4, 14, 28, 70, 0], [36, 14, 28, 70, 130], [68, 14, 28, 70, 260]],
-  5: [[4, 20, 60, 56, 0], [70, 32, 24, 30, 200]],
 };
 
 interface Props { onDone: () => void; freeze: number | null }
@@ -140,18 +158,17 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const doneBands = COUNT_AT.filter((_, k) => t >= bandStart(k + 1) + BUILD).length;
+  const doneBands = COUNT_AT.filter((_, k) => t >= bandStart(k + 1) + BUILD + WIPE).length;
   const counter = doneBands === 0 ? 0 : COUNT_AT[doneBands - 1];
 
   const css = `
     ${Array.from({ length: ARROWS }, (_, i) => flyKeyframes(i)).join('\n')}
-    @keyframes bi-pop { 0% { opacity: 0; transform: scale(1.08); } 55% { opacity: 1; transform: scale(0.99); } 100% { opacity: 1; transform: scale(1); } }
     @keyframes bi-grow { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
-    @keyframes bi-band { 0% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes bi-wipe { 0% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 0 100%); } }
     @keyframes bi-type { 0% { width: 0; } 100% { width: 100%; } }
     @keyframes bi-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
     @keyframes bi-term { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
-    .bi-anim { animation-duration: ${TOTAL}ms; animation-timing-function: linear; animation-fill-mode: both; animation-delay: 0ms; }
+    .bi-anim { animation-duration: ${TOTAL}ms; animation-timing-function: linear; animation-fill-mode: both; }
     .bi-frozen, .bi-frozen * { animation-play-state: paused !important; }
   `;
 
@@ -164,7 +181,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     >
       <style>{css}</style>
 
-      {/* Bands tile the viewport; each dissolves when its build finishes. */}
+      {/* Bands tile the viewport as covers; each sweeps off left-to-right. */}
       {[0, 1, 2, 3, 4].map((k) => {
         const s = bandStart(k + 1);
         return (
@@ -174,11 +191,11 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
             style={{
               top: `${BAND_TOP[k]}vh`,
               height: `${BAND_H[k]}vh`,
-              animation: `bi-band 260ms ease-out both`,
+              animation: `bi-wipe ${WIPE}ms linear both`,
               animationDelay: `calc(${s + BUILD}ms - var(--freeze, 0ms))`,
             }}
           >
-            {/* ghost wireframes stamp in */}
+            {/* ghost wireframes stamp in where a cursor lands */}
             {(RECTS[k + 1] || []).map(([l, tp, w, h, off], ri) => (
               <div
                 key={ri}
@@ -186,8 +203,8 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
                 style={{
                   left: `${l}%`, top: `${tp}%`, width: `${w}%`, height: `${h}%`,
                   transformOrigin: 'left center',
-                  animation: `bi-grow 220ms cubic-bezier(.2,.9,.3,1.2) both`,
-                  animationDelay: `calc(${s + 80 + off}ms - var(--freeze, 0ms))`,
+                  animation: `bi-grow 200ms cubic-bezier(.2,.9,.3,1.2) both`,
+                  animationDelay: `calc(${s + 60 + off}ms - var(--freeze, 0ms))`,
                 }}
               />
             ))}
@@ -200,7 +217,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
                 background: '#141009', color: '#ffb454',
                 border: '1px solid #3d2c14',
                 animation: `bi-term 180ms ease-out both`,
-                animationDelay: `calc(${s + 120}ms - var(--freeze, 0ms))`,
+                animationDelay: `calc(${s + 100}ms - var(--freeze, 0ms))`,
                 maxWidth: '62vw',
               }}
             >
@@ -208,7 +225,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
                 <div key={li} className="overflow-hidden whitespace-nowrap"
                   style={{
                     animation: `bi-type 260ms steps(${line.length}) both`,
-                    animationDelay: `calc(${s + 200 + li * 300}ms - var(--freeze, 0ms))`,
+                    animationDelay: `calc(${s + 180 + li * 300}ms - var(--freeze, 0ms))`,
                     color: li === 0 ? '#ffd9a0' : '#9a8a76',
                   }}>
                   {line}
