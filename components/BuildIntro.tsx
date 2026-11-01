@@ -257,6 +257,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   const [elapsed, setElapsed] = React.useState(0);
   const [leaving, setLeaving] = React.useState(false);
   const pathsRef = React.useRef<Key[][]>([]);
+  const planRef = React.useRef<Plan | null>(null);
   const doneRef = React.useRef(onDone);
   doneRef.current = onDone;
 
@@ -304,7 +305,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
       window.addEventListener('load', onLoad);
       const fallback = setTimeout(prepare, 1600);
       // Fail-safe: never trap the page behind the overlay.
-      const bail = setTimeout(() => { if (alive) { setLeaving(true); setTimeout(() => doneRef.current(), 300); } }, 12000);
+      const bail = setTimeout(() => { if (alive && !planRef.current) { setLeaving(true); setTimeout(() => doneRef.current(), 300); } }, 8000);
       return () => {
         alive = false;
         window.removeEventListener('load', onLoad);
@@ -316,7 +317,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
         window.removeEventListener('touchmove', block);
       };
     }
-    const bail2 = setTimeout(() => { if (alive) { setLeaving(true); setTimeout(() => doneRef.current(), 300); } }, 12000);
+    const bail2 = setTimeout(() => { if (alive && !planRef.current) { setLeaving(true); setTimeout(() => doneRef.current(), 300); } }, 8000);
     return () => {
       alive = false;
       clearTimeout(bail2);
@@ -329,7 +330,10 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   }, []);
 
   React.useEffect(() => {
-    if (plan) pathsRef.current = Array.from({ length: ARROWS }, (_, i) => flightPath(i, plan));
+    if (plan) {
+      planRef.current = plan;
+      pathsRef.current = Array.from({ length: ARROWS }, (_, i) => flightPath(i, plan));
+    }
   }, [plan]);
 
   // Drive the clock + the autoscroll once the plan exists.
