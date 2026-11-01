@@ -189,8 +189,8 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
             key={k}
             className="absolute left-0 right-0 overflow-hidden bg-[#1c1814]"
             style={{
-              top: `${BAND_TOP[k]}vh`,
-              height: `${BAND_H[k]}vh`,
+              top: `calc(${BAND_TOP[k]}vh - 1px)`,
+              height: `calc(${BAND_H[k]}vh + 2px)`,
               animation: `bi-wipe ${WIPE}ms linear both`,
               animationDelay: `calc(${s + BUILD}ms - var(--freeze, 0ms))`,
             }}
