@@ -1,17 +1,18 @@
 import React from 'react';
 
 /*
- * BuildIntro - the "15 cursors speed-build the site" loading intro.
+ * BuildIntro - the "cursors hand-build the site" loading intro.
  *
- * Plays once per full page load on the home page. A swarm of cursor arrows
- * flies in and the whole landing page is built for real, top to bottom:
- * ghost wireframes stamp in exactly where real page elements sit (measured
- * from the live DOM at runtime), crews of arrows dart to each stamp, sweep
- * the blueprint cover off each section slice, and the page autoscrolls to
- * follow the build all the way to the footer, then whips back to the top
- * and hands over. The reveal is the real page - covers hide it and are
- * swept away. Skippable by click/tap/Escape, disabled for
- * prefers-reduced-motion.
+ * Plays once per full page load on the home page. Starts from a black page.
+ * A swarm of cursor arrows flies in; working cursors SKETCH each element
+ * (wireframe outlines grow under the cursor tip), nudge it into place and
+ * resize it, while idle cursors wander. Section covers then wipe off to
+ * reveal the real content in flat unpainted cream, and color is painted
+ * last, section by section. Two to three terminals stream the build log the
+ * whole time (sections, boxes, images, mounts, paint passes). The page
+ * autoscrolls to follow the build to the footer, whips back to the top and
+ * hands over the real (light) page. Skippable by click/tap/Escape, disabled
+ * for prefers-reduced-motion.
  *
  * Debug (preview only): ?introFreeze=<ms> renders a paused frame at that
  * timestamp for inspection; ?nointro skips; ?introRM=1 forces the
@@ -41,13 +42,15 @@ const pr = (i: number, salt: number) => {
   return x - Math.floor(x);
 };
 
-interface Ghost { x: number; y: number; w: number; h: number; stamp: number }
+type GhostKind = 'img' | 'box' | 'text';
+interface Ghost { x: number; y: number; w: number; h: number; stamp: number; kind: GhostKind; nx: number; ny: number; tag: string }
 interface Phase {
   label: string;
   top: number; height: number; left: number; width: number; // document coords
   start: number; dur: number;
   scrollFrom: number; scrollTo: number;
   wipeStart: number; wipeDur: number;
+  colorStart: number; colorDur: number;
   ghosts: Ghost[];
 }
 interface Plan {
@@ -63,6 +66,13 @@ interface Plan {
 const LABELS: Record<string, string> = {
   guide: 'route the guide', now: 'stamp the now board', collisions: 'wire collisions',
   practice: 'stack the practice', field: 'pin field notes', connect: 'ground connect',
+};
+
+const kindOf = (el: HTMLElement): GhostKind => {
+  const t = el.tagName.toLowerCase();
+  if (t === 'img' || t === 'video' || t === 'canvas' || t === 'figure') return 'img';
+  if (t === 'h1' || t === 'h2' || t === 'h3' || t === 'h4' || t === 'p' || t === 'a' || t === 'li') return 'text';
+  return 'box';
 };
 
 function measure(): Plan | null {
@@ -88,32 +98,32 @@ function measure(): Plan | null {
       const n = Math.ceil(h / (vh * 0.85));
       const sliceH = h / n;
       for (let i = 0; i < n; i++) {
-        units.push({ top: top + i * sliceH, height: sliceH, label: i === 0 ? label : label + ' (cont.)', dur: 450, el });
+        units.push({ top: top + i * sliceH, height: sliceH, label: i === 0 ? label : label + ' (cont.)', dur: 620, el });
       }
     } else {
       units.push({ top, height: h, label, dur, el });
     }
   };
 
-  addSliced(header, 'scaffold header · nav links', 1100);
+  addSliced(header, 'scaffold header · nav links', 1300);
   Array.from(main.children).forEach((child, ci) => {
     const el = child as HTMLElement;
     if (el.offsetHeight < 40) return;
     const id = el.id || el.querySelector('[id]')?.id || '';
     const fallback = ci === 0 ? 'place hero - portrait + display type' : 'frame section ' + (ci + 1);
-    addSliced(el, LABELS[id] || fallback, ci === 0 ? 1500 : ci === 1 ? 800 : Math.max(600, 900 - ci * 40));
+    addSliced(el, LABELS[id] || fallback, ci === 0 ? 1700 : ci === 1 ? 950 : Math.max(700, 1050 - ci * 40));
   });
-  if (footer) addSliced(footer, 'ground the footer', 550);
+  if (footer) addSliced(footer, 'ground the footer', 650);
 
   const phases: Phase[] = [];
-  let clock = 700; // arrows burst in first
+  let clock = 900; // arrows burst in first
   let prevY = 0;
   let totalGhosts = 0;
   const vw = window.innerWidth;
 
   units.forEach((u, k) => {
     const start = clock;
-    clock += u.dur * 0.8; // phases overlap a little - chaos and pace
+    clock += u.dur * 0.82; // phases overlap a little - chaos and pace
 
     // Ghosts: real descendant elements living inside this slice.
     const sliceBottom = u.top + u.height;
@@ -130,34 +140,43 @@ function measure(): Plan | null {
       return bb.width * bb.height - ab.width * ab.height;
     });
     const picked = inner.slice(0, 14)
-      .map((c, ci) => ({ c, r: pr(ci + k * 31, c.tagName.length + c.className.length) }))
+      .map((c, ci) => ({ c, ci, r: pr(ci + k * 31, c.tagName.length + c.className.length) }))
       .sort((a, b) => a.r - b.r)
-      .map((o) => o.c);
+      .map((o) => o);
 
-    const ghosts: Ghost[] = picked.map((c, gi) => {
+    const ghosts: Ghost[] = picked.map((o, gi) => {
+      const c = o.c;
       const cr = c.getBoundingClientRect();
-      const spread = (u.dur * 0.42) / Math.max(1, picked.length - 1);
+      const spread = (u.dur * 0.34) / Math.max(1, picked.length - 1);
       return {
         x: cr.left,
         y: cr.top + window.scrollY - rootTop,
         w: cr.width, h: cr.height,
-        stamp: start + u.dur * 0.10 + gi * spread + pr(gi, k * 7 + 1) * 90,
+        stamp: start + u.dur * 0.06 + gi * spread + pr(gi, k * 7 + 1) * 70,
+        kind: kindOf(c),
+        nx: (pr(gi, k * 13 + 2) - 0.5) * 22,
+        ny: (pr(gi, k * 17 + 5) - 0.5) * 14,
+        tag: c.tagName.toLowerCase(),
       };
     });
     totalGhosts += ghosts.length;
 
     const scrollTo = k <= 1 ? 0 : clamp(u.top - vh * 0.12, 0, maxScroll);
+    const wipeStart = start + u.dur * 0.50;
+    const wipeDur = u.dur * 0.28;
     phases.push({
       label: u.label, top: u.top, height: u.height, left: 0, width: vw,
       start, dur: u.dur,
       scrollFrom: prevY, scrollTo,
-      wipeStart: start + u.dur * 0.52, wipeDur: u.dur * 0.44,
+      wipeStart, wipeDur,
+      colorStart: wipeStart + wipeDur + 60,
+      colorDur: u.dur * 0.22 + 160,
       ghosts,
     });
     prevY = scrollTo;
   });
 
-  const holdStart = Math.max(...phases.map((ph) => ph.start + ph.dur)) + 250;
+  const holdStart = Math.max(...phases.map((ph) => ph.colorStart + ph.colorDur)) + 300;
   const backStart = holdStart + 450;
   const backDur = 900;
   const total = backStart + backDur + 150;
@@ -204,17 +223,28 @@ function flightPath(i: number, plan: Plan): Key[] {
       const lane = (i - crew0 + ARROWS) % ARROWS; // 0..3
       ph.ghosts.forEach((g, gi) => {
         if (gi % crewSize !== lane) return;
-        const vy = g.y - scrollAt(plan, g.stamp);
-        push(g.stamp - 90, g.x + g.w / 2 - 26, clamp(vy - 18, 20, vh - 20));
-        push(g.stamp, g.x + g.w / 2, clamp(vy + g.h / 2, 20, vh - 20));
-        push(g.stamp + 60, g.x + g.w / 2 + 10, clamp(vy + g.h / 2 + 6, 20, vh - 20));
+        const vy = (docY: number) => clamp(docY - scrollAt(plan, g.stamp), 20, vh - 20);
+        // Sketch: ride the growing wireframe corner (top edge, then down the right).
+        push(g.stamp - 90, g.x - 24, vy(g.y - 16));
+        push(g.stamp + 30, g.x, vy(g.y));
+        push(g.stamp + 130, g.x + g.w * 0.7, vy(g.y + 2));
+        push(g.stamp + 220, g.x + g.w, vy(g.y + g.h * 0.65));
+        // Nudge into place, then settle at the center.
+        push(g.stamp + 330, g.x + g.w + g.nx, vy(g.y + g.h + g.ny));
+        push(g.stamp + 460, g.x + g.w / 2, vy(g.y + g.h / 2));
       });
       // Ride the wipe edge in staggered lanes, kept on screen.
-      for (let m = 0; m <= 5; m++) {
-        const tm = ph.wipeStart + (ph.wipeDur * m) / 5;
-        const edgeX = ph.left + (m / 5) * ph.width;
+      for (let m = 0; m <= 4; m++) {
+        const tm = ph.wipeStart + (ph.wipeDur * m) / 4;
+        const edgeX = ph.left + (m / 4) * ph.width;
         const vyTop = ph.top - scrollAt(plan, tm);
         push(tm, edgeX - 8 + lane * 5, clamp(vyTop + ph.height * (0.18 + lane * 0.2), 26, vh - 26));
+      }
+      // Paint pass: sweep the section during its color stage.
+      for (let m = 0; m <= 2; m++) {
+        const tm = ph.colorStart + (ph.colorDur * m) / 2;
+        const vyTop = ph.top - scrollAt(plan, tm);
+        push(tm, ph.left + ph.width * (0.2 + 0.3 * m) + lane * 14, clamp(vyTop + ph.height * (0.3 + lane * 0.15), 26, vh - 26));
       }
     } else {
       // Chaos detail: the rest of the swarm roams, scouts ahead, mills around.
@@ -248,6 +278,32 @@ function posAt(keys: Key[], t: number): { x: number; y: number } {
   }
   const last = keys[keys.length - 1];
   return { x: last.x, y: last.y };
+}
+
+interface TermLine { at: number; text: string }
+
+// Three realistic build streams derived from the plan.
+function termStreams(plan: Plan): [TermLine[], TermLine[], TermLine[]] {
+  const t0: TermLine[] = [{ at: 60, text: '$ boot 15 agents' }, { at: 320, text: '$ mount /origin --readonly' }];
+  const t1: TermLine[] = [{ at: 140, text: 'plan: ' + plan.phases.length + ' sections, ' + plan.totalGhosts + ' elements' }];
+  const t2: TermLine[] = [{ at: 200, text: 'vite v5.4.8 dev server ready' }, { at: 460, text: 'tsc --noEmit ... ok' }];
+  plan.phases.forEach((ph, k) => {
+    t0.push({ at: ph.start + 40, text: '$ add section ' + ph.label.split(' ').slice(-1)[0] + '  # ' + ph.label });
+    t0.push({ at: ph.wipeStart, text: '$ reveal ' + ph.label.split(' ').slice(-1)[0] });
+    ph.ghosts.forEach((g, gi) => {
+      const name = g.kind === 'img' ? 'image' : g.kind === 'text' ? 'text' : 'box';
+      t1.push({ at: g.stamp + 30, text: '+ ' + name + ' <' + g.tag + '> ' + Math.round(g.w) + 'x' + Math.round(g.h) });
+      if (gi % 3 === 0) t1.push({ at: g.stamp + 330, text: '~ place (' + Math.round(g.x) + ', ' + Math.round(g.y) + ') ok' });
+    });
+    t2.push({ at: ph.wipeStart + 80, text: 'hmr update /origin/' + k + '  ' + (24 + Math.round(pr(k, 5) * 60)) + 'ms' });
+    t2.push({ at: ph.colorStart + 40, text: 'paint ' + ph.label.split(' ').slice(-1)[0] + '  #f6f0e2 -> ember' });
+    t2.push({ at: ph.colorStart + ph.colorDur, text: 'paint ok  ' + (38 + Math.round(pr(k, 9) * 80)) + 'ms' });
+  });
+  t0.push({ at: plan.holdStart + 60, text: '$ ship prajvalarora.com' });
+  t1.push({ at: plan.holdStart + 20, text: 'all elements placed' });
+  t2.push({ at: plan.holdStart + 90, text: 'build complete in ' + (plan.total / 1000).toFixed(1) + 's' });
+  const s = (a: TermLine, b: TermLine) => a.at - b.at;
+  return [t0.sort(s), t1.sort(s), t2.sort(s)];
 }
 
 interface Props { onDone: () => void; freeze: number | null }
@@ -333,6 +389,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     if (plan) {
       planRef.current = plan;
       pathsRef.current = Array.from({ length: ARROWS }, (_, i) => flightPath(i, plan));
+      if (freeze !== null) setElapsed(freeze); // frozen debug: re-render so the swarm appears
     }
   }, [plan]);
 
@@ -368,14 +425,34 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   }, [plan]);
 
   const stamped = plan ? plan.phases.reduce((n, ph) => n + ph.ghosts.filter((g) => t >= g.stamp).length, 0) : 0;
+  const painted = plan ? plan.phases.filter((ph) => t >= ph.colorStart + ph.colorDur).length : 0;
 
-  const termLines = plan
-    ? plan.phases
-        .map((ph) => ({ at: ph.start + 60, text: '$ ' + ph.label }))
-        .concat([{ at: plan.holdStart + 60, text: '$ ship prajvalarora.com' }])
-        .filter((l) => t >= l.at)
-        .slice(-4)
-    : [];
+  // Stage label for the active phase: sketch -> place -> reveal -> paint.
+  const stage = plan
+    ? (() => {
+        const ph = plan.phases.find((p) => t >= p.start && t < p.colorStart + p.colorDur);
+        if (!ph) return t >= plan.holdStart ? 'done' : '';
+        if (t < ph.start + ph.dur * 0.42) return 'sketching - ' + ph.label;
+        if (t < ph.wipeStart) return 'placing - ' + ph.label;
+        if (t < ph.colorStart) return 'revealing - ' + ph.label;
+        return 'painting - ' + ph.label;
+      })()
+    : 'booting';
+
+  const streams = React.useMemo(() => (plan ? termStreams(plan) : null), [plan]);
+
+  const renderTerm = (lines: TermLine[], maxRows: number, accent: string) => {
+    const visible = lines.filter((l) => t >= l.at).slice(-maxRows);
+    const rows = visible.length ? visible : [{ at: 0, text: '' }];
+    return rows.map((l, li) => {
+      const chars = Math.max(0, Math.min(l.text.length, Math.floor((t - l.at) / 11)));
+      return (
+        <div key={li} className="whitespace-nowrap overflow-hidden" style={{ color: li === rows.length - 1 ? accent : '#9a8a76', textOverflow: 'ellipsis' }}>
+          {l.text.slice(0, chars)}
+        </div>
+      );
+    });
+  };
 
   return (
     <>
@@ -383,66 +460,129 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
       <div className="pointer-events-none absolute inset-0 z-[90]" aria-hidden="true">
         {plan && plan.phases.map((ph, k) => {
           const p = clamp01((t - ph.wipeStart) / ph.wipeDur);
+          const paint = clamp01((t - ph.colorStart) / ph.colorDur);
           return (
-            <div
-              key={k}
-              className="absolute overflow-hidden"
-              style={{
-                left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
-                background: '#1c1814',
-                backgroundImage:
-                  'repeating-linear-gradient(0deg, rgba(212,184,122,0.05) 0 1px, transparent 1px 34px), repeating-linear-gradient(90deg, rgba(212,184,122,0.05) 0 1px, transparent 1px 34px)',
-                clipPath: `inset(0 0 0 ${(p * 100).toFixed(2)}%)`,
-                visibility: p >= 1 ? 'hidden' : 'visible',
-              }}
-            >
-              {ph.ghosts.map((g, gi) => {
-                const s = clamp01((t - g.stamp) / 150);
-                if (s <= 0) return null;
-                return (
-                  <div
-                    key={gi}
-                    className="absolute rounded-md border border-[#d4b87a] bg-[#c4a35a]/10"
-                    style={{
-                      left: g.x - ph.left, top: g.y - ph.top, width: g.w, height: g.h,
-                      opacity: s, transform: `scale(${0.55 + 0.45 * s})`,
-                      transformOrigin: 'center',
-                    }}
-                  />
-                );
-              })}
-            </div>
+            <React.Fragment key={k}>
+              <div
+                className="absolute overflow-hidden"
+                style={{
+                  left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
+                  background: '#100d09',
+                  backgroundImage:
+                    'repeating-linear-gradient(0deg, rgba(212,184,122,0.06) 0 1px, transparent 1px 34px), repeating-linear-gradient(90deg, rgba(212,184,122,0.06) 0 1px, transparent 1px 34px)',
+                  clipPath: `inset(0 0 0 ${(p * 100).toFixed(2)}%)`,
+                  visibility: p >= 1 ? 'hidden' : 'visible',
+                }}
+              >
+                {ph.ghosts.map((g, gi) => {
+                  const s = clamp01((t - g.stamp) / 240);
+                  if (s <= 0) return null;
+                  // Sketch: width grows first (top edge), then height (right edge).
+                  const sx = clamp01(s * 1.6);
+                  const sy = clamp01(s * 1.6 - 0.6);
+                  // Place: after the sketch, the outline visibly nudges into position.
+                  const settle = clamp01((t - g.stamp - 300) / 200);
+                  const dx = g.nx * (1 - settle);
+                  const dy = g.ny * (1 - settle);
+                  return (
+                    <div
+                      key={gi}
+                      className="absolute"
+                      style={{
+                        left: g.x - ph.left + dx, top: g.y - ph.top + dy,
+                        width: Math.max(2, g.w * sx), height: Math.max(2, g.h * sy),
+                        border: `1.5px dashed ${g.kind === 'img' ? '#e4570d' : g.kind === 'text' ? '#d4b87a' : '#8a5a2b'}`,
+                        borderRadius: 4,
+                        background: g.kind === 'img' ? 'rgba(228,87,13,0.07)' : 'rgba(196,163,90,0.05)',
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              {/* Primer wash over the revealed slice: color is painted last. */}
+              {paint < 1 && (
+                <div
+                  className="absolute"
+                  style={{
+                    left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
+                    background: '#efe7d6',
+                    opacity: 0.9 * (1 - paint),
+                    clipPath: `inset(0 ${(100 - p * 100).toFixed(2)}% 0 0)`,
+                    visibility: p <= 0 ? 'hidden' : 'visible',
+                  }}
+                />
+              )}
+            </React.Fragment>
           );
         })}
-        {!plan && <div className="fixed inset-0" style={{ background: '#1c1814' }} />}
+        {!plan && <div className="fixed inset-0" style={{ background: '#100d09' }} />}
       </div>
 
-      {/* Viewport-space UI: status, terminal, counter, swarm. */}
+      {/* Viewport-space UI: status, terminals, counter, swarm. */}
       <div
         role="presentation"
         aria-hidden="true"
         className={`fixed inset-0 z-[100] transition-opacity duration-300 ${leaving && !frozen ? 'opacity-0' : 'opacity-100'}`}
       >
         <div className="absolute left-4 top-3 font-mono text-[11px] md:text-xs text-[#9a8a76]">
-          <span className="text-[#d4b87a]">$</span> build . --fast
+          <span className="text-[#d4b87a]">$</span> build . --hands-on
           <span className="inline-block w-2 animate-pulse">_</span>
         </div>
         <div className="absolute right-4 top-3 font-mono text-[11px] md:text-xs text-[#9a8a76]">
-          {stamped}{plan ? ` / ${plan.totalGhosts}` : ''} placed
+          {stamped}{plan ? ` / ${plan.totalGhosts}` : ''} placed{painted ? ` · ${painted} painted` : ''}
+        </div>
+        {stage && (
+          <div className="absolute left-4 top-8 font-mono text-[10px] md:text-[11px] text-[#7a6c58]">
+            {stage}
+          </div>
+        )}
+
+        {/* Terminal 1: section assembly commands */}
+        <div
+          className="absolute bottom-10 left-4 w-[46vw] max-w-[340px] rounded-md shadow-lg"
+          style={{ background: 'rgba(20,16,9,0.92)', border: '1px solid #3d2c14' }}
+        >
+          <div className="flex items-center gap-1.5 px-2.5 pt-1.5 pb-1">
+            <span className="h-2 w-2 rounded-full" style={{ background: '#5c2e16' }} />
+            <span className="h-2 w-2 rounded-full" style={{ background: '#6b4a1c' }} />
+            <span className="h-2 w-2 rounded-full" style={{ background: '#3f5233' }} />
+            <span className="ml-2 font-mono text-[9px] text-[#7a6c58]">assemble - zsh</span>
+          </div>
+          <div className="px-2.5 pb-2 font-mono text-[10px] leading-relaxed md:text-[11px]" style={{ color: '#ffb454' }}>
+            {renderTerm(streams ? streams[0] : [], 4, '#ffd9a0')}
+          </div>
         </div>
 
+        {/* Terminal 2: element-level placement log */}
         <div
-          className="absolute bottom-10 left-4 max-w-[70vw] rounded-md px-3 py-2 font-mono text-[10px] leading-relaxed shadow-lg md:bottom-12 md:text-[11px]"
-          style={{ background: '#141009', color: '#ffb454', border: '1px solid #3d2c14' }}
+          className="absolute right-4 top-16 hidden w-[300px] rounded-md shadow-lg md:block"
+          style={{ background: 'rgba(20,16,9,0.92)', border: '1px solid #3d2c14' }}
         >
-          {(termLines.length ? termLines : [{ at: 0, text: '$ boot 15 agents' }]).map((l, li) => {
-            const chars = Math.max(0, Math.min(l.text.length, Math.floor((t - l.at) / 14)));
-            return (
-              <div key={li} className="whitespace-nowrap" style={{ color: li % 2 === 0 ? '#ffd9a0' : '#9a8a76' }}>
-                {l.text.slice(0, chars)}
-              </div>
-            );
-          })}
+          <div className="flex items-center gap-1.5 px-2.5 pt-1.5 pb-1">
+            <span className="h-2 w-2 rounded-full" style={{ background: '#5c2e16' }} />
+            <span className="h-2 w-2 rounded-full" style={{ background: '#6b4a1c' }} />
+            <span className="h-2 w-2 rounded-full" style={{ background: '#3f5233' }} />
+            <span className="ml-2 font-mono text-[9px] text-[#7a6c58]">elements - tail -f</span>
+          </div>
+          <div className="px-2.5 pb-2 font-mono text-[10px] leading-relaxed" style={{ color: '#c9b389' }}>
+            {renderTerm(streams ? streams[1] : [], 5, '#ffd9a0')}
+          </div>
+        </div>
+
+        {/* Terminal 3: build/paint pipeline */}
+        <div
+          className="absolute bottom-10 right-4 hidden w-[280px] rounded-md shadow-lg md:block"
+          style={{ background: 'rgba(20,16,9,0.92)', border: '1px solid #3d2c14' }}
+        >
+          <div className="flex items-center gap-1.5 px-2.5 pt-1.5 pb-1">
+            <span className="h-2 w-2 rounded-full" style={{ background: '#5c2e16' }} />
+            <span className="h-2 w-2 rounded-full" style={{ background: '#6b4a1c' }} />
+            <span className="h-2 w-2 rounded-full" style={{ background: '#3f5233' }} />
+            <span className="ml-2 font-mono text-[9px] text-[#7a6c58]">paint - vite</span>
+          </div>
+          <div className="px-2.5 pb-2 font-mono text-[10px] leading-relaxed" style={{ color: '#b58547' }}>
+            {renderTerm(streams ? streams[2] : [], 4, '#ffd9a0')}
+          </div>
         </div>
 
         {plan && pathsRef.current.length === ARROWS && Array.from({ length: ARROWS }, (_, i) => {
