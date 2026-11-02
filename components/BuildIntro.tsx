@@ -43,7 +43,7 @@ const pr = (i: number, salt: number) => {
 };
 
 type GhostKind = 'img' | 'box' | 'text';
-interface Ghost { x: number; y: number; w: number; h: number; stamp: number; addAt: number; kind: GhostKind; nx: number; ny: number; tag: string }
+interface Ghost { x: number; y: number; w: number; h: number; stamp: number; addAt: number; paintAt: number; kind: GhostKind; nx: number; ny: number; tag: string; el: HTMLElement }
 interface Phase {
   label: string;
   top: number; height: number; left: number; width: number; // document coords
@@ -123,7 +123,6 @@ function measure(): Plan | null {
 
   units.forEach((u, k) => {
     const start = clock;
-    clock += u.dur * 0.82; // phases overlap a little - chaos and pace
 
     // Ghosts: real descendant elements living inside this slice.
     const sliceBottom = u.top + u.height;
@@ -132,46 +131,55 @@ function measure(): Plan | null {
     ).filter((c) => {
       const cr = c.getBoundingClientRect();
       const cy = cr.top + window.scrollY - rootTop + cr.height / 2;
-      return cr.width >= 34 && cr.height >= 12 && c.offsetParent !== null && cy >= u.top && cy < sliceBottom;
+      return cr.width >= 16 && cr.height >= 10 && c.offsetParent !== null && cy >= u.top && cy < sliceBottom;
     });
     const inner = cand.filter((c) => !cand.some((o) => o !== c && c.contains(o)));
     inner.sort((a, b) => {
       const ab = a.getBoundingClientRect(); const bb = b.getBoundingClientRect();
       return bb.width * bb.height - ab.width * ab.height;
     });
-    const picked = inner.slice(0, 14)
+    const picked = inner.slice(0, 60)
       .map((c, ci) => ({ c, ci, r: pr(ci + k * 31, c.tagName.length + c.className.length) }))
       .sort((a, b) => a.r - b.r)
       .map((o) => o);
 
+    const dur = Math.max(u.dur, 460 + picked.length * 40); // more elements, more build time
+    clock += dur * 0.82; // phases overlap a little - chaos and pace
     const ghosts: Ghost[] = picked.map((o, gi) => {
       const c = o.c;
       const cr = c.getBoundingClientRect();
-      const spread = (u.dur * 0.34) / Math.max(1, picked.length - 1);
-      const stamp = start + u.dur * 0.06 + gi * spread + pr(gi, k * 7 + 1) * 70;
+      const spread = (dur * 0.34) / Math.max(1, picked.length - 1);
+      const stamp = start + dur * 0.04 + gi * spread + pr(gi, k * 7 + 1) * 60;
       return {
         x: cr.left,
         y: cr.top + window.scrollY - rootTop,
         w: cr.width, h: cr.height,
         stamp,
-        addAt: stamp + 520, // sketch + settle, then this element's cover unwraps
+        addAt: stamp + 380, // sketch + settle, then the real element materializes
+        paintAt: 0, // set once the phase exists
         kind: kindOf(c),
         nx: (pr(gi, k * 13 + 2) - 0.5) * 22,
         ny: (pr(gi, k * 17 + 5) - 0.5) * 14,
         tag: c.tagName.toLowerCase(),
+        el: c,
       };
     });
     totalGhosts += ghosts.length;
 
     const scrollTo = k <= 1 ? 0 : clamp(u.top - vh * 0.12, 0, maxScroll);
+    const colorStart = Math.max(...ghosts.map((g) => g.addAt), start) + 220; // paint only after every element exists
+    const colorDur = dur * 0.30 + 160;
+    ghosts.forEach((g, gi) => {
+      g.paintAt = colorStart + (gi / Math.max(1, ghosts.length - 1)) * colorDur * 0.7;
+    });
     phases.push({
       label: u.label, top: u.top, height: u.height, left: 0, width: vw,
-      start, dur: u.dur,
+      start, dur,
       scrollFrom: prevY, scrollTo,
-      baseFadeAt: start + u.dur * 0.44,
-      baseFadeDur: 380,
-      colorStart: start + u.dur * 0.66,
-      colorDur: u.dur * 0.26 + 160,
+      baseFadeAt: start + dur * 0.06,
+      baseFadeDur: 320,
+      colorStart,
+      colorDur,
       ghosts,
     });
     prevY = scrollTo;
@@ -314,6 +322,9 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   const [leaving, setLeaving] = React.useState(false);
   const pathsRef = React.useRef<Key[][]>([]);
   const skippedRef = React.useRef(false);
+  const ghostsRef = React.useRef<Ghost[]>([]);
+  const revealedRef = React.useRef<Set<number>>(new Set());
+  const paintedRef = React.useRef<Set<number>>(new Set());
   const planRef = React.useRef<Plan | null>(null);
   const doneRef = React.useRef(onDone);
   doneRef.current = onDone;
@@ -321,11 +332,22 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   const frozen = freeze !== null;
   const t = frozen ? freeze : elapsed;
 
+  const restoreElements = () => {
+    ghostsRef.current.forEach((g) => {
+      g.el.style.transition = 'none';
+      g.el.style.opacity = '';
+      g.el.style.clipPath = '';
+      g.el.style.transform = '';
+      g.el.style.filter = '';
+    });
+  };
+
+
   // Mount: block user scrolling immediately, measure once layout settles.
   React.useEffect(() => {
     let alive = true;
     const block = (e: Event) => e.preventDefault();
-    const skip = () => { skippedRef.current = true; window.scrollTo(0, 0); setLeaving(true); setTimeout(() => doneRef.current(), 300); };
+    const skip = () => { skippedRef.current = true; restoreElements(); window.scrollTo(0, 0); setLeaving(true); setTimeout(() => doneRef.current(), 300); };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { skip(); return; }
       if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', ' ', 'Home', 'End'].includes(e.key)) e.preventDefault();
@@ -335,6 +357,10 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     window.addEventListener('wheel', block, { passive: false });
     window.addEventListener('touchmove', block, { passive: false });
     window.scrollTo(0, 0);
+    // The site sets html { scroll-behavior: smooth }; per-frame programmatic
+    // scrolling then crawls on real phones and the build looks stuck.
+    const prevScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
 
     const go = () => { if (alive) setPlan(measure()); };
     const prepare = async () => {
@@ -390,6 +416,21 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     if (plan) {
       planRef.current = plan;
       pathsRef.current = Array.from({ length: ARROWS }, (_, i) => flightPath(i, plan));
+      // Hide the real elements; the build adds them back one by one.
+      const all: Ghost[] = [];
+      plan.phases.forEach((ph) => ph.ghosts.forEach((g) => all.push(g)));
+      ghostsRef.current = all;
+      revealedRef.current = new Set();
+      paintedRef.current = new Set();
+      all.forEach((g) => {
+        g.el.style.opacity = '0';
+        if (g.kind === 'text') {
+          g.el.style.clipPath = 'inset(0 100% 0 0)';
+        } else {
+          g.el.style.transform = 'scale(0.92)';
+        }
+        g.el.style.filter = 'grayscale(1) brightness(1.04)';
+      });
       if (freeze !== null) setElapsed(freeze); // frozen debug: re-render so the swarm appears
     }
   }, [plan]);
@@ -420,10 +461,35 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
       clearInterval(iv);
       clearTimeout(fadeT);
       clearTimeout(doneT);
+      restoreElements();
+      document.documentElement.style.scrollBehavior = '';
       window.scrollTo(0, 0);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [plan]);
+
+  // Sequential construction: reveal and paint the real elements on their own clocks.
+  React.useEffect(() => {
+    const all = ghostsRef.current;
+    for (let gi = 0; gi < all.length; gi++) {
+      const g = all[gi];
+      if (!revealedRef.current.has(gi) && t >= g.addAt) {
+        revealedRef.current.add(gi);
+        g.el.style.transition = g.kind === 'text'
+          ? 'clip-path 480ms linear, opacity 120ms linear'
+          : 'opacity 260ms ease-out, transform 340ms cubic-bezier(.2,.9,.3,1.1)';
+        g.el.style.opacity = '1';
+        if (g.kind === 'text') g.el.style.clipPath = 'inset(0 0% 0 0)';
+        else g.el.style.transform = 'scale(1)';
+      }
+      if (!paintedRef.current.has(gi) && t >= g.paintAt) {
+        paintedRef.current.add(gi);
+        const prev = g.el.style.transition;
+        g.el.style.transition = prev + ', filter 420ms ease';
+        g.el.style.filter = 'grayscale(0) brightness(1)';
+      }
+    }
+  }, [t]);
 
   const stamped = plan ? plan.phases.reduce((n, ph) => n + ph.ghosts.filter((g) => t >= g.stamp).length, 0) : 0;
   const painted = plan ? plan.phases.filter((ph) => t >= ph.colorStart + ph.colorDur).length : 0;
@@ -460,21 +526,9 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
       <div className="pointer-events-none absolute inset-0 z-[90]" aria-hidden="true">
         {plan && plan.phases.map((ph, k) => {
           const base = clamp01((t - ph.baseFadeAt) / ph.baseFadeDur);
-          const paint = clamp01((t - ph.colorStart) / ph.colorDur);
           return (
             <React.Fragment key={k}>
-              {/* Primer wash over the real content: color is painted last. */}
-              {paint < 1 && base > 0 && (
-                <div
-                  className="absolute"
-                  style={{
-                    left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
-                    background: '#efe7d6',
-                    opacity: 0.9 * (1 - paint),
-                  }}
-                />
-              )}
-              {/* Base cover: the black page; fades once the elements are sketched. */}
+              {/* Base cover: the black page; fades as construction starts. */}
               {base < 1 && (
                 <div
                   className="absolute overflow-hidden"
@@ -487,18 +541,17 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
                   }}
                 />
               )}
-              {/* Per-element covers: sketched, nudged into place, then each unwraps. */}
+              {/* Sketched wireframes; each fades as its real element materializes. */}
               {ph.ghosts.map((g, gi) => {
                 const s = clamp01((t - g.stamp) / 240);
                 if (s <= 0) return null;
-                const open = clamp01((t - g.addAt) / 260);
+                const open = clamp01((t - g.addAt) / 200);
                 if (open >= 1) return null;
                 const sx = clamp01(s * 1.6);
                 const sy = clamp01(s * 1.6 - 0.6);
                 const settle = clamp01((t - g.stamp - 300) / 200);
                 const dx = g.nx * (1 - settle);
                 const dy = g.ny * (1 - settle);
-                const filled = base >= 1;
                 return (
                   <div
                     key={gi}
@@ -506,14 +559,10 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
                     style={{
                       left: g.x - ph.left + dx, top: g.y - ph.top + dy,
                       width: Math.max(2, g.w * sx), height: Math.max(2, g.h * sy),
-                      border: `1.5px dashed ${g.kind === 'img' ? '#e4570d' : g.kind === 'text' ? '#d4b87a' : '#8a5a2b'}`,
+                      border: `1.5px dashed ${g.kind === 'img' ? '#e4570d' : g.kind === 'text' ? (base >= 1 ? '#8a6a30' : '#d4b87a') : '#a3742a'}`,
                       borderRadius: 4,
-                      background: filled
-                        ? (g.kind === 'img' ? 'rgba(228,87,13,0.10)' : 'rgba(30,24,16,0.85)')
-                        : (g.kind === 'img' ? 'rgba(228,87,13,0.07)' : 'rgba(196,163,90,0.05)'),
+                      background: g.kind === 'img' ? 'rgba(228,87,13,0.08)' : (base >= 1 ? 'rgba(138,90,43,0.06)' : 'rgba(196,163,90,0.05)'),
                       opacity: 1 - open,
-                      transform: `scale(${1 - open * 0.04})`,
-                      transformOrigin: 'center',
                     }}
                   />
                 );
