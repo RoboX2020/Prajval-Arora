@@ -11,10 +11,10 @@ const COLUMNS = 14;
  * rectangles (cards, images, rounded boxes) are blocks the coffee will not
  * enter: clicking the header cup topples it and coffee pours down the page,
  * flowing AROUND the blocks (they stay visible as islands while the sheet
- * fills the background between them). Once the pour bottoms out, the sheet
- * closes over the blocks, the theme flips to dark underneath, and the whole
- * sheet drains off the bottom revealing the dark page. Clicking again
- * drains a coffee sheet off the bottom, back to cream.
+ * fills the background between them). Once the pour bottoms out the theme
+ * flips to dark while the sheet holds around the blocks, then the sheet
+ * drains off the bottom revealing the dark page. Clicking again drains a
+ * coffee sheet off the bottom, back to cream.
  *
  * Design alternative kept on a switch: FLOW_MODE 'glass' renders the blocks
  * as translucent panes instead of islands - the coffee is seen moving behind
@@ -26,7 +26,7 @@ const COLUMNS = 14;
 type FlowMode = 'around' | 'glass';
 const FLOW_MODE: FlowMode = 'around';
 
-type Phase = 'idle' | 'topple' | 'pour' | 'close' | 'drainOff' | 'preDrain' | 'drain' | 'drainFade';
+type Phase = 'idle' | 'topple' | 'pour' | 'drainOff' | 'preDrain' | 'drain' | 'drainFade';
 
 type Hole = { x: number; y: number; w: number; h: number; r: number };
 
@@ -65,14 +65,25 @@ const measureBlocks = (): Hole[] => {
   return kept.slice(0, 40);
 };
 
+// mask-mode for an image is ALPHA: opaque = liquid visible. destination-out
+// punches the blocks out fully ('around') or partly ('glass', liquid seen
+// through the panes). Canvas PNG: SVG data-URI masks do not rasterize reliably.
 const buildMask = (holes: Hole[], vw: number, vh: number): string => {
-  const fill = FLOW_MODE === 'around' ? 'black' : 'rgb(84,84,84)';
-  const svg =
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${vw}" height="${vh}">` +
-    `<rect width="${vw}" height="${vh}" fill="white"/>` +
-    holes.map((h) => `<rect x="${h.x.toFixed(1)}" y="${h.y.toFixed(1)}" width="${h.w.toFixed(1)}" height="${h.h.toFixed(1)}" rx="${h.r}" fill="${fill}"/>`).join('') +
-    `</svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  const c = document.createElement('canvas');
+  c.width = vw; c.height = vh;
+  const ctx = c.getContext('2d');
+  if (!ctx) return '';
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, vw, vh);
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = FLOW_MODE === 'around' ? '#000' : 'rgba(0,0,0,0.62)';
+  holes.forEach((h) => {
+    ctx.beginPath();
+    if (typeof ctx.roundRect === 'function') ctx.roundRect(h.x, h.y, h.w, h.h, h.r);
+    else ctx.rect(h.x, h.y, h.w, h.h);
+    ctx.fill();
+  });
+  return `url(${c.toDataURL('image/png')})`;
 };
 
 export const ThemeToggle: React.FC = () => {
@@ -116,10 +127,9 @@ export const ThemeToggle: React.FC = () => {
     setMask(buildMask(measureBlocks(), window.innerWidth, window.innerHeight));
     setPhase('topple');
     later(() => setPhase('pour'), 430);        // cup tipped, stream + rivulets fall around the blocks
-    later(() => setPhase('close'), 2150);      // pour bottomed out: sheet closes over the blocks
-    later(() => setLight(false), 2500);        // flip while fully covered
-    later(() => setPhase('drainOff'), 2780);   // the whole sheet slides off the bottom
-    later(() => { setPhase('idle'); setMask(null); unlockScroll(); }, 3640);
+    later(() => setLight(false), 2400);        // pour bottomed out: flip while the sheet holds around the blocks
+    later(() => setPhase('drainOff'), 2750);   // the sheet slides off the bottom, washing over the blocks
+    later(() => { setPhase('idle'); setMask(null); unlockScroll(); }, 3610);
   };
 
   const drainToLight = () => {
@@ -140,9 +150,9 @@ export const ThemeToggle: React.FC = () => {
   };
 
   const animating = phase !== 'idle';
-  const forward = phase === 'topple' || phase === 'pour' || phase === 'close' || phase === 'drainOff';
+  const forward = phase === 'topple' || phase === 'pour' || phase === 'drainOff';
   const reverse = phase === 'preDrain' || phase === 'drain' || phase === 'drainFade';
-  const tipped = phase === 'pour' || phase === 'close' || phase === 'drainOff';
+  const tipped = phase === 'pour' || phase === 'drainOff';
 
   return (
     <>
@@ -225,16 +235,6 @@ export const ThemeToggle: React.FC = () => {
                   );
                 })}
               </div>
-
-              {/* close: once the pour bottoms out the sheet seals over the blocks before the flip */}
-              <div
-                style={{
-                  position: 'absolute', inset: 0,
-                  background: COFFEE,
-                  opacity: phase === 'close' || phase === 'drainOff' ? 1 : 0,
-                  transition: 'opacity 320ms ease-in',
-                }}
-              />
             </div>
           )}
 
