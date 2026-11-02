@@ -313,6 +313,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   const [elapsed, setElapsed] = React.useState(0);
   const [leaving, setLeaving] = React.useState(false);
   const pathsRef = React.useRef<Key[][]>([]);
+  const skippedRef = React.useRef(false);
   const planRef = React.useRef<Plan | null>(null);
   const doneRef = React.useRef(onDone);
   doneRef.current = onDone;
@@ -324,7 +325,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
   React.useEffect(() => {
     let alive = true;
     const block = (e: Event) => e.preventDefault();
-    const skip = () => { setLeaving(true); setTimeout(() => doneRef.current(), 300); };
+    const skip = () => { skippedRef.current = true; window.scrollTo(0, 0); setLeaving(true); setTimeout(() => doneRef.current(), 300); };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { skip(); return; }
       if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', ' ', 'Home', 'End'].includes(e.key)) e.preventDefault();
@@ -404,7 +405,7 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     let raf = 0;
     const tick = () => {
       const now = performance.now() - started;
-      window.scrollTo(0, scrollAt(plan, now));
+      window.scrollTo(0, skippedRef.current ? 0 : scrollAt(plan, now));
       setElapsed(now);
       raf = requestAnimationFrame(tick);
     };
