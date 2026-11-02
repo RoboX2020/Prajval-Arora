@@ -4,22 +4,32 @@ import { Coffee } from 'lucide-react';
 const THEME_KEY = 'site-theme';
 const COFFEE = '#2a170a'; // the spill: dark roast, close to the dark theme body
 const CREASE = '#4a2c14';
+const COLUMNS = 14;
 
 /*
- * Coffee theme toggle. Clicking the cup tumbles a mug and spills coffee
- * across the whole page, settling into the coffee-dark theme. Clicking again
- * drains the coffee off the bottom of the screen, back to cream. The theme
- * flip happens while the page is fully covered, so the swap is invisible.
- * Reduced motion: instant toggle, no animation.
+ * Coffee theme toggle. Clicking the header cup topples the cup in place and
+ * coffee pours straight out of it, flowing down the page like honey -
+ * viscous rivulets descending at different speeds until the page is fully
+ * covered; the theme flips to dark underneath and the sheet slides off the
+ * bottom, revealing the dark page. Clicking again drains a coffee sheet off
+ * the bottom, back to cream. Reduced motion: instant toggle, no animation.
  */
 
-type Phase = 'idle' | 'tumble' | 'pour' | 'covered' | 'fade' | 'preDrain' | 'drain' | 'drainFade';
+type Phase = 'idle' | 'topple' | 'pour' | 'drainOff' | 'preDrain' | 'drain' | 'drainFade';
+
+// Deterministic per-column variance so the liquid front fingers unevenly.
+const colRand = (i: number, salt: number) => {
+  const x = Math.sin(i * 91.7 + salt * 53.3) * 24634.6345;
+  return x - Math.floor(x);
+};
 
 export const ThemeToggle: React.FC = () => {
   const [light, setLight] = useState<boolean>(() =>
     typeof document !== 'undefined' && document.documentElement.classList.contains('light')
   );
   const [phase, setPhase] = useState<Phase>('idle');
+  const [pourX, setPourX] = useState(0); // button center, where the stream leaves the cup
+  const btnRef = useRef<HTMLButtonElement | null>(null);
   const timers = useRef<number[]>([]);
 
   useEffect(() => {
@@ -36,14 +46,13 @@ export const ThemeToggle: React.FC = () => {
   const later = (fn: () => void, ms: number) => { timers.current.push(window.setTimeout(fn, ms)); };
 
   const spillToDark = () => {
-    setPhase('tumble');
-    later(() => setPhase('pour'), 520);       // mug tipped, coffee pours
-    later(() => {
-      setLight(false);                         // flip while fully covered
-      setPhase('covered');
-    }, 1350);
-    later(() => setPhase('fade'), 1550);       // coffee blends into the dark page
-    later(() => setPhase('idle'), 1950);
+    const r = btnRef.current?.getBoundingClientRect();
+    setPourX(r ? r.left + r.width / 2 : window.innerWidth - 44);
+    setPhase('topple');
+    later(() => setPhase('pour'), 430);        // cup tipped, stream + rivulets fall
+    later(() => setLight(false), 2620);        // flip while fully covered
+    later(() => setPhase('drainOff'), 2880);   // the whole sheet slides off the bottom
+    later(() => setPhase('idle'), 3720);
   };
 
   const drainToLight = () => {
@@ -64,13 +73,14 @@ export const ThemeToggle: React.FC = () => {
   };
 
   const animating = phase !== 'idle';
-  const forward = phase === 'tumble' || phase === 'pour' || phase === 'covered' || phase === 'fade';
-  const mugTipped = phase === 'pour' || phase === 'covered' || phase === 'fade' || phase === 'preDrain';
-  const fading = phase === 'fade' || phase === 'drainFade';
+  const forward = phase === 'topple' || phase === 'pour' || phase === 'drainOff';
+  const reverse = phase === 'preDrain' || phase === 'drain' || phase === 'drainFade';
+  const tipped = phase === 'pour' || phase === 'drainOff';
 
   return (
     <>
       <button
+        ref={btnRef}
         type="button"
         onClick={onClick}
         aria-label={light ? 'Switch to dark mode' : 'Switch to light mode'}
@@ -78,90 +88,78 @@ export const ThemeToggle: React.FC = () => {
         title={light ? 'Spill the coffee (dark mode)' : 'Mop it up (light mode)'}
         className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#5a4a32] text-[#b8a894] transition-colors hover:border-[#d4b87a] hover:text-[#d4b87a]"
       >
-        <Coffee size={16} />
+        <span
+          style={{
+            display: 'inline-flex',
+            transform: `rotate(${tipped ? -104 : 0}deg)`,
+            transformOrigin: '62% 80%',
+            transition: 'transform 460ms cubic-bezier(.34,1.5,.64,1)',
+          }}
+        >
+          <Coffee size={16} />
+        </span>
       </button>
 
       {animating && (
-        <div
-          className="pointer-events-none fixed inset-0 z-[110]"
-          aria-hidden="true"
-          style={{ opacity: fading ? 0 : 1, transition: 'opacity 380ms ease' }}
-        >
-          {/* forward: coffee blooms from the pour point until it covers everything */}
+        <div className="pointer-events-none fixed inset-0 z-[110]" aria-hidden="true">
           {forward && (
             <div
               style={{
-                position: 'absolute',
-                left: '50%', top: '16vh',
-                width: '260vmax', height: '260vmax',
-                marginLeft: '-130vmax', marginTop: '-130vmax',
-                borderRadius: '46% 54% 52% 48% / 51% 47% 53% 49%',
-                background: `radial-gradient(circle at 50% 40%, ${CREASE} 0%, ${COFFEE} 42%)`,
-                transform: phase === 'tumble' ? 'scale(0)' : 'scale(1)',
-                transition: 'transform 780ms cubic-bezier(.55,.06,.35,1)',
+                position: 'absolute', inset: 0,
+                transform: phase === 'drainOff' ? 'translateY(116vh)' : 'translateY(0)',
+                transition: phase === 'drainOff' ? 'transform 820ms cubic-bezier(.55,.08,.72,.3)' : 'none',
               }}
-            />
+            >
+              {/* the stream leaving the tipped cup */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: pourX - 4, top: 44,
+                  width: 8,
+                  height: phase === 'topple' ? 0 : 90,
+                  background: `linear-gradient(180deg, ${CREASE}, ${COFFEE})`,
+                  borderRadius: 4,
+                  transition: 'height 240ms ease-in',
+                }}
+              />
+              {/* viscous rivulets descending from the top at uneven speeds */}
+              {Array.from({ length: COLUMNS }, (_, i) => {
+                const dur = 950 + colRand(i, 1) * 750;          // honey: slow, uneven
+                const delay = 60 + colRand(i, 2) * 300;
+                const w = 100 / COLUMNS;
+                const shade = colRand(i, 3);
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      position: 'absolute',
+                      left: `${i * w - 0.35}%`,
+                      top: -40,
+                      width: `calc(${w}% + 2px)`,
+                      height: 'calc(100vh + 46px)',
+                      background: `linear-gradient(180deg, ${shade > 0.5 ? CREASE : COFFEE} 0%, ${COFFEE} 34%)`,
+                      borderRadius: '0 0 50% 50% / 0 0 34px 34px',
+                      transform: phase === 'topple' ? 'translateY(calc(-100vh - 90px))' : 'translateY(0)',
+                      transition: `transform ${dur}ms cubic-bezier(.58,.06,.84,.46) ${delay}ms`,
+                    }}
+                  />
+                );
+              })}
+            </div>
           )}
-          {/* forward: satellite splatters that fling out ahead of the main spill */}
-          {forward && [
-            [-9, 3, 7], [8, 6, 5], [-4, 26, 6], [11, 24, 8], [2, 34, 5],
-          ].map(([dx, dy, sz], i) => (
-            <div
-              key={i}
-              style={{
-                position: 'absolute',
-                left: `calc(50% + ${dx}vw)`, top: `calc(16vh + ${dy}vh)`,
-                width: `${sz}vmax`, height: `${sz}vmax`,
-                marginLeft: `${-sz / 2}vmax`, marginTop: `${-sz / 2}vmax`,
-                borderRadius: '48% 52% 55% 45% / 52% 46% 54% 48%',
-                background: COFFEE,
-                transform: phase === 'tumble' ? 'scale(0)' : 'scale(1)',
-                transition: `transform ${520 + i * 70}ms cubic-bezier(.2,.8,.3,1.15) ${80 + i * 55}ms`,
-              }}
-            />
-          ))}
+
           {/* reverse: a full coffee sheet that drains off the bottom, revealing cream */}
-          {(phase === 'preDrain' || phase === 'drain' || phase === 'drainFade') && (
+          {reverse && (
             <div
               style={{
                 position: 'absolute', inset: 0,
                 background: `linear-gradient(180deg, ${CREASE} 0%, ${COFFEE} 18%)`,
                 clipPath: phase === 'preDrain' ? 'inset(0 0 0 0)' : 'inset(100.5% 0 0 0)',
                 transition: 'clip-path 950ms cubic-bezier(.6,.05,.7,.2)',
+                opacity: phase === 'drainFade' ? 0 : 1,
               }}
             />
           )}
-          {/* the tumbling mug */}
-          <div
-            style={{
-              position: 'absolute', left: '50%', top: '10vh',
-              transform: `translate(-50%, 0) rotate(${mugTipped ? -115 : 0}deg) translateY(${phase === 'tumble' ? '0' : mugTipped ? '1.5vh' : '0'})`,
-              transformOrigin: '50% 90%',
-              transition: 'transform 480ms cubic-bezier(.34,1.4,.64,1)',
-              opacity: phase === 'fade' || phase === 'drainFade' ? 0 : 1,
-            }}
-          >
-            <svg width="72" height="72" viewBox="0 0 64 64">
-              <g>
-                <rect x="10" y="18" width="34" height="34" rx="5" fill="#f6f0e2" stroke="#1c1814" strokeWidth="2.5" />
-                <path d="M44 24 h6 a7 7 0 0 1 0 16 h-6" fill="none" stroke="#1c1814" strokeWidth="2.5" />
-                <rect x="10" y="18" width="34" height="10" rx="5" fill={COFFEE} />
-                <path d="M20 6 q3 4 0 8 M28 4 q3 4 0 8 M36 6 q3 4 0 8" fill="none" stroke="#b8a894" strokeWidth="2" strokeLinecap="round" />
-              </g>
-            </svg>
-            {/* the pour stream while tipped */}
-            {mugTipped && phase !== 'fade' && phase !== 'drainFade' && (
-              <div
-                style={{
-                  position: 'absolute', left: -6, top: '55%',
-                  width: 6, height: '14vh',
-                  background: `linear-gradient(180deg, ${CREASE}, ${COFFEE})`,
-                  borderRadius: 3,
-                  transform: 'rotate(8deg)',
-                }}
-              />
-            )}
-          </div>
         </div>
       )}
     </>
