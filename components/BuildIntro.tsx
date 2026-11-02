@@ -43,13 +43,13 @@ const pr = (i: number, salt: number) => {
 };
 
 type GhostKind = 'img' | 'box' | 'text';
-interface Ghost { x: number; y: number; w: number; h: number; stamp: number; kind: GhostKind; nx: number; ny: number; tag: string }
+interface Ghost { x: number; y: number; w: number; h: number; stamp: number; addAt: number; kind: GhostKind; nx: number; ny: number; tag: string }
 interface Phase {
   label: string;
   top: number; height: number; left: number; width: number; // document coords
   start: number; dur: number;
   scrollFrom: number; scrollTo: number;
-  wipeStart: number; wipeDur: number;
+  baseFadeAt: number; baseFadeDur: number;
   colorStart: number; colorDur: number;
   ghosts: Ghost[];
 }
@@ -148,11 +148,13 @@ function measure(): Plan | null {
       const c = o.c;
       const cr = c.getBoundingClientRect();
       const spread = (u.dur * 0.34) / Math.max(1, picked.length - 1);
+      const stamp = start + u.dur * 0.06 + gi * spread + pr(gi, k * 7 + 1) * 70;
       return {
         x: cr.left,
         y: cr.top + window.scrollY - rootTop,
         w: cr.width, h: cr.height,
-        stamp: start + u.dur * 0.06 + gi * spread + pr(gi, k * 7 + 1) * 70,
+        stamp,
+        addAt: stamp + 520, // sketch + settle, then this element's cover unwraps
         kind: kindOf(c),
         nx: (pr(gi, k * 13 + 2) - 0.5) * 22,
         ny: (pr(gi, k * 17 + 5) - 0.5) * 14,
@@ -162,15 +164,14 @@ function measure(): Plan | null {
     totalGhosts += ghosts.length;
 
     const scrollTo = k <= 1 ? 0 : clamp(u.top - vh * 0.12, 0, maxScroll);
-    const wipeStart = start + u.dur * 0.50;
-    const wipeDur = u.dur * 0.28;
     phases.push({
       label: u.label, top: u.top, height: u.height, left: 0, width: vw,
       start, dur: u.dur,
       scrollFrom: prevY, scrollTo,
-      wipeStart, wipeDur,
-      colorStart: wipeStart + wipeDur + 60,
-      colorDur: u.dur * 0.22 + 160,
+      baseFadeAt: start + u.dur * 0.44,
+      baseFadeDur: 380,
+      colorStart: start + u.dur * 0.66,
+      colorDur: u.dur * 0.26 + 160,
       ghosts,
     });
     prevY = scrollTo;
@@ -233,13 +234,12 @@ function flightPath(i: number, plan: Plan): Key[] {
         push(g.stamp + 330, g.x + g.w + g.nx, vy(g.y + g.h + g.ny));
         push(g.stamp + 460, g.x + g.w / 2, vy(g.y + g.h / 2));
       });
-      // Ride the wipe edge in staggered lanes, kept on screen.
-      for (let m = 0; m <= 4; m++) {
-        const tm = ph.wipeStart + (ph.wipeDur * m) / 4;
-        const edgeX = ph.left + (m / 4) * ph.width;
-        const vyTop = ph.top - scrollAt(plan, tm);
-        push(tm, edgeX - 8 + lane * 5, clamp(vyTop + ph.height * (0.18 + lane * 0.2), 26, vh - 26));
-      }
+      // Hover over the lane's elements as each cover unwraps.
+      ph.ghosts.forEach((g, gi) => {
+        if (gi % crewSize !== lane) return;
+        const vyU = clamp(g.y + g.h / 2 - scrollAt(plan, g.addAt), 26, vh - 26);
+        push(g.addAt + 120, g.x + g.w / 2 + 8, vyU);
+      });
       // Paint pass: sweep the section during its color stage.
       for (let m = 0; m <= 2; m++) {
         const tm = ph.colorStart + (ph.colorDur * m) / 2;
@@ -289,13 +289,13 @@ function termStreams(plan: Plan): [TermLine[], TermLine[], TermLine[]] {
   const t2: TermLine[] = [{ at: 200, text: 'vite v5.4.8 dev server ready' }, { at: 460, text: 'tsc --noEmit ... ok' }];
   plan.phases.forEach((ph, k) => {
     t0.push({ at: ph.start + 40, text: '$ add section ' + ph.label.split(' ').slice(-1)[0] + '  # ' + ph.label });
-    t0.push({ at: ph.wipeStart, text: '$ reveal ' + ph.label.split(' ').slice(-1)[0] });
+    t0.push({ at: ph.baseFadeAt, text: '$ fill ' + ph.label.split(' ').slice(-1)[0] + '  # elements in' });
     ph.ghosts.forEach((g, gi) => {
       const name = g.kind === 'img' ? 'image' : g.kind === 'text' ? 'text' : 'box';
       t1.push({ at: g.stamp + 30, text: '+ ' + name + ' <' + g.tag + '> ' + Math.round(g.w) + 'x' + Math.round(g.h) });
       if (gi % 3 === 0) t1.push({ at: g.stamp + 330, text: '~ place (' + Math.round(g.x) + ', ' + Math.round(g.y) + ') ok' });
     });
-    t2.push({ at: ph.wipeStart + 80, text: 'hmr update /origin/' + k + '  ' + (24 + Math.round(pr(k, 5) * 60)) + 'ms' });
+    t2.push({ at: ph.baseFadeAt + 80, text: 'hmr update /origin/' + k + '  ' + (24 + Math.round(pr(k, 5) * 60)) + 'ms' });
     t2.push({ at: ph.colorStart + 40, text: 'paint ' + ph.label.split(' ').slice(-1)[0] + '  #f6f0e2 -> ember' });
     t2.push({ at: ph.colorStart + ph.colorDur, text: 'paint ok  ' + (38 + Math.round(pr(k, 9) * 80)) + 'ms' });
   });
@@ -432,9 +432,8 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
     ? (() => {
         const ph = plan.phases.find((p) => t >= p.start && t < p.colorStart + p.colorDur);
         if (!ph) return t >= plan.holdStart ? 'done' : '';
-        if (t < ph.start + ph.dur * 0.42) return 'sketching - ' + ph.label;
-        if (t < ph.wipeStart) return 'placing - ' + ph.label;
-        if (t < ph.colorStart) return 'revealing - ' + ph.label;
+        if (t < ph.start + ph.dur * 0.40) return 'sketching - ' + ph.label;
+        if (t < ph.colorStart) return 'adding elements - ' + ph.label;
         return 'painting - ' + ph.label;
       })()
     : 'booting';
@@ -459,59 +458,65 @@ export const BuildIntro: React.FC<Props> = ({ onDone, freeze }) => {
       {/* Document-space blueprint covers over each real section slice. */}
       <div className="pointer-events-none absolute inset-0 z-[90]" aria-hidden="true">
         {plan && plan.phases.map((ph, k) => {
-          const p = clamp01((t - ph.wipeStart) / ph.wipeDur);
+          const base = clamp01((t - ph.baseFadeAt) / ph.baseFadeDur);
           const paint = clamp01((t - ph.colorStart) / ph.colorDur);
           return (
             <React.Fragment key={k}>
-              <div
-                className="absolute overflow-hidden"
-                style={{
-                  left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
-                  background: '#100d09',
-                  backgroundImage:
-                    'repeating-linear-gradient(0deg, rgba(212,184,122,0.06) 0 1px, transparent 1px 34px), repeating-linear-gradient(90deg, rgba(212,184,122,0.06) 0 1px, transparent 1px 34px)',
-                  clipPath: `inset(0 0 0 ${(p * 100).toFixed(2)}%)`,
-                  visibility: p >= 1 ? 'hidden' : 'visible',
-                }}
-              >
-                {ph.ghosts.map((g, gi) => {
-                  const s = clamp01((t - g.stamp) / 240);
-                  if (s <= 0) return null;
-                  // Sketch: width grows first (top edge), then height (right edge).
-                  const sx = clamp01(s * 1.6);
-                  const sy = clamp01(s * 1.6 - 0.6);
-                  // Place: after the sketch, the outline visibly nudges into position.
-                  const settle = clamp01((t - g.stamp - 300) / 200);
-                  const dx = g.nx * (1 - settle);
-                  const dy = g.ny * (1 - settle);
-                  return (
-                    <div
-                      key={gi}
-                      className="absolute"
-                      style={{
-                        left: g.x - ph.left + dx, top: g.y - ph.top + dy,
-                        width: Math.max(2, g.w * sx), height: Math.max(2, g.h * sy),
-                        border: `1.5px dashed ${g.kind === 'img' ? '#e4570d' : g.kind === 'text' ? '#d4b87a' : '#8a5a2b'}`,
-                        borderRadius: 4,
-                        background: g.kind === 'img' ? 'rgba(228,87,13,0.07)' : 'rgba(196,163,90,0.05)',
-                      }}
-                    />
-                  );
-                })}
-              </div>
-              {/* Primer wash over the revealed slice: color is painted last. */}
-              {paint < 1 && (
+              {/* Primer wash over the real content: color is painted last. */}
+              {paint < 1 && base > 0 && (
                 <div
                   className="absolute"
                   style={{
                     left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
                     background: '#efe7d6',
                     opacity: 0.9 * (1 - paint),
-                    clipPath: `inset(0 ${(100 - p * 100).toFixed(2)}% 0 0)`,
-                    visibility: p <= 0 ? 'hidden' : 'visible',
                   }}
                 />
               )}
+              {/* Base cover: the black page; fades once the elements are sketched. */}
+              {base < 1 && (
+                <div
+                  className="absolute overflow-hidden"
+                  style={{
+                    left: ph.left, top: ph.top - 1, width: ph.width, height: ph.height + 2,
+                    background: '#100d09',
+                    backgroundImage:
+                      'repeating-linear-gradient(0deg, rgba(212,184,122,0.06) 0 1px, transparent 1px 34px), repeating-linear-gradient(90deg, rgba(212,184,122,0.06) 0 1px, transparent 1px 34px)',
+                    opacity: 1 - base,
+                  }}
+                />
+              )}
+              {/* Per-element covers: sketched, nudged into place, then each unwraps. */}
+              {ph.ghosts.map((g, gi) => {
+                const s = clamp01((t - g.stamp) / 240);
+                if (s <= 0) return null;
+                const open = clamp01((t - g.addAt) / 260);
+                if (open >= 1) return null;
+                const sx = clamp01(s * 1.6);
+                const sy = clamp01(s * 1.6 - 0.6);
+                const settle = clamp01((t - g.stamp - 300) / 200);
+                const dx = g.nx * (1 - settle);
+                const dy = g.ny * (1 - settle);
+                const filled = base >= 1;
+                return (
+                  <div
+                    key={gi}
+                    className="absolute"
+                    style={{
+                      left: g.x - ph.left + dx, top: g.y - ph.top + dy,
+                      width: Math.max(2, g.w * sx), height: Math.max(2, g.h * sy),
+                      border: `1.5px dashed ${g.kind === 'img' ? '#e4570d' : g.kind === 'text' ? '#d4b87a' : '#8a5a2b'}`,
+                      borderRadius: 4,
+                      background: filled
+                        ? (g.kind === 'img' ? 'rgba(228,87,13,0.10)' : 'rgba(30,24,16,0.85)')
+                        : (g.kind === 'img' ? 'rgba(228,87,13,0.07)' : 'rgba(196,163,90,0.05)'),
+                      opacity: 1 - open,
+                      transform: `scale(${1 - open * 0.04})`,
+                      transformOrigin: 'center',
+                    }}
+                  />
+                );
+              })}
             </React.Fragment>
           );
         })}
