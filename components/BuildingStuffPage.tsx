@@ -94,6 +94,9 @@ export const BuildingStuffPage: React.FC = () => {
   const [time, setTime] = useState(0);
   const [dur, setDur] = useState(0);
   const dragX = useRef<number | null>(null);
+  const reelRef = useRef<HTMLDivElement>(null);
+  const lastWheelTs = useRef(0);
+  const lastSwitchTs = useRef(0);
 
   const clip = CLIPS[active];
 
@@ -144,6 +147,29 @@ export const BuildingStuffPage: React.FC = () => {
     const rect = e.currentTarget.getBoundingClientRect();
     v.currentTime = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1) * dur;
   }, [dur]);
+
+  /* mouse wheel / trackpad scroll along the reel. Scoped to the reel only,
+     one clip per gesture: the first meaningful delta switches, the rest of
+     the gesture (trackpad momentum) is swallowed so it can't flip clips or
+     scroll the page mid-gesture. Listens non-passively so preventDefault works. */
+  useEffect(() => {
+    const el = reelRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      const now = performance.now();
+      const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(d) < 8) return;
+      const sameGesture = now - lastWheelTs.current < 160;
+      lastWheelTs.current = now;
+      if (!sameGesture && now - lastSwitchTs.current > 650) {
+        lastSwitchTs.current = now;
+        nav(d > 0 ? 1 : -1);
+      }
+      e.preventDefault();
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [nav]);
 
   /* swipe / drag along the reel */
   const onPointerDown = useCallback((e: React.PointerEvent) => {
@@ -210,7 +236,7 @@ export const BuildingStuffPage: React.FC = () => {
       </h1>
 
       {/* the reel */}
-      <div className="bs-rise-2 relative z-30 mt-6 w-full md:-mt-[1.5vw]"
+      <div ref={reelRef} className="bs-rise-2 relative z-30 mt-6 w-full md:-mt-[1.5vw]"
         style={{ touchAction: 'pan-y' }}
         onPointerDown={onPointerDown} onPointerUp={onPointerUp}
         onPointerCancel={() => { dragX.current = null; }}>
@@ -245,6 +271,7 @@ export const BuildingStuffPage: React.FC = () => {
                         ref={videoRef}
                         key={c.id}
                         src={c.src}
+                        poster={c.poster}
                         loop
                         muted={muted}
                         playsInline
