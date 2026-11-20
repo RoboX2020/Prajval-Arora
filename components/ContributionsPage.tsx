@@ -42,7 +42,7 @@ const Entry: React.FC<{ c: Contribution; i: number }> = ({ c, i }) => (
 export const ContributionsPage: React.FC = () => {
   useEffect(() => { const old = document.title; document.title = 'Open source contributions · Prajval Arora'; window.scrollTo(0, 0); return () => { document.title = old; }; }, []);
   const repos = new Set(CONTRIBUTIONS.map((c) => c.repo)).size;
-  return <div className="origin-root contrib-ledger min-h-screen bg-[#1c1814] text-[#e6d9c4]">
+  return <div className="origin-root min-h-screen bg-[#1c1814] text-[#e6d9c4]">
     <header className="border-b border-[#3d3228] bg-[#241c16]">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
         <Link to="/" className="font-display text-xl text-[#f0e6d4]">Prajval<span className="text-[#d4b87a]">.</span></Link>
