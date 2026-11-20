@@ -42,7 +42,7 @@ const Entry: React.FC<{ c: Contribution; i: number }> = ({ c, i }) => (
 export const ContributionsPage: React.FC = () => {
   useEffect(() => { const old = document.title; document.title = 'Open source contributions · Prajval Arora'; window.scrollTo(0, 0); return () => { document.title = old; }; }, []);
   const repos = new Set(CONTRIBUTIONS.map((c) => c.repo)).size;
-  return <div className="origin-root min-h-screen bg-[#1c1814] text-[#e6d9c4]">
+  return <div className="origin-root contrib-ledger min-h-screen bg-[#1c1814] text-[#e6d9c4]">
     <header className="border-b border-[#3d3228] bg-[#241c16]">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
         <Link to="/" className="font-display text-xl text-[#f0e6d4]">Prajval<span className="text-[#d4b87a]">.</span></Link>
@@ -56,7 +56,7 @@ export const ContributionsPage: React.FC = () => {
           <h1 className="mt-5 font-display text-[clamp(3rem,9vw,6rem)] leading-[0.95] tracking-tight text-[#f0e6d4]">Contributions<br /><span className="italic text-[#d4b87a]">merged upstream.</span></h1>
         </div>
         <div className="flex flex-col justify-end">
-          <p className="text-lg leading-relaxed text-[#c4b49a]">Since September 2026 I have been sending fixes and tests to open source robotics, simulation and vision libraries. These are the pull requests maintainers reviewed and merged, newest first.</p>
+          <p className="text-lg leading-relaxed text-[#c4b49a]">Since September 2026 I have been sending fixes and tests to open source robotics, simulation, vision and solver libraries. These are the pull requests maintainers reviewed and merged, newest first.</p>
         </div>
       </section>
       <dl className="grid gap-6 border-y border-[#3d3228] py-6 sm:grid-cols-3">
